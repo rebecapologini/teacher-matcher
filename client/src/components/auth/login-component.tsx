@@ -1,43 +1,43 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { ChangeEvent, FormEvent, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-import { useLoginMutation } from '../../features/auth/auth-api-slice.ts'
-import { setUser } from '../../features/auth/auth-slice.ts'
+import { useLoginMutation } from "../../features/auth/auth-api-slice.ts";
+import { setUser } from "../../features/auth/auth-slice.ts";
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-  })
+    email: "",
+    password: "",
+  });
 
-  const [login] = useLoginMutation()
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const [login] = useLoginMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      const user = await login(formData).unwrap()
-      dispatch(setUser(user))
-      navigate('/')
+      const user = await login(formData).unwrap();
+      dispatch(setUser(user));
+      navigate("/");
     } catch (err) {
-      console.error('Failed to login:', err)
+      console.error("Failed to login:", err);
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
       <div>
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email">Email!</label>
         <input
           type="email"
           id="email"
@@ -60,7 +60,7 @@ const Login = () => {
       </div>
       <button type="submit">Login</button>
     </form>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;
