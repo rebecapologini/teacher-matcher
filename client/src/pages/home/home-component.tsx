@@ -4,6 +4,7 @@ import 'filepond/dist/filepond.min.css';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
+
 import AddTodo from '../../components/todos/add-todo.tsx';
 import TodoList from '../../components/todos/todo-list.tsx';
 
@@ -11,7 +12,6 @@ import TodoList from '../../components/todos/todo-list.tsx';
 registerPlugin(
   FilePondPluginFileValidateType,
   FilePondPluginImagePreview,
-
 );
 
 const Home = () => {
@@ -19,14 +19,13 @@ const Home = () => {
 
   const handleRemoveFile = (error: any, fileItem: any) => {
     if (!fileItem) return;
-
     // Обработка удаления файла на сервере
-    fetch(`http://localhost:4000/api/upload`, {
+    fetch('http://localhost:4000/api/upload', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ fileName: fileItem.filename }),
+      body: JSON.stringify({ fileName: fileItem.filename }), 
     })
     .then(response => response.json())
     .then(data => {
@@ -59,7 +58,7 @@ const Home = () => {
           revert: {
             url: '/upload',
             method: 'DELETE',
-            withCredentials: true,
+            withCredentials: false,
             headers: {},
             onload: (response) => response,
             onerror: (response) => response,
@@ -68,7 +67,7 @@ const Home = () => {
         onupdatefiles={fileItems => {
           setFiles(fileItems.map(fileItem => fileItem.file as File));
         }}
-        onremovefile={handleRemoveFile}
+        onremovefile={handleRemoveFile} // Передаем функцию напрямую
         name="file"
         acceptedFileTypes={['image/*']}
         labelFileTypeNotAllowed="Only images are allowed"

@@ -3,7 +3,6 @@ const express = require("express");
    const session = require("express-session");
    const { sequelize } = require("./db/models");
    require("dotenv").config();
-
    const { initializeDbConnection, pgPool } = require("./configs/db");
    const { sessionConfig } = require("./configs/session");
    const authRoutes = require("./routes/auth");
@@ -34,12 +33,11 @@ const express = require("express");
    app.use(express.json());
    app.use(express.urlencoded({ extended: false }));
    app.use(session(sessionConfig(pgPool)));
-
    // Serve static files from the public directory
    app.use(express.static('public'));
 
    app.use("/api/auth", authRoutes);
-   app.use(authMiddleware);
+  //  app.use(authMiddleware);
    app.use("/api/users", userRoutes);
    app.use("/api/todos", todoRoutes);
    app.use("/api", uploadRoutes);
