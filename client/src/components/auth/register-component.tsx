@@ -1,39 +1,38 @@
-import { ChangeEvent, FormEvent, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-
-import { useRegisterMutation } from '../../features/auth/auth-api-slice.ts'
-import { setUser } from '../../features/auth/auth-slice.ts'
+import { ChangeEvent, FormEvent, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useRegisterMutation } from '../../features/auth/auth-api-slice.ts';
+import { setUser } from '../../features/auth/auth-slice.ts';
 
 const Register = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: '',
-  })
+  });
 
-  const [register] = useRegisterMutation()
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const [register] = useRegisterMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
+    const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      const user = await register(formData).unwrap()
-      dispatch(setUser(user))
-      navigate('/')
+      const user = await register(formData).unwrap();
+      dispatch(setUser(user));
+      navigate('/');
     } catch (err) {
-      console.error('Failed to register:', err)
+      console.error('Failed to register:', err);
     }
-  }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
@@ -65,7 +64,7 @@ const Register = () => {
       </div>
       <button type="submit">Register</button>
     </form>
-  )
-}
+  );
+};
 
-export default Register
+export default Register;
