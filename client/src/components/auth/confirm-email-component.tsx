@@ -12,11 +12,8 @@ const ConfirmPage = () => {
   useEffect(() => {
     const confirmEmail = async () => {
       try {
-        console.log(`http://localhost:5173/api/auth/confirm/${token}`);
-
-        const response = await fetch(
-          `http://localhost:4000/api/auth/confirm/${token}`
-        );
+        const baseUrl = import.meta.env.VITE_API_BASE_URL;
+        const response = await fetch(`${baseUrl}/confirm/${token}`);
         const data = await response.json();
         if (response.ok) {
           alert(data.message);
