@@ -4,12 +4,15 @@
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
+  margin-top: 13px;
 }
 
-.custom-button.primary {
+.custom-button.details {
   background-color: white;
   color: rgb(167, 111, 110);
   border: 1px solid rgb(167, 111, 110);
+  width: 140px;
+  font-weight: 400;
 }
 
 .custom-button.secondary {
@@ -22,4 +25,27 @@
   background-color: rgb(239, 233, 233);
   color: rgb(167, 111, 110);
   border: 1px solid rgb(167, 111, 110);
+}
+.custom-button.details:hover,
+.custom-button.secondary:hover,
+.custom-button.tertiary:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.custom-button.details:hover {
+  background-color: white;
+  border-color: rgb(167, 111, 110) !important;
+  color: rgb(167, 111, 110) !important;
+}
+
+.custom-button.secondary:hover {
+  background-color: white !important;
+  border-color: rgb(167, 111, 110) !important;
+  color: rgb(167, 111, 110) !important;
+}
+
+.custom-button.tertiary:hover {
+  background-color: white !important;
+  border-color: rgb(167, 111, 110) !important;
+  color: rgb(167, 111, 110) !important;
 }

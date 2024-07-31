@@ -1,12 +1,14 @@
 import React from "react";
 import { Button } from "antd";
 import "./button.css";
+import { RightOutlined } from "@ant-design/icons";
 
 interface CustomButtonProps {
-  type: "primary" | "secondary" | "tertiary";
+  type: "details" | "secondary" | "tertiary";
   text: string;
   onClick?: () => void;
   block?: boolean;
+  iconAfterText?: React.ReactNode;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
@@ -14,9 +16,15 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   text,
   onClick,
   block,
+  iconAfterText,
 }) => {
   return (
-    <Button className={`custom-button ${type}`} onClick={onClick} block={block}>
+    <Button
+      className={`custom-button ${type}`}
+      onClick={onClick}
+      block={block}
+      icon={iconAfterText}
+    >
       {text}
     </Button>
   );
