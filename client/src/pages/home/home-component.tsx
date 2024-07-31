@@ -4,6 +4,7 @@ import CustomButton from "../../components/button/button-component";
 import "./home-component.css";
 import { RightOutlined } from "@ant-design/icons";
 
+import Header from "../../components/header/header-component.tsx";
 import { useNavigate } from "react-router-dom";
 
 const Home: React.FC = () => {
@@ -11,9 +12,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="welcome-page">
-      <div className="header">
-        <h1>Teacher Matcher</h1>
-      </div>
+      <Header />
       <div className="content">
         <Card
           className="card hoverable-card"
@@ -40,13 +39,13 @@ const Home: React.FC = () => {
           type="secondary"
           text="Войти"
           block
-          onClick={() => navigate("/login")}
+          onClick={() => navigate("/auth")}
         />
         <CustomButton
           type="tertiary"
           text="Регистрация"
           block
-          onClick={() => navigate("/register")}
+          onClick={() => navigate("/auth")}
         />
       </div>
     </div>

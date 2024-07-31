@@ -1,7 +1,6 @@
 import { Suspense } from "react";
 import { Routes } from "react-router-dom";
 
-import Header from "./components/header/header-component.tsx";
 import { generateRoutes, routes } from "./routes/routes";
 
 const App = () => {

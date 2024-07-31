@@ -1,14 +1,14 @@
 import React from "react";
 import { Button } from "antd";
 import "./button.css";
-import { RightOutlined } from "@ant-design/icons";
 
 interface CustomButtonProps {
-  type: "details" | "secondary" | "tertiary";
+  type: "details" | "secondary" | "tertiary" | "white";
   text: string;
   onClick?: () => void;
   block?: boolean;
   iconAfterText?: React.ReactNode;
+  htmlType?: "button" | "submit" | "reset";
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({

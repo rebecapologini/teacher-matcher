@@ -7,19 +7,6 @@
   overflow: hidden;
 }
 
-.header {
-  text-align: center;
-  margin-top: 60px;
-  margin-bottom: 25px;
-}
-
-.header h1 {
-  font-size: 29px;
-  font-weight: 550;
-  font-family: "Open Sans", sans-serif;
-  letter-spacing: -1px;
-}
-
 .content {
   width: 220px;
 }
@@ -34,6 +21,7 @@
     box-shadow 0.3s;
   transform: translateY(-4px);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 30px;
 }
 
 .card-content {
