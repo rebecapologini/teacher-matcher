@@ -13,7 +13,12 @@ const ConfirmPage = () => {
     const confirmEmail = async () => {
       try {
         const baseUrl = import.meta.env.VITE_API_BASE_URL;
-        const response = await fetch(`${baseUrl}/confirm/${token}`);
+        const response = await fetch(`${baseUrl}/auth/confirm/${token}`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
         const data = await response.json();
         if (response.ok) {
           alert(data.message);
@@ -30,7 +35,7 @@ const ConfirmPage = () => {
     if (token) {
       confirmEmail();
     }
-  }, [token, navigate]);
+  }, [token]);
 
   return (
     <div>
