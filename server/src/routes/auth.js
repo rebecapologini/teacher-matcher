@@ -123,9 +123,7 @@ router.get("/me", (req, res) => {
 });
 
 router.get("/confirm/:token", async (req, res) => {
-  console.log("req.params");
   const { token } = req.params;
-  console.log("req.params", req.params);
 
   try {
     const mailCheck = await MailCheck.findOne({ where: { token } });
