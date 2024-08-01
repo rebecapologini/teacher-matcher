@@ -1,0 +1,18 @@
+.login-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  /* height: 100vh; */
+  overflow: hidden;
+}
+.buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-bottom: 50px;
+}
+.login-card,
+.custom-input {
+  border-radius: 60px;
+}
