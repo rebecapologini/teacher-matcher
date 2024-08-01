@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-import { ChangeEvent, FormEvent, useState } from "react";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-
-import { useLoginMutation } from "../../features/auth/auth-api-slice.ts";
-import { setUser } from "../../features/auth/auth-slice.ts";
-=======
 import { ChangeEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -16,7 +8,6 @@ import CustomButton from "../../components/button/button-component";
 import { useLoginMutation } from "../../features/auth/auth-api-slice.ts";
 import { setUser } from "../../features/auth/auth-slice.ts";
 import "./login-component.css";
->>>>>>> dev
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -36,12 +27,6 @@ const Login = () => {
     }));
   };
 
-<<<<<<< HEAD
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    try {
-      const user = await login(formData).unwrap();
-=======
   const handleSubmit = async (formData: {
     email: string;
     password: string;
@@ -49,7 +34,6 @@ const Login = () => {
     try {
       const user = await login(formData).unwrap();
       console.log("Login successful:", user);
->>>>>>> dev
       dispatch(setUser(user));
       navigate("/");
     } catch (err) {
@@ -58,33 +42,6 @@ const Login = () => {
   };
 
   return (
-<<<<<<< HEAD
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="email">Email!</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          autoComplete="email"
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          autoComplete="current-password"
-        />
-      </div>
-      <button type="submit">Login</button>
-    </form>
-=======
     <>
       <div className="auth-page">
         <div className="login-card">
@@ -144,7 +101,6 @@ const Login = () => {
         </div>
       </div>
     </>
->>>>>>> dev
   );
 };
 
