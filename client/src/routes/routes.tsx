@@ -24,6 +24,7 @@ export const routes: RouteConfig[] = [
   { path: "/confirm/:token", element: <LazyConfirmPage /> },
   { path: "/profile-setup", element: <LazyProfileSetup />, protected: true },
   { path: "/", element: <LazyHome />, protected: true },
+  { path: "/confirm/:token", element: <LazyConfirmPage /> },
 ];
 
 export const generateRoutes = (routes: RouteConfig[]) => {

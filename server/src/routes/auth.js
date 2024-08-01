@@ -109,7 +109,6 @@ router.post("/logout", (req, res) => {
 });
 router.post("/confirm/:token", async (req, res) => {
   const { token } = req.params;
-  console.log(req.params);
 
   try {
     const mailCheck = await MailCheck.findOne({ where: { token } });

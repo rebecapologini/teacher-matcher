@@ -3,7 +3,7 @@ require("dotenv").config();
 
 const pgPool = new Pool({
   user: process.env.POSTGRES_USER,
-  host: process.env.POSTGRES_HOST || "localhost",
+  host: process.env.POSTGRES_HOST || "db",
   database: process.env.POSTGRES_DB,
   password: process.env.POSTGRES_PASSWORD,
   port: 5432,
