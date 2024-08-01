@@ -8,13 +8,15 @@ const ConfirmPage = () => {
   const handleNavigate = (path: string) => {
     navigate(path);
   };
-
+  console.log("asdasdas");
   useEffect(() => {
     const confirmEmail = async () => {
       try {
         const baseUrl = import.meta.env.VITE_API_BASE_URL;
-        const response = await fetch(`${baseUrl}/confirm/${token}`);
+        const response = await fetch(`${baseUrl}/auth/confirm/${token}`);
+        console.log("response", response);
         const data = await response.json();
+        console.log("data", data);
         if (response.ok) {
           alert(data.message);
           handleNavigate("/");

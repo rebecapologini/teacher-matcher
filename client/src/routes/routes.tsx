@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 
 import {
   LazyAuthPage,
+  LazyConfirmPage,
   LazyLogin,
   LazyRegister,
   ProtectedRoute,
@@ -20,6 +21,7 @@ export const routes: RouteConfig[] = [
   { path: "/register", element: <LazyRegister /> },
   { path: "/auth", element: <LazyAuthPage /> },
   { path: "/", element: <LazyHome />, protected: true },
+  { path: "/confirm/:token", element: <LazyConfirmPage /> },
 ];
 
 export const generateRoutes = (routes: RouteConfig[]) => {
