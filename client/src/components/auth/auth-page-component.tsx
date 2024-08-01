@@ -1,19 +1,48 @@
-import { useNavigate } from 'react-router-dom'
+import { useState } from "react";
+import CustomButton from "../../components/button/button-component";
+import Header from "../header/header-component.tsx";
+import Login from "./login-component";
+import Register from "./register-component";
+import { LeftOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+import "./auth-page-component.css";
+const Auth = () => {
+  const [activeComponent, setActiveComponent] = useState<"login" | "register">(
+    "login"
+  );
+  const navigate = useNavigate();
 
-const AuthPage = () => {
-  const navigate = useNavigate()
-
-  const handleNavigate = (path: string) => {
-    navigate(path)
-  }
+  const handleButtonClick = (component: "login" | "register") => {
+    setActiveComponent(component);
+  };
 
   return (
-    <div>
-      <h1>Welcome, please log in or register</h1>
-      <button onClick={() => handleNavigate('/login')}>Login</button>
-      <button onClick={() => handleNavigate('/register')}>Register</button>
+    <div className="aut-page">
+      <Header />
+      <div className="buttons">
+        <CustomButton
+          type="white"
+          text="Войти"
+          block
+          onClick={() => handleButtonClick("login")}
+        />
+        <CustomButton
+          type="white"
+          text="Регистрация"
+          block
+          onClick={() => handleButtonClick("register")}
+        />
+      </div>{" "}
+      {activeComponent === "login" ? <Login /> : <Register />}
+      <CustomButton
+        type="white"
+        text="Главная"
+        block
+        onClick={() => navigate("/")}
+        iconAfterText={<LeftOutlined />}
+      />
     </div>
-  )
-}
+  );
+};
 
-export default AuthPage
+export default Auth;

@@ -1,8 +1,10 @@
 const express = require("express");
-const { User } = require("../db/models");
+const { User, MailCheck } = require("../db/models");
 const bcrypt = require("bcryptjs");
 const { body, validationResult } = require("express-validator");
 const router = express.Router();
+const { v4: uuidv4 } = require("uuid");
+const nodemailer = require("nodemailer");
 
 router.post(
   "/register",
@@ -14,6 +16,7 @@ router.post(
       .withMessage("Password must be at least 6 characters long"),
   ],
   async (req, res) => {
+    console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       console.log(errors);
@@ -24,8 +27,17 @@ router.post(
 
     try {
       const hashedPassword = await bcrypt.hash(password, 10);
-      const user = await User.create({ name, email, password: hashedPassword });
+      const user = await User.create({
+        name,
+        email,
+        password: hashedPassword,
+        confirm: false,
+      });
       req.session.userId = user.id;
+      const confirmationToken = generateToken();
+      await MailCheck.create({ user_id: user.id, token: confirmationToken });
+
+      await sendConfirmationEmail(email, confirmationToken);
 
       const userWithoutPassword = user.toJSON();
       delete userWithoutPassword.password;
@@ -109,5 +121,55 @@ router.get("/me", (req, res) => {
     })
     .catch((error) => res.status(500).json({ error: error.message }));
 });
+
+router.get("/confirm/:token", async (req, res) => {
+  const { token } = req.params;
+
+  try {
+    const mailCheck = await MailCheck.findOne({ where: { token } });
+    if (!mailCheck) {
+      return res.status(400).json({ error: "Invalid token" });
+    }
+
+    const user = await User.findByPk(mailCheck.user_id);
+    if (!user) {
+      return res.status(400).json({ error: "User not found" });
+    }
+
+    user.confirm = true;
+    await user.save();
+
+    await mailCheck.destroy();
+
+    res.status(200).json({ message: "Email confirmed successfully" });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+function generateToken() {
+  return uuidv4();
+}
+
+async function sendConfirmationEmail(email, token) {
+  const transporter = nodemailer.createTransport({
+    host: "smtp.mail.ru",
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
+    },
+  });
+
+  const mailOptions = {
+    from: process.env.EMAIL_USER,
+    to: email,
+    subject: "Подтверждение почты",
+    text: `Для подтверждения почты перейдите по ссылке: http://localhost:5173/confirm/${token}`,
+  };
+
+  await transporter.sendMail(mailOptions);
+}
 
 module.exports = router;
