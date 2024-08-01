@@ -4,17 +4,17 @@ import 'filepond/dist/filepond.min.css';
 import FilePondPluginFileValidateType from 'filepond-plugin-file-validate-type';
 import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
-
-import AddTodo from '../../components/todos/add-todo.tsx';
-import TodoList from '../../components/todos/todo-list.tsx';
+import FilePondPluginFileValidateSize from 'filepond-plugin-file-validate-size';
+import '../../FilePondCustom.css'; // Импортируем кастомные стили
 
 // Регистрируем плагины
 registerPlugin(
   FilePondPluginFileValidateType,
   FilePondPluginImagePreview,
+  FilePondPluginFileValidateSize
 );
 
-const Home = () => {
+const Uploading = () => {
   const [files, setFiles] = useState<File[]>([]);
 
   const handleRemoveFile = (error: any, fileItem: any) => {
@@ -30,6 +30,7 @@ const Home = () => {
     .then(response => response.json())
     .then(data => {
       console.log('File deleted:', data);
+      setFiles([]); // Очистка файлов после удаления
     })
     .catch(error => {
       console.error('Error deleting file:', error);
@@ -39,8 +40,6 @@ const Home = () => {
   return (
     <div>
       <h1>Welcome to Home Page</h1>
-      <AddTodo />
-      <TodoList />
       <FilePond
         files={files}
         allowMultiple={true}
@@ -72,10 +71,20 @@ const Home = () => {
         acceptedFileTypes={['image/*']}
         labelFileTypeNotAllowed="Only images are allowed"
         fileValidateTypeLabelExpectedTypes="Expects {allButLastType} or {lastType}"
-        allowImagePreview={true}
+        allowImagePreview={false}
+        maxFileSize="2MB" // Добавлено ограничение размера файла
+        labelMaxFileSizeExceeded="File is too large"
+        labelMaxFileSize="Maximum file size is {filesize}"
+        className="filepond-custom" // Применяем кастомный класс
+        labelIdle=''
+        credits = {false}
+        labelFileProcessingComplete=''
+        labelFileProcessingAborted=''
+        styleButtonRemoveItemPosition='center'
+        labelFileProcessing=''
       />
     </div>
   );
 };
 
-export default Home;
+export default Uploading;
