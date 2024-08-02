@@ -17,11 +17,7 @@ router.post(
   ],
 
   async (req, res) => {
-<<<<<<< HEAD
-    console.log('1')
-=======
     console.log(req.body);
->>>>>>> main
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       console.log(errors);
@@ -112,22 +108,7 @@ router.post("/logout", (req, res) => {
     res.status(200).json({ message: "Logged out successfully" });
   });
 });
-
-router.get("/me", (req, res) => {
-  if (!req.session.userId) {
-    return res.status(401).json({ error: "Not authenticated" });
-  }
-
-  User.findByPk(req.session.userId)
-    .then((user) => {
-      const userWithoutPassword = user.toJSON();
-      delete userWithoutPassword.password;
-      return res.json(userWithoutPassword);
-    })
-    .catch((error) => res.status(500).json({ error: error.message }));
-});
-
-router.get("/confirm/:token", async (req, res) => {
+router.post("/confirm/:token", async (req, res) => {
   const { token } = req.params;
 
   try {
@@ -150,6 +131,19 @@ router.get("/confirm/:token", async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+});
+router.get("/me", (req, res) => {
+  if (!req.session.userId) {
+    return res.status(401).json({ error: "Not authenticated" });
+  }
+
+  User.findByPk(req.session.userId)
+    .then((user) => {
+      const userWithoutPassword = user.toJSON();
+      delete userWithoutPassword.password;
+      return res.json(userWithoutPassword);
+    })
+    .catch((error) => res.status(500).json({ error: error.message }));
 });
 
 function generateToken() {

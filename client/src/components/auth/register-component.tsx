@@ -60,7 +60,7 @@ const Register = () => {
     try {
       const user = await register(formData).unwrap();
       dispatch(setUser(user));
-      navigate("/");
+      navigate("/profile-setup");
     } catch (err) {
       console.error("Failed to register:", err);
 >>>>>>> main
@@ -141,42 +141,6 @@ const Register = () => {
             </Form>
           </Card>
         </div>
-        {/* <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="name">Name:</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              autoComplete="name"
-            />
-          </div>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              autoComplete="email"
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              autoComplete="new-password"
-            />
-          </div>
-          <button type="submit">Register</button>
-        </form> */}
       </div>
 <<<<<<< HEAD
       <div>
@@ -214,3 +178,8 @@ export default Register;
 
 export default Register;
 >>>>>>> main
+    </>
+  );
+};
+
+export default Register;

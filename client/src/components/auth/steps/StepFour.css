@@ -1,0 +1,59 @@
+.step-four {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.comfort-selection,
+.lessons-selection {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.price-range-selection,
+.experience-selection {
+  display: flex;
+  justify-content: space-between;
+}
+
+.comfort-card,
+.lessons-card,
+.price-range-card,
+.experience-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+}
+
+.comfort-card {
+  width: 85px;
+  height: 112px;
+  margin-left: -10px;
+}
+
+.lessons-card,
+.price-range-card,
+.experience-card {
+  width: 30px;
+  height: 32px;
+}
+
+.ant-card-meta.gender {
+  margin-top: -15px;
+}
+
+.gender .ant-card-meta-title {
+  font-size: 15px;
+  text-align: center;
+  margin-top: -5px;
+}
+
+.selected {
+  border-color: rgb(167, 111, 110);
+}

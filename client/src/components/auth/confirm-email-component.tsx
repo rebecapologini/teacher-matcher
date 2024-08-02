@@ -32,7 +32,7 @@ const ConfirmPage = () => {
     if (token) {
       confirmEmail();
     }
-  }, [token, navigate]);
+  }, [token]);
 
   return (
     <div>
