@@ -19,12 +19,18 @@ const Register = () => {
   const [register] = useRegisterMutation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [register] = useRegisterMutation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
+    }));
+  };
     }));
   };
 
@@ -40,6 +46,7 @@ const Register = () => {
     } catch (err) {
       console.error("Failed to register:", err);
     }
+  };
   };
 
   return (

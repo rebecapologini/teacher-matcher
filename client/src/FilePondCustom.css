@@ -1,0 +1,44 @@
+/* Скрыть все встроенные надписи FilePond */
+.filepond--label-action {
+  display: none; /* Скрыть текстовые надписи */
+}
+.filepond--root {
+width: 0px;
+height: 0px;
+}
+
+/* Скрыть стандартные иконки FilePond */
+.filepond--item-panel {
+  display: none; /* Скрыть панель элементов */
+}
+.filepond--wrapper{
+  width: 0px;
+}
+.filepond--drop-label{
+  height: 0px;
+}
+
+/* Оставить только иконку загрузки и удаления */
+.filepond--drop-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url('/icons/UploadIcon.svg') no-repeat center center;
+  background-size: contain;
+  width: 15px; /* Ширина вашего SVG */
+  height: 15px; /* Высота вашего SVG */
+  left: 35px;
+}
+
+/* Стили для области предпросмотра изображений */
+.filepond--item {
+  position: relative;
+  width: 50px; /* Ширина вашего SVG */
+  height: 50px; /* Высота вашего SVG */
+}
+
+/* Скрыть надпись, если файл загрузился */
+.filepond--item-panel {
+  display: none; /* Скрыть панель предпросмотра */
+}
+

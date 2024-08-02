@@ -14,16 +14,22 @@ const Login = () => {
     email: "",
     password: "",
   });
+    email: "",
+    password: "",
+  });
 
-  const [login] = useLoginMutation();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const [login] = useLoginMutation();;
+  const dispatch = useDispatch();;
+  const navigate = useNavigate();;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
+    }));
+  };
     }));
   };
 
@@ -33,12 +39,17 @@ const Login = () => {
   }) => {
     try {
       const user = await login(formData).unwrap();
+      dispatch(setUser(user));
+      navigate("/");
+      const user = await login(formData).unwrap();
       console.log("Login successful:", user);
       dispatch(setUser(user));
       navigate("/");
     } catch (err) {
       console.error("Failed to login:", err);
+      console.error("Failed to login:", err);
     }
+  };
   };
 
   return (
@@ -104,4 +115,5 @@ const Login = () => {
   );
 };
 
+export default Login;
 export default Login;
