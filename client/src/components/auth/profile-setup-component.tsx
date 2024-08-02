@@ -15,6 +15,8 @@ import {
 import Header from "../header/header-component";
 import "./profile-setup-component.css";
 import CustomButton from "../button/button-component";
+import StepFour from "./steps/StepFour";
+import StepFive from "./steps/StepFive";
 
 const ProfileSetup = () => {
   const [currentStep, setCurrentStep] = useState<number>(0);
@@ -27,13 +29,24 @@ const ProfileSetup = () => {
       level: "",
       duration: "",
     } as StepThreeData,
-    stepFourData: {} as StepFourData,
-    stepFiveData: {} as StepFiveData,
+    stepFourData: {
+      sex: "",
+      lessons: "",
+      priceRange: "",
+      experience: "",
+    } as StepFourData,
+
+    stepFiveData: { description: "" } as StepFiveData,
   });
 
   const updateProfileData = (
     step: keyof ProfileData,
-    data: StepOneData | StepTwoData | StepThreeData
+    data:
+      | StepOneData
+      | StepTwoData
+      | StepThreeData
+      | StepFourData
+      | StepFiveData
   ) => {
     setProfileData((prevData) => ({
       ...prevData,
@@ -48,7 +61,7 @@ const ProfileSetup = () => {
   const prev = () => {
     setCurrentStep((prev) => prev - 1);
   };
-  const totalSteps = 3;
+  const totalSteps = 5;
   const steps = [
     {
       title: "Шаг 1",
@@ -80,14 +93,32 @@ const ProfileSetup = () => {
         />
       ),
     },
+    {
+      title: "Шаг 4",
+      content: (
+        <StepFour
+          data={profileData.stepFourData}
+          updateData={(data) => updateProfileData("stepFourData", data)}
+          next={next}
+        />
+      ),
+    },
+    {
+      title: "Шаг 5",
+      content: (
+        <StepFive
+          data={profileData.stepFiveData}
+          updateData={(data) => updateProfileData("stepFiveData", data)}
+          next={next}
+        />
+      ),
+    },
   ];
 
   return (
     <div className="profile-setup">
       <Header />
-      <div className="steps-content" style={{ marginTop: "20px" }}>
-        {steps[currentStep].content}
-      </div>
+      <div className="steps-content">{steps[currentStep].content}</div>
       <div className="steps-action">
         {currentStep > 0 && (
           <CustomButton

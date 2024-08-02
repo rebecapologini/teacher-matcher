@@ -15,13 +15,15 @@ export interface StepThreeData {
   duration: string;
 }
 export interface StepFourData {
-  language: string;
-  goal: string;
-  level: string;
-  duration: string;
+  sex: string;
+  lessons: string;
+  priceRange: string;
+  experience: string;
 }
 
-export interface StepFiveData {}
+export interface StepFiveData {
+  description: string;
+}
 
 export interface ProfileData {
   stepOneData: StepOneData;
