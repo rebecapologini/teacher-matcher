@@ -29,7 +29,7 @@ const StepFive: React.FC<StepFiveProps> = ({ data, updateData }) => {
               name="description"
               value={data.description || ""}
               onChange={handleDescriptionChange}
-              className="custom-input"
+              className="custom-input-about"
             />
           </label>
         </div>
