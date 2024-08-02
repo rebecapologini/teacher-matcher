@@ -39,13 +39,13 @@ const Home: React.FC = () => {
           type="secondary"
           text="Войти"
           block
-          onClick={() => navigate("/auth")}
+          onClick={() => navigate("/auth?form=login")}
         />
         <CustomButton
           type="tertiary"
           text="Регистрация"
           block
-          onClick={() => navigate("/auth")}
+          onClick={() => navigate("/auth?form=register")}
         />
       </div>
     </div>

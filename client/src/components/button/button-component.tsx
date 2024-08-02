@@ -8,7 +8,9 @@ interface CustomButtonProps {
   onClick?: () => void;
   block?: boolean;
   iconAfterText?: React.ReactNode;
+  icon?: React.ReactNode;
   htmlType?: "button" | "submit" | "reset";
+  transparent?: boolean;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
@@ -17,15 +19,18 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   onClick,
   block,
   iconAfterText,
+  icon,
+  transparent,
 }) => {
   return (
     <Button
-      className={`custom-button ${type}`}
+      className={`custom-button ${type} ${transparent ? "transparent-button" : ""}`}
       onClick={onClick}
       block={block}
-      icon={iconAfterText}
+      icon={icon}
     >
-      {text}
+      {text}{" "}
+      {iconAfterText && <span className="icon-right">{iconAfterText}</span>}
     </Button>
   );
 };

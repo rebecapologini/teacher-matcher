@@ -1,12 +1,13 @@
 header {
   text-align: center;
-  margin-top: 20px;
-  margin-bottom: 10px;
+  margin-top: 1px;
   background-color: transparent !important;
 }
 .header h1 {
+  height: 38px;
+  width: 327px;
   font-size: 29px;
-  font-weight: 600;
+  font-weight: 490px;
   font-family: "Open Sans", sans-serif;
   letter-spacing: -1px;
   background-color: transparent !important;
