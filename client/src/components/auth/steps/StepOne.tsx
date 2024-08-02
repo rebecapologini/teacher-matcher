@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Input, Avatar } from "antd";
 import { StepOneData } from "../../../types/profile";
+import "./StepOne.css";
 interface StepOneProps {
   data: StepOneData;
   updateData: (data: StepOneData) => void;

@@ -2,6 +2,8 @@ import React from "react";
 import { Card, Select } from "antd";
 import { StepThreeData } from "../../../types/profile";
 
+import "./StepThree.css";
+
 interface StepThreeProps {
   data: StepThreeData;
   updateData: (data: StepThreeData) => void;

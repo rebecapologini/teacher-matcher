@@ -2,6 +2,7 @@ import React from "react";
 import { Card } from "antd";
 import { CheckCircleOutlined } from "@ant-design/icons";
 
+import "./StepTwo.css";
 const { Meta } = Card;
 
 interface StepTwoProps {

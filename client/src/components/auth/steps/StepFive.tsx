@@ -2,6 +2,7 @@ import React from "react";
 import { Card, Input } from "antd";
 import { StepFiveData } from "../../../types/profile";
 
+import "./StepFive.css";
 const { TextArea } = Input;
 
 interface StepFiveProps {
@@ -29,11 +30,6 @@ const StepFive: React.FC<StepFiveProps> = ({ data, updateData }) => {
               value={data.description || ""}
               onChange={handleDescriptionChange}
               className="custom-input"
-              style={{
-                marginTop: "20px",
-                minHeight: "260px",
-                borderRadius: "20px",
-              }}
             />
           </label>
         </div>

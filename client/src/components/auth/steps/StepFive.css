@@ -1,0 +1,23 @@
+.selects-container {
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.ant-input.custom-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid rgb(167, 111, 110);
+  border-radius: 20px;
+  box-sizing: border-box;
+  margin-top: 20px;
+  min-height: 260px;
+  border-radius: 20px;
+}
+
+.custom-input:focus {
+  border-color: rgb(167, 111, 110);
+  outline: none;
+}

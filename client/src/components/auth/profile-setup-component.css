@@ -7,27 +7,6 @@
   overflow: visible;
   position: relative;
 }
-.avatar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 2px;
-}
-.ant-card-bordered {
-  border-radius: 30px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.steps-content h2 {
-  font-size: 24px;
-  font-weight: 400;
-  font-family: "Roboto", sans-serif;
-  letter-spacing: -1px;
-  background-color: transparent !important;
-  text-align: center;
-  margin-top: -10px;
-  margin-bottom: 10px;
-}
 
 .button-container {
   display: flex;
@@ -48,36 +27,6 @@
   z-index: 1000;
 }
 
-.role-selection {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 20px;
-  gap: 10px;
-}
-
-.role-card {
-  width: 150px;
-  cursor: pointer;
-  transition: box-shadow 0.3s ease;
-}
-
-.role-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  transition: box-shadow 1s ease;
-}
-
-.role-card.selected {
-  box-shadow: 0 8px 16px rgba(0.3);
-}
-
-.role-image {
-  width: 200px;
-  height: 200px;
-  object-fit: cover;
-}
-
 .steps-action {
   position: fixed;
   bottom: 20px;
@@ -96,91 +45,13 @@
   font-size: 24px;
   color: rgb(167, 111, 110);
 }
-
-.selects-container {
-  width: 240px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.custom-select {
-  margin: 5px;
-}
-
-.custom-select .ant-select-selector {
-  border-radius: 30px;
-  background-color: rgb(167, 111, 110);
-  border-color: rgb(167, 111, 110) !important;
-}
-.step-four {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.comfort-selection,
-.lessons-selection {
-  display: flex;
-  gap: 10px;
-  justify-content: space-between;
-}
-.price-range-selection,
-.experience-selection {
-  display: flex;
-  justify-content: space-between;
-}
-.comfort-card,
-.lessons-card,
-.price-range-card,
-.experience-card {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.steps-content h2 {
+  font-size: 24px;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: -1px;
+  background-color: transparent !important;
   text-align: center;
-  cursor: pointer;
-}
-
-.comfort-card {
-  width: 85px;
-  height: 112px;
-  margin-left: -10px;
-}
-
-.lessons-card,
-.price-range-card,
-.experience-card {
-  width: 30px;
-  height: 32px;
-}
-/* .ant-card-bordered {
-  width: 100px;
-  height: 112px;
-} */
-
-.ant-card-meta.gender {
-  margin-top: -15px;
-}
-.gender .ant-card-meta-title {
-  font-size: 15px;
-  text-align: center;
-  margin-top: -5px;
-}
-.selected {
-  border-color: rgb(167, 111, 110);
-}
-.custom-input {
-  width: 100%;
-  padding: 10px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  box-sizing: border-box;
-}
-
-.custom-input:focus {
-  border-color: #1890ff;
-  outline: none;
+  margin-top: -10px;
+  margin-bottom: 10px;
 }

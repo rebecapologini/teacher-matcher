@@ -2,6 +2,7 @@ import React from "react";
 import { Card } from "antd";
 import { StepFourData } from "../../../types/profile";
 
+import "./StepFour.css";
 const { Meta } = Card;
 
 interface StepFourProps {
