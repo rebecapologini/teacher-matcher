@@ -25,6 +25,7 @@ const Auth = () => {
     <div className="aut-page">
       <Header />
       <div className="buttons">
+        
         <CustomButton
           type="white"
           text="Войти"

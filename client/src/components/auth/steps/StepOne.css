@@ -3,8 +3,12 @@
   justify-content: center;
   align-items: center;
   margin-top: 2px;
+  
 }
-
+.ant-avatar{
+  opacity: 1;
+  
+}
 .ant-card-bordered {
   border-radius: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);

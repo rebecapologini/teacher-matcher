@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { useRegisterMutation } from '../../features/auth/auth-api-slice.ts';
-import { setUser } from '../../features/auth/auth-slice.ts';
-
-const Register = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-=======
 import { ChangeEvent, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +14,6 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
->>>>>>> main
   });
 
   const [register] = useRegisterMutation();
@@ -42,16 +28,6 @@ const Register = () => {
     }));
   };
 
-<<<<<<< HEAD
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    try {
-      const user = await register(formData).unwrap();
-      dispatch(setUser(user));
-      navigate('/');
-    } catch (err) {
-      console.error('Failed to register:', err);
-=======
   const handleSubmit = async (formData: {
     name: string;
     email: string;
@@ -63,7 +39,6 @@ const Register = () => {
       navigate("/profile-setup");
     } catch (err) {
       console.error("Failed to register:", err);
->>>>>>> main
     }
   };
 
@@ -71,6 +46,7 @@ const Register = () => {
     <>
       <div className="reg-page">
         <div className="reg-card">
+          
           <Card
             className="card hoverable-card"
             bordered={true}
@@ -142,44 +118,9 @@ const Register = () => {
           </Card>
         </div>
       </div>
-<<<<<<< HEAD
-      <div>
-        <label htmlFor="email">Email</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          autoComplete="email"
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-          autoComplete="new-password"
-        />
-      </div>
-      <button type="submit">Register</button>
-    </form>
-  );
-};
-
-export default Register;
-=======
     </>
   );
 };
 
-export default Register;
->>>>>>> main
-    </>
-  );
-};
 
 export default Register;
