@@ -32,7 +32,7 @@ export interface TeacherStepThreeData {
 }
 
 export interface TeacherStepFourData {
-  teachingExperience: string;
+  teachingExperience: number;
   almaMater: string;
   academicDegree: string;
   faculty: string;

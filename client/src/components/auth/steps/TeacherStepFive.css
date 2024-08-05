@@ -1,4 +1,4 @@
-/* .step-five {
+.step-five {
   height: 571px;
   width: 327px;
   margin-bottom: 100px;
@@ -56,13 +56,4 @@
 .times-selection .ant-btn.ant-btn-primary:hover {
   background-color: rgb(157, 101, 100);
   border: 1px solid #a76f6e;
-} */
-
-.selects-containter-five:hover .days-selection button,
-.selects-containter-five:hover .times-selection button {
-  background-color: #1890ff;
-}
-.days-selection button:hover,
-.times-selection button:hover {
-  background-color: #1890ff;
 }

@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, Input, Button } from "antd";
 const { TextArea } = Input;
 import { TeacherStepFiveData } from "../../../types/profile";
 import "./TeacherStepFive.css";
+
 interface TeacherStepFiveProps {
   data: TeacherStepFiveData;
   updateData: (data: TeacherStepFiveData) => void;
   next: () => void;
 }
+
 const daysOfWeek = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
-const times = [
+const timesList = [
   "8:00",
   "9:00",
   "10:00",
@@ -30,95 +32,116 @@ const TeacherStepFive: React.FC<TeacherStepFiveProps> = ({
   data,
   updateData,
 }) => {
-  const handleTextAreaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    updateData({ ...data, [name]: value });
-  };
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    updateData({ ...data, [name]: value });
-  };
-  const [selectedDays, setSelectedDays] = useState<string[]>(
-    data.convenientTime?.days || []
-  );
-  const [selectedTimes, setSelectedTimes] = useState<string[]>(
-    data.convenientTime?.times || []
+  const [selectedDay, setSelectedDay] = useState<string | null>(null);
+  const [selectedTimes, setSelectedTimes] = useState<{
+    [day: string]: string[];
+  }>({});
+  const [aboutMe, setAboutMe] = useState<string>(data.aboutYourself || "");
+  const [videoLink, setVideoLink] = useState<string>(
+    data.videoPresentation || ""
   );
 
-  const toggleSelection = (
-    item: string,
-    selectedItems: string[],
-    setSelectedItems: React.Dispatch<React.SetStateAction<string[]>>
-  ) => {
-    setSelectedItems(
-      selectedItems.includes(item)
-        ? selectedItems.filter((i) => i !== item)
-        : [...selectedItems, item]
-    );
+  const handleDayClick = (day: string) => {
+    setSelectedDay(day);
   };
+
+  const handleTimeClick = (time: string) => {
+    if (selectedDay) {
+      setSelectedTimes((prevSelectedTimes) => {
+        const dayTimes = prevSelectedTimes[selectedDay] || [];
+        const updatedTimes = {
+          ...prevSelectedTimes,
+          [selectedDay]: dayTimes.includes(time)
+            ? dayTimes.filter((t) => t !== time)
+            : [...dayTimes, time],
+        };
+        const updatedConvenientTime = {
+          days: Object.keys(updatedTimes),
+          times: Object.values(updatedTimes).flat(),
+        };
+        updateData({ ...data, convenientTime: updatedConvenientTime });
+        return updatedTimes;
+      });
+    }
+  };
+
+  const handleAboutMeChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = e.target;
+    setAboutMe(value);
+    updateData({ ...data, aboutYourself: value });
+  };
+
+  const handleVideoLinkChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setVideoLink(value);
+    updateData({ ...data, videoPresentation: value });
+  };
+
   useEffect(() => {
+    const updatedConvenientTime = {
+      days: Object.keys(selectedTimes),
+      times: Object.values(selectedTimes).flat(),
+    };
     updateData({
       ...data,
-      convenientTime: {
-        days: selectedDays,
-        times: selectedTimes,
-      },
+      convenientTime: updatedConvenientTime,
+      aboutYourself: aboutMe,
+      videoPresentation: videoLink,
     });
-  }, [selectedDays, selectedTimes]);
+  }, [selectedTimes, aboutMe, videoLink]);
+
   return (
     <div className="step-five">
       <h2>Шаг 5 из 5</h2>
       <Card>
-        <div className="selects-containter-five">
-          <label>
-            Удобное время занятия
-            <div className="days-selection">
-              {daysOfWeek.map((day) => (
-                <Button
-                  key={day}
-                  type={selectedDays.includes(day) ? "primary" : "default"}
-                  onClick={() =>
-                    toggleSelection(day, selectedDays, setSelectedDays)
-                  }
-                >
-                  {day}
-                </Button>
-              ))}
-            </div>
-            <div className="times-selection">
-              {times.map((time) => (
-                <Button
-                  key={time}
-                  type={selectedTimes.includes(time) ? "primary" : "default"}
-                  onClick={() =>
-                    toggleSelection(time, selectedTimes, setSelectedTimes)
-                  }
-                >
-                  {time}
-                </Button>
-              ))}
-            </div>
-          </label>
-
-          <label>
-            Расскажи о себе
-            <TextArea
-              name="aboutYourself"
-              value={data.aboutYourself}
-              onChange={handleTextAreaChange}
-              className="custom-input-about"
-            />
-          </label>
-          <label>
-            Ссылка на видеопрезентацию
-            <Input
-              type="url"
-              name="videoPresentation"
-              value={data.videoPresentation}
-              onChange={handleInputChange}
-            />
-          </label>
+        <div className="select-day">
+          <label>Выберите день недели:</label>
+          <div className="days-container">
+            {daysOfWeek.map((day) => (
+              <Button
+                key={day}
+                type={selectedDay === day ? "primary" : "default"}
+                onClick={() => handleDayClick(day)}
+              >
+                {day}
+              </Button>
+            ))}
+          </div>
+        </div>
+        <div className="select-time">
+          <label>Выберите время:</label>
+          <div className="times-container">
+            {timesList.map((time) => (
+              <Button
+                key={time}
+                type={
+                  selectedDay && selectedTimes[selectedDay]?.includes(time)
+                    ? "primary"
+                    : "default"
+                }
+                onClick={() => handleTimeClick(time)}
+              >
+                {time}
+              </Button>
+            ))}
+          </div>
+        </div>
+        <div className="input-container">
+          <label htmlFor="about-me">Расскажите о себе</label>
+          <TextArea
+            id="about-me"
+            value={aboutMe}
+            onChange={handleAboutMeChange}
+            rows={4}
+          />
+        </div>
+        <div className="input-container">
+          <label htmlFor="video-link">Ссылка на видеопрезентацию</label>
+          <Input
+            id="video-link"
+            value={videoLink}
+            onChange={handleVideoLinkChange}
+          />
         </div>
       </Card>
     </div>
