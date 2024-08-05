@@ -1,0 +1,68 @@
+/* .step-five {
+  height: 571px;
+  width: 327px;
+  margin-bottom: 100px;
+}
+
+.days-selection {
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.days-selection .ant-btn {
+  width: 34px;
+  height: 30px;
+}
+
+.days-selection .ant-btn:hover {
+  border: 1px solid #a76f6e !important;
+  background-color: rgb(245, 245, 245);
+  color: #a76f6e !important;
+}
+
+.days-selection .ant-btn.ant-btn-primary {
+  background-color: rgb(167, 111, 110);
+  border: 1px solid #a76f6e;
+  color: #fff;
+}
+
+.days-selection .ant-btn.ant-btn-primary:hover {
+  background-color: rgb(157, 101, 100);
+  border: 1px solid #a76f6e;
+}
+
+.times-selection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 11px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.times-selection .ant-btn:hover {
+  border: 1px solid #a76f6e !important;
+  background-color: rgb(245, 245, 245);
+  color: #a76f6e !important;
+}
+
+.times-selection .ant-btn.ant-btn-primary {
+  background-color: rgb(167, 111, 110);
+  border: 1px solid #a76f6e;
+  color: #fff;
+}
+
+.times-selection .ant-btn.ant-btn-primary:hover {
+  background-color: rgb(157, 101, 100);
+  border: 1px solid #a76f6e;
+} */
+
+.selects-containter-five:hover .days-selection button,
+.selects-containter-five:hover .times-selection button {
+  background-color: #1890ff;
+}
+.days-selection button:hover,
+.times-selection button:hover {
+  background-color: #1890ff;
+}

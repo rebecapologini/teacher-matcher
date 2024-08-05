@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card } from "antd";
 import { StepFourData } from "../../../types/profile";
 
@@ -12,20 +12,25 @@ interface StepFourProps {
 }
 
 const StepFour: React.FC<StepFourProps> = ({ data, updateData }) => {
+  const [, setForceUpdate] = useState(0);
   const handleComfortChange = (value: string) => {
     updateData({ ...data, sex: value });
+    setForceUpdate((f) => f + 1);
   };
 
   const handleLessonsChange = (value: string) => {
     updateData({ ...data, lessons: value });
+    setForceUpdate((f) => f + 1);
   };
 
   const handlePriceRangeChange = (value: string) => {
     updateData({ ...data, priceRange: value });
+    setForceUpdate((f) => f + 1);
   };
 
   const handleExperienceChange = (value: string) => {
     updateData({ ...data, experience: value });
+    setForceUpdate((f) => f + 1);
   };
 
   return (
@@ -36,6 +41,7 @@ const StepFour: React.FC<StepFourProps> = ({ data, updateData }) => {
           <label>Вам комфортнее работать с:</label>
           <div className="comfort-selection">
             <Card
+              key={`man-${data.sex === "man"}`}
               hoverable
               className={`comfort-card ${data.sex === "man" ? "selected" : ""}`}
               onClick={() => handleComfortChange("man")}
@@ -46,6 +52,7 @@ const StepFour: React.FC<StepFourProps> = ({ data, updateData }) => {
               <Meta title="Мужчина" className="gender" />
             </Card>
             <Card
+              key={`woman-${data.sex === "woman"}`}
               hoverable
               className={`comfort-card ${data.sex === "woman" ? "selected" : ""}`}
               onClick={() => handleComfortChange("woman")}
@@ -56,6 +63,7 @@ const StepFour: React.FC<StepFourProps> = ({ data, updateData }) => {
               <Meta title="Женщина" className="gender" />
             </Card>
             <Card
+              key={`both-${data.sex === "both"}`}
               hoverable
               className={`comfort-card ${data.sex === "both" ? "selected" : ""}`}
               onClick={() => handleComfortChange("both")}
@@ -71,6 +79,7 @@ const StepFour: React.FC<StepFourProps> = ({ data, updateData }) => {
             <label>Количество уроков в неделю:</label>
             <div className="lessons-selection">
               <Card
+                key={`lessons-1-2-${data.lessons === "1-2"}`}
                 hoverable
                 className={`lessons-card ${data.lessons === "1-2" ? "selected" : ""}`}
                 onClick={() => handleLessonsChange("1-2")}
@@ -78,6 +87,7 @@ const StepFour: React.FC<StepFourProps> = ({ data, updateData }) => {
                 <Meta title="1-2" />
               </Card>
               <Card
+                key={`lessons-3+-${data.lessons === "3+"}`}
                 hoverable
                 className={`lessons-card ${data.lessons === "3+" ? "selected" : ""}`}
                 onClick={() => handleLessonsChange("3+")}
@@ -90,6 +100,7 @@ const StepFour: React.FC<StepFourProps> = ({ data, updateData }) => {
             <label>Выберите ценовой диапазон:</label>
             <div className="price-range-selection">
               <Card
+                key={`price-до2000-${data.priceRange === "до2000"}`}
                 hoverable
                 className={`price-range-card ${data.priceRange === "до2000" ? "selected" : ""}`}
                 onClick={() => handlePriceRangeChange("до2000")}
@@ -97,6 +108,7 @@ const StepFour: React.FC<StepFourProps> = ({ data, updateData }) => {
                 <Meta title="до 2000" />
               </Card>
               <Card
+                key={`price-до5000-${data.priceRange === "до5000"}`}
                 hoverable
                 className={`price-range-card ${data.priceRange === "до5000" ? "selected" : ""}`}
                 onClick={() => handlePriceRangeChange("до5000")}
@@ -104,6 +116,7 @@ const StepFour: React.FC<StepFourProps> = ({ data, updateData }) => {
                 <Meta title="до 5000" />
               </Card>
               <Card
+                key={`price-до10000-${data.priceRange === "до10000"}`}
                 hoverable
                 className={`price-range-card ${data.priceRange === "до10000" ? "selected" : ""}`}
                 onClick={() => handlePriceRangeChange("до10000")}
@@ -116,6 +129,7 @@ const StepFour: React.FC<StepFourProps> = ({ data, updateData }) => {
             <label>Стаж преподавателя:</label>
             <div className="experience-selection">
               <Card
+                key={`experience-1-3года-${data.experience === "1-3года"}`}
                 hoverable
                 className={`experience-card ${data.experience === "1-3года" ? "selected" : ""}`}
                 onClick={() => handleExperienceChange("1-3года")}
@@ -123,6 +137,7 @@ const StepFour: React.FC<StepFourProps> = ({ data, updateData }) => {
                 <Meta title="1-3 года" />
               </Card>
               <Card
+                key={`experience-5-10лет-${data.experience === "5-10лет"}`}
                 hoverable
                 className={`experience-card ${data.experience === "5-10лет" ? "selected" : ""}`}
                 onClick={() => handleExperienceChange("5-10лет")}
@@ -130,6 +145,7 @@ const StepFour: React.FC<StepFourProps> = ({ data, updateData }) => {
                 <Meta title="5-10 лет" />
               </Card>
               <Card
+                key={`experience->10лет-${data.experience === ">10лет"}`}
                 hoverable
                 className={`experience-card ${data.experience === ">10лет" ? "selected" : ""}`}
                 onClick={() => handleExperienceChange(">10лет")}
