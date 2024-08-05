@@ -46,6 +46,7 @@ const Register = () => {
     <>
       <div className="reg-page">
         <div className="reg-card">
+          
           <Card
             className="card hoverable-card"
             bordered={true}
@@ -120,5 +121,6 @@ const Register = () => {
     </>
   );
 };
+
 
 export default Register;

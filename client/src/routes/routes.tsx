@@ -22,7 +22,7 @@ export const routes: RouteConfig[] = [
   { path: "/register", element: <LazyRegister /> },
   { path: "/auth", element: <LazyAuthPage /> },
   { path: "/confirm/:token", element: <LazyConfirmPage /> },
-  { path: "/profile-setup", element: <LazyProfileSetup />, protected: true },
+  { path: "/profile-setup", element: <LazyProfileSetup />, protected: false },
   { path: "/", element: <LazyHome />, protected: true },
   { path: "/confirm/:token", element: <LazyConfirmPage /> },
 ];

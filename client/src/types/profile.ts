@@ -2,6 +2,7 @@ export interface StepOneData {
   name: string;
   surname: string;
   age: number;
+  avatarUrl: string;
 }
 
 export interface StepTwoData {

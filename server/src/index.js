@@ -10,10 +10,11 @@ const express = require("express");
    const todoRoutes = require("./routes/todo");
    const uploadRoutes = require('./routes/upload');
    const authMiddleware = require("./middlewares/auth");
+   const uniRoutes = require('./routes/univercity')
    const setupCors = require("./middlewares/cors");
-
+   const path = require('path');
    const app = express();
-
+   const vkRoutes = require('./routes/univercity');
    initializeDbConnection(pgPool);
    setupCors(app);
 
@@ -28,20 +29,20 @@ const express = require("express");
      res.header("Access-Control-Allow-Credentials", "true");
      next();
    });
-
    app.use(morgan("dev"));
    app.use(express.json());
    app.use(express.urlencoded({ extended: false }));
    app.use(session(sessionConfig(pgPool)));
    // Serve static files from the public directory
    app.use(express.static('public'));
-
+   app.use('/uploads', express.static(path.join(__dirname,'public/uploads')))
    app.use("/api/auth", authRoutes);
   //  app.use(authMiddleware);
    app.use("/api/users", userRoutes);
    app.use("/api/todos", todoRoutes);
    app.use("/api", uploadRoutes);
-
+   app.use('/api/vk', vkRoutes);
+   app.use('/', uniRoutes)
    const PORT = process.env.PORT || 4000;
 
    app.listen(PORT, async () => {

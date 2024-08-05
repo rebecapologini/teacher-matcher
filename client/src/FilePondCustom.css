@@ -1,12 +1,36 @@
 /* Скрыть все встроенные надписи FilePond */
 .filepond--label-action {
-  display: none; /* Скрыть текстовые надписи */
+ font-size: 1px;
 }
 .filepond--root {
 width: 0px;
 height: 0px;
 }
+.filepond--file-wrapper{
+  position: absolute;
+  left: -200px;
+  top: 67px;
+  right: 50px;
+}
+.filepond--file-status{
+  opacity: 0;
+  display: none;
+}
+.filepond--file-info{
+ opacity: 0;
+}
 
+.filepond--file-info-main .filepond--file-status {
+  display: none !important;
+}
+.filepond--file-action-button filepond--action-remove-item::after{
+  position: absolute;
+  display: none;
+}
+.filepond--progress-indicator filepond--load-indicatore{
+  font-size:0px;
+  display: none !important;
+}
 /* Скрыть стандартные иконки FilePond */
 .filepond--item-panel {
   display: none; /* Скрыть панель элементов */
@@ -27,7 +51,8 @@ height: 0px;
   background-size: contain;
   width: 15px; /* Ширина вашего SVG */
   height: 15px; /* Высота вашего SVG */
-  left: 35px;
+  margin-top: 63px;
+  left: -15px;
 }
 
 /* Стили для области предпросмотра изображений */
@@ -42,3 +67,9 @@ height: 0px;
   display: none; /* Скрыть панель предпросмотра */
 }
 
+
+
+
+.filepond--action-remove-item{
+  margin-left: 150px;
+}

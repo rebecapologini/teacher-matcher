@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Input, Avatar } from "antd";
+import { UserOutlined } from '@ant-design/icons';
 import { StepOneData } from "../../../types/profile";
 import "./StepOne.css";
+import Uploading from "../../../pages/home/Uploading";
+import UniSelector from "../../../pages/uni-selector";
 interface StepOneProps {
   data: StepOneData;
   updateData: (data: StepOneData) => void;
   next: () => void;
 }
+
 const StepOne: React.FC<StepOneProps> = ({ data, updateData }) => {
+  const [avatarUrl, setAvatarUrl] = useState<string | undefined>(data.avatarUrl);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     updateData({ ...data, [e.target.name]: e.target.value });
   };
@@ -16,47 +22,27 @@ const StepOne: React.FC<StepOneProps> = ({ data, updateData }) => {
     updateData({ ...data, age: value });
   };
 
-  // const handleSubmit = () => {
-  // const dataSend = {
-  //   name: data.name,
-  //   surname: data.surname,
-  //   age: data.age,
-  // };
-  // sendServer(dataSend);
-  // };
-
-  //   const sendServer = async (data: {
-  //     name: string;
-  //     surname: string;
-  //     age: number;
-  //   }) => {
-  //     try {
-  //       const baseUrl = import.meta.env.VITE_API_BASE_URL;
-  //       const response = await fetch(`${baseUrl}/profile-setup/`, {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify(data),
-  //       });
-
-  //       if (!response.ok) {
-  //         throw new Error("Ошибка при отправке данных");
-  //       }
-
-  //       const result = await response.json();
-  //       console.log("Ответ сервера:", result);
-  //     } catch (error) {
-  //       console.error("Ошибка:", error);
-  //     }
-  // };
-
+  const handleUploadComplete = (fileUrl: string) => {
+    setAvatarUrl(fileUrl);
+    updateData({ ...data, avatarUrl: fileUrl });  // Сохранение URL в данные
+  };
+  const handleRemoveAvatar = () => {
+    setAvatarUrl(undefined);
+    updateData({ ...data, avatarUrl: '' });
+  };
+  console.log(avatarUrl)
   return (
     <>
       <h2>Шаг 1 из 5</h2>
       <Card>
         <div className="avatar">
-          <Avatar size={128} icon="user" />
+          <Avatar 
+            size={128} 
+            src={avatarUrl ? `http://localhost:4000${avatarUrl}` : 'http://localhost:4000/uploads/default-avatar.svg'} 
+            icon={!avatarUrl && <UserOutlined />} 
+          />
+          <Uploading onUploadComplete={handleUploadComplete} onRemove={handleRemoveAvatar} />
+          <UniSelector/>
         </div>
         <div>
           <label>
