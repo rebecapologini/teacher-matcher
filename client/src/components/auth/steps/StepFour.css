@@ -56,4 +56,6 @@
 
 .selected {
   border-color: rgb(167, 111, 110);
+  box-shadow: 10px;
+  transition: border-color 0.3s ease;
 }

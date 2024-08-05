@@ -7,6 +7,19 @@
   overflow: visible;
   position: relative;
 }
+.content {
+  flex: 1;
+}
+.profile-setup h2 {
+  font-size: 24px;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: -1px;
+  background-color: transparent !important;
+  text-align: center;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
 
 .button-container {
   display: flex;
@@ -15,27 +28,21 @@
 }
 
 .progress-container {
-  width: 80%;
-  max-width: 600px;
+  width: 327px;
   margin: auto;
-  margin-top: 20px;
   position: fixed;
-  bottom: 80px;
   left: 50%;
   transform: translateX(-50%);
   background-color: white;
   z-index: 1000;
 }
 
-.steps-action {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+.step-navigator {
   display: flex;
+  align-items: center;
+  justify-content: center;
   gap: 10px;
-  background-color: white;
-  z-index: 1000;
+  margin-bottom: 20px;
 }
 
 .check-icon {
@@ -45,13 +52,12 @@
   font-size: 24px;
   color: rgb(167, 111, 110);
 }
-.steps-content h2 {
-  font-size: 24px;
-  font-weight: 400;
-  font-family: "Roboto", sans-serif;
-  letter-spacing: -1px;
-  background-color: transparent !important;
-  text-align: center;
-  margin-top: -10px;
-  margin-bottom: 10px;
+
+.sticky-navigation,
+.progress-container {
+  position: relative;
+  bottom: 0;
+  background-color: white;
+  z-index: 1000;
+  padding: 10px 0;
 }

@@ -1,9 +1,5 @@
 import { useState } from "react";
 import { Progress } from "antd";
-import { RightOutlined, LeftOutlined } from "@ant-design/icons";
-import StepOne from "./steps/StepOne";
-import StepTwo from "./steps/StepTwo";
-import StepThree from "./steps/StepThree";
 import {
   ProfileData,
   StepOneData,
@@ -11,15 +7,18 @@ import {
   StepThreeData,
   StepFourData,
   StepFiveData,
+  TeacherStepThreeData,
+  TeacherStepFourData,
+  TeacherStepFiveData,
 } from "../../types/profile";
 import Header from "../header/header-component";
 import "./profile-setup-component.css";
-import CustomButton from "../button/button-component";
-import StepFour from "./steps/StepFour";
-import StepFive from "./steps/StepFive";
+import StepNavigator from "./steps/stepNavigator";
+import StepContent from "./steps/stepContent";
 
 const ProfileSetup = () => {
   const [currentStep, setCurrentStep] = useState<number>(0);
+  const [role, setRole] = useState<string>("");
   const [profileData, setProfileData] = useState<ProfileData>({
     stepOneData: { name: "", surname: "", age: 0 } as StepOneData,
     stepTwoData: { role: "" } as StepTwoData,
@@ -35,7 +34,6 @@ const ProfileSetup = () => {
       priceRange: "",
       experience: "",
     } as StepFourData,
-
     stepFiveData: { description: "" } as StepFiveData,
   });
 
@@ -47,6 +45,9 @@ const ProfileSetup = () => {
       | StepThreeData
       | StepFourData
       | StepFiveData
+      | TeacherStepThreeData
+      | TeacherStepFourData
+      | TeacherStepFiveData
   ) => {
     setProfileData((prevData) => ({
       ...prevData,
@@ -61,91 +62,45 @@ const ProfileSetup = () => {
   const prev = () => {
     setCurrentStep((prev) => prev - 1);
   };
-  const totalSteps = 5;
-  const steps = [
-    {
-      title: "Шаг 1",
-      content: (
-        <StepOne
-          data={profileData.stepOneData}
-          updateData={(data) => updateProfileData("stepOneData", data)}
-          next={next}
-        />
-      ),
-    },
-    {
-      title: "Шаг 2",
-      content: (
-        <StepTwo
-          data={profileData.stepTwoData}
-          updateData={(data) => updateProfileData("stepTwoData", data)}
-          next={next}
-        />
-      ),
-    },
-    {
-      title: "Шаг 3",
-      content: (
-        <StepThree
-          data={profileData.stepThreeData}
-          updateData={(data) => updateProfileData("stepThreeData", data)}
-          next={next}
-        />
-      ),
-    },
-    {
-      title: "Шаг 4",
-      content: (
-        <StepFour
-          data={profileData.stepFourData}
-          updateData={(data) => updateProfileData("stepFourData", data)}
-          next={next}
-        />
-      ),
-    },
-    {
-      title: "Шаг 5",
-      content: (
-        <StepFive
-          data={profileData.stepFiveData}
-          updateData={(data) => updateProfileData("stepFiveData", data)}
-          next={next}
-        />
-      ),
-    },
-  ];
+
+  const totalSteps = role === "teacher" ? 5 : 5;
+
+  const handleRoleUpdate = (data: StepTwoData) => {
+    updateProfileData("stepTwoData", data);
+    setRole(data.role);
+  };
 
   return (
     <div className="profile-setup">
-      <Header />
-      <div className="steps-content">{steps[currentStep].content}</div>
-      <div className="steps-action">
-        {currentStep > 0 && (
-          <CustomButton
-            type="secondary"
-            icon={<LeftOutlined />}
-            text="Назад"
-            onClick={() => prev()}
-          />
-        )}
-        <CustomButton
-          type="secondary"
-          iconAfterText={<RightOutlined />}
-          text="Далее"
-          onClick={next}
+      <Header />{" "}
+      <div className="content">
+        <StepContent
+          currentStep={currentStep}
+          role={role}
+          profileData={profileData}
+          updateProfileData={updateProfileData}
+          handleRoleUpdate={handleRoleUpdate}
+          next={next}
         />
       </div>
-      <div className="progress-container">
-        <Progress
-          percent={((currentStep + 1) / totalSteps) * 100}
-          strokeWidth={12}
-          strokeColor="#a76f6e"
-          showInfo={false}
-          style={{ width: "100%" }}
+      <div className="sticky-navigation">
+        <div className="progress-container">
+          <Progress
+            percent={((currentStep + 1) / totalSteps) * 100}
+            strokeWidth={12}
+            strokeColor="#a76f6e"
+            showInfo={false}
+            style={{ width: "100%" }}
+          />
+        </div>
+        <StepNavigator
+          currentStep={currentStep}
+          totalSteps={totalSteps}
+          prev={prev}
+          next={next}
         />
       </div>
     </div>
   );
 };
-
 export default ProfileSetup;

@@ -1,9 +1,9 @@
 import React from "react";
 import { Card, Input } from "antd";
+const { TextArea } = Input;
 import { StepFiveData } from "../../../types/profile";
 
 import "./StepFive.css";
-const { TextArea } = Input;
 
 interface StepFiveProps {
   data: StepFiveData;
