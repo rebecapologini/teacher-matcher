@@ -1,5 +1,5 @@
 import React from "react";
-// import { Card, Input, Avatar } from "antd";
+import { Slider, Select } from "antd";
 import { TeacherStepFourData } from "../../../types/profile";
 import "./StepOne.css";
 interface TeacherStepFourProps {
@@ -22,14 +22,33 @@ const TeacherStepFour: React.FC<TeacherStepFourProps> = ({
     <div>
       <h2>Шаг 4 из 5</h2>
       <div>
-        <label>Преподавательский стаж</label>
-        <input
-          name="teachingExperience"
+        <label>Сколько лет вы преподаёте?</label>
+        <Slider
+          min={1}
+          max={10}
+          marks={{
+            1: "1 год",
+            5: "5 лет",
+            10: "10 лет",
+          }}
           value={data.teachingExperience}
-          onChange={handleChange}
+          onChange={(value) =>
+            updateData({ ...data, teachingExperience: value })
+          }
         />
       </div>
       <div>
+        <label>
+          Ваша Alma mater
+          <Select
+            // defaultValue="Английский"
+            onChange={handleChange}
+            // value={"МГУ"}
+            className="custom-select"
+          >
+            {/* <Select.Option value=""></Select.Option> */}
+          </Select>
+        </label>
         <label>Ваша Alma mater</label>
         <input
           name="almaMater"
