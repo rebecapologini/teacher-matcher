@@ -30,7 +30,6 @@
 .progress-container {
   width: 327px;
   margin: auto;
-  position: fixed;
   left: 50%;
   transform: translateX(-50%);
   background-color: white;
@@ -45,14 +44,6 @@
   margin-bottom: 20px;
 }
 
-.check-icon {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-  font-size: 24px;
-  color: rgb(167, 111, 110);
-}
-
 .sticky-navigation,
 .progress-container {
   position: relative;
@@ -60,4 +51,12 @@
   background-color: white;
   z-index: 1000;
   padding: 10px 0;
+}
+
+.check-icon {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 24px;
+  color: rgb(167, 111, 110);
 }

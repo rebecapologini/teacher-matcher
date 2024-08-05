@@ -36,7 +36,7 @@ const ProfileSetup = () => {
     } as StepFourData,
     stepFiveData: { description: "" } as StepFiveData,
   });
-  console.log(profileData);
+  // console.log(profileData);
 
   const updateProfileData = (
     step: keyof ProfileData,

@@ -1,0 +1,17 @@
+.step-four {
+  height: 100%;
+  width: 327px;
+}
+.selects {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.select-exp {
+  font-size: 16px;
+}
+.university-select,
+.faculty-select,
+.academic-degree {
+  width: 100%;
+}

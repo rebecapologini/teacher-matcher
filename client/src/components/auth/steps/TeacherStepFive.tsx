@@ -55,11 +55,7 @@ const TeacherStepFive: React.FC<TeacherStepFiveProps> = ({
             ? dayTimes.filter((t) => t !== time)
             : [...dayTimes, time],
         };
-        const updatedConvenientTime = {
-          days: Object.keys(updatedTimes),
-          times: Object.values(updatedTimes).flat(),
-        };
-        updateData({ ...data, convenientTime: updatedConvenientTime });
+        updateData({ ...data, convenientTime: updatedTimes });
         return updatedTimes;
       });
     }
@@ -78,13 +74,9 @@ const TeacherStepFive: React.FC<TeacherStepFiveProps> = ({
   };
 
   useEffect(() => {
-    const updatedConvenientTime = {
-      days: Object.keys(selectedTimes),
-      times: Object.values(selectedTimes).flat(),
-    };
     updateData({
       ...data,
-      convenientTime: updatedConvenientTime,
+      convenientTime: selectedTimes,
       aboutYourself: aboutMe,
       videoPresentation: videoLink,
     });
@@ -133,6 +125,7 @@ const TeacherStepFive: React.FC<TeacherStepFiveProps> = ({
             value={aboutMe}
             onChange={handleAboutMeChange}
             rows={4}
+            className="custom-input-about"
           />
         </div>
         <div className="input-container">
@@ -141,6 +134,7 @@ const TeacherStepFive: React.FC<TeacherStepFiveProps> = ({
             id="video-link"
             value={videoLink}
             onChange={handleVideoLinkChange}
+            className="custom-input"
           />
         </div>
       </Card>
