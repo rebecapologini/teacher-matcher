@@ -36,7 +36,6 @@ const ProfileSetup = () => {
     } as StepFourData,
     stepFiveData: { description: "" } as StepFiveData,
   });
-  // console.log(profileData);
 
   const updateProfileData = (
     step: keyof ProfileData,
@@ -73,7 +72,7 @@ const ProfileSetup = () => {
 
   return (
     <div className="profile-setup">
-      <Header />{" "}
+      <Header />
       <div className="content">
         <StepContent
           currentStep={currentStep}
@@ -91,7 +90,7 @@ const ProfileSetup = () => {
             strokeWidth={12}
             strokeColor="#a76f6e"
             showInfo={false}
-            style={{ width: "100%" }}
+            className="progress-bar"
           />
         </div>
         <StepNavigator
@@ -104,4 +103,5 @@ const ProfileSetup = () => {
     </div>
   );
 };
+
 export default ProfileSetup;

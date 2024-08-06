@@ -34,7 +34,7 @@ const StepFour: React.FC<StepFourProps> = ({ data, updateData }) => {
   };
 
   return (
-    <div className="step-four">
+    <div>
       <h2>Шаг 4 из 5</h2>
       <Card>
         <div className="selects-container">

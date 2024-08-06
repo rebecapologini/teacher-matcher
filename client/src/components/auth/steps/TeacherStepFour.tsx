@@ -120,7 +120,7 @@ const TeacherStepFour: React.FC<TeacherStepFourProps> = ({
           <div>
             <label>Ваша Alma mater</label>
             <Select
-              className="university-select"
+              className="custom-select"
               placeholder="Выберите университет"
               value={data.almaMater?.toString()}
               onChange={handleUniversityChange}
@@ -136,7 +136,7 @@ const TeacherStepFour: React.FC<TeacherStepFourProps> = ({
             <div>
               <label>Факультет</label>
               <Select
-                className="faculty-select"
+                className="custom-select"
                 placeholder="Выберите факультет"
                 value={data.faculty?.toString()}
                 onChange={(value) => handleFacultyChange(value)}
@@ -152,7 +152,7 @@ const TeacherStepFour: React.FC<TeacherStepFourProps> = ({
           <div>
             <label>Ученая степень</label>
             <Select
-              className="academic-degree"
+              className="custom-select"
               value={data.academicDegree}
               onChange={handleAcademicDegreeChange}
             >
