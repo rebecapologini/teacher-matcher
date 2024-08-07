@@ -15,7 +15,7 @@ const StepFive: React.FC<StepFiveProps> = ({ data, updateData }) => {
   const handleDescriptionChange = (
     e: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
-    updateData({ ...data, description: e.target.value });
+    updateData({ ...data, about: e.target.value });
   };
 
   return (
@@ -26,8 +26,8 @@ const StepFive: React.FC<StepFiveProps> = ({ data, updateData }) => {
           <label>
             Расскажите о себе (по желанию)
             <TextArea
-              name="description"
-              value={data.description || ""}
+              name="about"
+              value={data.about || ""}
               onChange={handleDescriptionChange}
               className="custom-input-about"
             />
