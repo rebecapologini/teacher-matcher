@@ -73,12 +73,12 @@ router.post(
     try {
       const user = await User.findOne({ where: { email } });
       if (!user) {
-        return res.status(400).json({ error: "Invalid email or password" });
+        return res.status(400).json({ error: "Invalid email" });
       }
 
       const match = await bcrypt.compare(password, user.password);
       if (!match) {
-        return res.status(400).json({ error: "Invalid email or password" });
+        return res.status(400).json({ error: "Invalid password" });
       }
 
       req.session.userId = user.id;

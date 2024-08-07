@@ -38,14 +38,12 @@ const Login = () => {
     } catch (err: any) {
       console.error("Failed to login:", err);
 
-      if (err?.data?.error === "Invalid email or password") {
+      if (err?.data?.error === "Invalid password") {
         setErrorMessage("Пароль неверный");
-      } else {
-        setErrorMessage("Произошла ошибка при входе. Пожалуйста, попробуйте снова.");
-      }
+      } 
 
       // Additional check for email validity
-      if (err?.data?.error.includes("email")) {
+      if (err?.data?.error === 'Invalid email') {
         setEmailError("Неверный email");
       }
     }
