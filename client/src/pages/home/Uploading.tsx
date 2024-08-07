@@ -30,7 +30,7 @@ const Uploading: React.FC<UploadingProps> = ({
   const handleRemoveFile = (error: any, fileItem: any) => {
     if (!fileItem) return;
     // Handle file removal on the server
-    fetch("http://localhost:4000/api/upload", {
+    fetch(`${import.meta.env.VITE_API_BASE_URL}/upload`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -83,7 +83,7 @@ const Uploading: React.FC<UploadingProps> = ({
         allowMultiple={true}
         maxFiles={1}
         server={{
-          url: "http://localhost:4000/api",
+          url: `${import.meta.env.VITE_API_BASE_URL}`,
           process: {
             url: "/upload",
             method: "POST",
@@ -99,7 +99,7 @@ const Uploading: React.FC<UploadingProps> = ({
           revert: {
             url: "/upload",
             method: "DELETE",
-            withCredentials: false,
+            withCredentials:  false,
             headers: {},
             onload: (response) => response,
             onerror: (response) => response,

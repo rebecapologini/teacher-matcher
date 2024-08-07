@@ -1,6 +1,5 @@
 import React from "react";
 import { Select, Card } from "antd";
-import { Select, Card } from "antd";
 import { TeacherStepThreeData } from "../../../types/profile";
 import UploadFile from "../../../pages/upload-file"; // Обновите путь к компоненту
 import "./StepOne.css";
@@ -30,20 +29,6 @@ const languageLevels = [
   "C2 - Владение в совершенстве",
 ];
 
-const competencies = [
-  "Подготовка к ЕГЭ",
-  "Общий Английский",
-  "Английский для путешествия",
-];
-
-const languageLevels = [
-  "A1 - Начальный",
-  "A2 - Элементарный",
-  "B1 - Средний",
-  "B2 - Средне-продвинутый",
-  "C1 - Продвинутый",
-  "C2 - Владение в совершенстве",
-];
 
 const TeacherStepThree: React.FC<TeacherStepThreeProps> = ({
   data,
@@ -68,6 +53,13 @@ const TeacherStepThree: React.FC<TeacherStepThreeProps> = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     updateData({ ...data, [name]: value });
+  };
+
+  const handleClickOnInput = () => {
+    const uploadIconContainer = document.querySelector('.upload-icon-container') as HTMLElement;
+    if (uploadIconContainer) {
+      uploadIconContainer.click();
+    }
   };
 
   return (
@@ -109,17 +101,18 @@ const TeacherStepThree: React.FC<TeacherStepThreeProps> = ({
         <div>
           <label>Подтверждающие документы</label>
           <div className="docs">
-          <UploadFile 
-            onUploadComplete={handleUploadComplete} 
-            onRemove={handleRemoveFile} 
-          />
-        </div>
+            <UploadFile 
+              onUploadComplete={handleUploadComplete} 
+              onRemove={handleRemoveFile} 
+            />
+          </div>
           <input
             name="documents"
             value={data.documents}
             onChange={handleChange}
             readOnly
             className="document-input"
+            onClick={handleClickOnInput}
           />
         </div>
       </Card>

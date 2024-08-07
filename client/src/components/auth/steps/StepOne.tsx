@@ -68,19 +68,7 @@ const StepOne: React.FC<StepOneProps> = ({ data, updateData }) => {
                 : "http://localhost:4000/uploads/default-avatar.svg"
             }
             icon={!avatarUrl && <UserOutlined />}
-          <Avatar
-            size={128}
-            src={
-              avatarUrl
-                ? `http://localhost:4000${avatarUrl}`
-                : "http://localhost:4000/uploads/default-avatar.svg"
-            }
-            icon={!avatarUrl && <UserOutlined />}
-          />
-          <Uploading
-            onUploadComplete={handleUploadComplete}
-            onRemove={handleRemoveAvatar}
-          />
+            />
           <Uploading
             onUploadComplete={handleUploadComplete}
             onRemove={handleRemoveAvatar}

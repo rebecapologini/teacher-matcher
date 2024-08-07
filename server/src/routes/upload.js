@@ -53,7 +53,7 @@ router.post('/upload', (req, res) => {
 
 router.delete('/upload', (req, res) => {
     const { fileName } = req.body;
-
+    console.log("AAAAAAAAAAA",fileName)
     // Заменяем пробелы на _
     const newFileName = fileMappings[fileName.replace(/\s+/g, '_')];
 
@@ -70,7 +70,7 @@ router.delete('/upload', (req, res) => {
     }
 
     const filePath = path.join(__dirname, `../public/${folder}/`, newFileName);
-
+   
     fs.unlink(filePath, (err) => {
         if (err) {
             console.error('Ошибка при удалении файла:', err);

@@ -12,7 +12,8 @@
   gap: 10px;
   margin-bottom: 50px;
 }
-.login-card,
-.custom-input {
-  border-radius: 60px;
+.error-message {
+  color: red;
+  margin-top: 8px;
+  font-size: 14px;
 }

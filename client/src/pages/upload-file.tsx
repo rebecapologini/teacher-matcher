@@ -19,7 +19,7 @@ const UploadFile: React.FC<UploadFileProps> = ({ onUploadComplete, onRemove }) =
       formData.append('file', file);
 
       try {
-        const response = await axios.post('http://localhost:4000/api/upload', formData, {
+        const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/upload`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },
@@ -40,7 +40,7 @@ const UploadFile: React.FC<UploadFileProps> = ({ onUploadComplete, onRemove }) =
   const handleRemoveClick = async () => {
     if (fileName) {
       try {
-        const response = await axios.delete('http://localhost:4000/api/upload', {
+        const response = await axios.delete(`${import.meta.env.VITE_API_BASE_URL}/upload`, {
           headers: {
             'Content-Type': 'application/json',
           },
@@ -71,17 +71,18 @@ const UploadFile: React.FC<UploadFileProps> = ({ onUploadComplete, onRemove }) =
         style={{ display: 'none' }}
         onChange={handleFileChange}
       />
-      <div className="upload-icon" onClick={() => !isFileUploaded && fileInputRef.current?.click()}>
-        {!isFileUploaded ? (
-          <svg width="15" height="16" viewBox="0 0 14 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M5 5V13C5 14.1046 5.89543 15 7 15V15C8.10457 15 9 14.1046 9 13V5C9 2.79086 7.20914 1 5 1V1C2.79086 1 1 2.79086 1 5V13C1 16.3137 3.68629 19 7 19V19C10.3137 19 13 16.3137 13 13V8" stroke="#888888" stroke-width="2" stroke-linecap="round"/>
-</svg>
-
-        ) : (
-<svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={handleRemoveClick}>
-  <path d="M2 2L13 13M2 13L13 2" stroke="#888888" stroke-width="2" stroke-linecap="round"/>
-</svg>
-        )}
+      <div className="upload-icon-container" onClick={() => !isFileUploaded && fileInputRef.current?.click()}>
+        <div className="upload-icon">
+          {!isFileUploaded ? (
+            <svg width="15" height="16" viewBox="0 0 14 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 5V13C5 14.1046 5.89543 15 7 15V15C8.10457 15 9 14.1046 9 13V5C9 2.79086 7.20914 1 5 1V1C2.79086 1 1 2.79086 1 5V13C1 16.3137 3.68629 19 7 19V19C10.3137 19 13 16.3137 13 13V8" stroke="#888888" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          ) : (
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={handleRemoveClick}>
+              <path d="M2 2L13 13M2 13L13 2" stroke="#888888" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          )}
+        </div>
       </div>
     </div>
   );
