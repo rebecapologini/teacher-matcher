@@ -1,0 +1,33 @@
+.step-four {
+  height: 100%;
+  width: 327px;
+}
+
+.selects {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.select-exp {
+  font-size: 16px;
+}
+
+.university-select,
+.faculty-select,
+.academic-degree,
+.custom-select {
+  width: 100%;
+  border-radius: 30px;
+  background-color: rgb(167, 111, 110);
+  border-color: rgb(167, 111, 110);
+}
+
+.select-exp-slider {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.lesson-cost {
+  width: 100%;
+}

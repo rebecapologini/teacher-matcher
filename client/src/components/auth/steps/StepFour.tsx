@@ -62,7 +62,7 @@ const StepFour: React.FC<StepFourProps> = ({ data, updateData }) => {
   }, []);
 
   return (
-    <>
+    <div>
       <h2>Шаг 4 из 5</h2>
       <Card>
         <div className="selects-container">
@@ -133,7 +133,7 @@ const StepFour: React.FC<StepFourProps> = ({ data, updateData }) => {
           </div>
         </div>
       </Card>
-    </>
+    </div>
   );
 };
 

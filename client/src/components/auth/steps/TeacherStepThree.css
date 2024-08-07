@@ -1,0 +1,12 @@
+.selects-container {
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.custom-select .ant-select-selector {
+  border-radius: 30px;
+  background-color: rgb(167, 111, 110);
+  border-color: rgb(167, 111, 110);
+}

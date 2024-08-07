@@ -22,6 +22,10 @@ export interface StepFourData {
   lessons: string;
   price_id: number;
   teacher_experience_id: number;
+  almaMater?: string | number | "";
+  faculty?: string | number | "";
+  academicDegree?: string;
+  lessonCost?: string;
 }
 
 export interface StepFiveData {
@@ -29,23 +33,21 @@ export interface StepFiveData {
 }
 
 export interface TeacherStepThreeData {
-  competence: string;
+  competence: string[];
   languageLevel: string;
   documents: string;
 }
 
 export interface TeacherStepFourData {
   teachingExperience: number;
-  almaMater: string;
+  almaMater: string | number | "";
+  faculty: string | number | "";
   academicDegree: string;
-  faculty: string;
   lessonCost: string;
 }
-
 export interface TeacherStepFiveData {
   convenientTime: {
-    days: string[];
-    times: string[];
+    [day: string]: string[];
   };
   aboutYourself: string;
   videoPresentation: string;

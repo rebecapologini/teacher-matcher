@@ -1,8 +1,9 @@
 .step-four {
-  width: 100%;
+  height: 571px;
+  width: 327px;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
 .comfort-selection,
