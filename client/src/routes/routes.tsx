@@ -19,11 +19,12 @@ interface RouteConfig {
 
 export const routes: RouteConfig[] = [
   { path: "/login", element: <LazyLogin /> },
+  { path: "/matching", element: <LazyLogin />, protected: true },
   { path: "/register", element: <LazyRegister /> },
   { path: "/auth", element: <LazyAuthPage /> },
   { path: "/confirm/:token", element: <LazyConfirmPage /> },
-  { path: "/profile-setup", element: <LazyProfileSetup />, protected: false },
-  { path: "/", element: <LazyHome />, protected: true },
+  { path: "/profile-setup", element: <LazyProfileSetup />, protected: true },
+  { path: "/", element: <LazyHome /> },
   { path: "/confirm/:token", element: <LazyConfirmPage /> },
 ];
 

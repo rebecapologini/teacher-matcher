@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card } from "antd";
 import CustomButton from "../../components/button/button-component";
 import "./home-component.css";

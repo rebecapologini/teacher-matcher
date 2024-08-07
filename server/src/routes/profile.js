@@ -63,8 +63,6 @@ router.post("/register", async (req, res) => {
       res.status(201).end();
     }
     console.log("req.session.userId", req.session.userId);
-    // const user = await Profile.create(req.body);
-    // res.status(201).json(user);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

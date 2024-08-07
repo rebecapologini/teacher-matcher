@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       TeacherExperience,
       User,
     }) {
-      StudentProfile.hasOne(User);
+      StudentProfile.hasOne(User, { foreignKey: "profile_id" });
       StudentProfile.belongsTo(Language, { foreignKey: "language_id" });
       StudentProfile.belongsTo(Level, { foreignKey: "level_id" });
       StudentProfile.belongsTo(Goal, { foreignKey: "goal_id" });
