@@ -9,6 +9,17 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
+      profile_id: {
+        unique: true,
+        type: Sequelize.INTEGER,
+
+        references: {
+          model: {
+            tableName: "StudentProfiles",
+          },
+          key: "id",
+        },
+      },
       name: {
         type: Sequelize.STRING,
       },

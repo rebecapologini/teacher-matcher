@@ -1,14 +1,15 @@
 .step-four {
-  width: 100%;
+  height: 571px;
+  width: 327px;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
 .comfort-selection,
 .lessons-selection {
   display: flex;
-  gap: 10px;
+  gap: 20px;
   justify-content: space-between;
 }
 
@@ -44,18 +45,12 @@
   height: 32px;
 }
 
-.ant-card-meta.gender {
-  margin-top: -15px;
-}
-
-.gender .ant-card-meta-title {
-  font-size: 15px;
-  text-align: center;
-  margin-top: -5px;
-}
-
 .selected {
   border-color: rgb(167, 111, 110);
   box-shadow: 10px;
   transition: border-color 0.3s ease;
+}
+
+.comfort-selection-img {
+  margin-top: 40px;
 }

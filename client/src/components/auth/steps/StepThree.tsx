@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Card, Select } from "antd";
 import { StepThreeData } from "../../../types/profile";
 
 import "./StepThree.css";
+import axios from "axios";
 
 interface StepThreeProps {
   data: StepThreeData;
@@ -11,22 +12,42 @@ interface StepThreeProps {
 }
 
 const StepThree: React.FC<StepThreeProps> = ({ data, updateData }) => {
-  const handleLanguageChange = (value: string) => {
-    updateData({ ...data, language: value });
+  const [levels, setLevels] = useState<{ id: number; level: string }[]>([]);
+  const [languages, setLanguages] = useState<{ id: number; name: string }[]>(
+    []
+  );
+  const [goals, setGoals] = useState<{ id: number; name: string }[]>([]);
+
+  const handleLanguageChange = (value: number) => {
+    updateData({ ...data, language_id: value });
   };
 
-  const handleGoalChange = (value: string) => {
-    updateData({ ...data, goal: value });
+  const handleGoalChange = (value: number) => {
+    updateData({ ...data, goal_id: value });
   };
 
-  const handleLevelChange = (value: string) => {
-    updateData({ ...data, level: value });
+  const handleLevelChange = (value: number) => {
+    console.log("level", value);
+    updateData({ ...data, level_id: value });
   };
 
   const handleDurationChange = (value: string) => {
     updateData({ ...data, duration: value });
   };
+  useEffect(() => {
+    async function getLevels() {
+      const {
+        data: { levels, languages, goals },
+      } = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/profile/levels`
+      );
+      setLanguages(languages);
+      setLevels(levels);
+      setGoals(goals);
+    }
 
+    getLevels();
+  }, []);
   return (
     <>
       <h2>Шаг 3 из 5</h2>
@@ -36,17 +57,19 @@ const StepThree: React.FC<StepThreeProps> = ({ data, updateData }) => {
             <label>
               Какой язык вы хотите изучить?
               <Select
-                defaultValue="Английский"
+                placeholder="Например, английский"
                 style={{ width: "100%" }}
                 onChange={handleLanguageChange}
-                value={data.language || "Английский"}
+                value={data.language_id || undefined}
                 className="custom-select"
               >
-                <Select.Option value="Английский">Английский</Select.Option>
-                <Select.Option value="Испанский">Испанский</Select.Option>
-                <Select.Option value="Французский">Французский</Select.Option>
-                <Select.Option value="Немецкий">Немецкий</Select.Option>
-                <Select.Option value="Китайский">Китайский</Select.Option>
+                {languages.map((language) => {
+                  return (
+                    <Select.Option key={language.id} value={language.id}>
+                      {language.name}
+                    </Select.Option>
+                  );
+                })}
               </Select>
             </label>
           </div>
@@ -54,16 +77,19 @@ const StepThree: React.FC<StepThreeProps> = ({ data, updateData }) => {
             <label>
               Цель изучения?
               <Select
-                defaultValue="Саморазвитие"
+                placeholder="Например, подготовка к экзаменам"
                 style={{ width: "100%" }}
                 onChange={handleGoalChange}
-                value={data.goal || "Саморазвитие"}
+                value={data.goal_id || undefined}
                 className="custom-select"
               >
-                <Select.Option value="Работа">Работа</Select.Option>
-                <Select.Option value="Путешествия">Путешествия</Select.Option>
-                <Select.Option value="Образование">Образование</Select.Option>
-                <Select.Option value="Саморазвитие">Саморазвитие</Select.Option>
+                {goals.map((goal) => {
+                  return (
+                    <Select.Option key={goal.id} value={goal.id}>
+                      {goal.name}
+                    </Select.Option>
+                  );
+                })}
               </Select>
             </label>
           </div>
@@ -71,19 +97,19 @@ const StepThree: React.FC<StepThreeProps> = ({ data, updateData }) => {
             <label>
               Как вы оцениваете свой уровень?
               <Select
-                defaultValue="Начинающий"
+                placeholder="Скоро будет выше:)"
                 style={{ width: "100%" }}
                 onChange={handleLevelChange}
-                value={data.level || "Начинающий"}
+                value={data.level_id || undefined}
                 className="custom-select"
               >
-                <Select.Option value="Начинающий">Начинающий</Select.Option>
-                <Select.Option value="Элементарный">Элементарный</Select.Option>
-                <Select.Option value="Средний">Средний</Select.Option>
-                <Select.Option value="Продвинутый">Продвинутый</Select.Option>
-                <Select.Option value="Профессиональный">
-                  Профессиональный
-                </Select.Option>
+                {levels.map((level) => {
+                  return (
+                    <Select.Option key={level.id} value={level.id}>
+                      {level.level}
+                    </Select.Option>
+                  );
+                })}
               </Select>
             </label>
           </div>
@@ -91,17 +117,16 @@ const StepThree: React.FC<StepThreeProps> = ({ data, updateData }) => {
             <label>
               Планируемая продолжительность обучения?
               <Select
-                defaultValue="Год"
+                placeholder="Выбор только за вами"
                 style={{ width: "100%" }}
                 onChange={handleDurationChange}
-                value={data.duration || "Год"}
+                value={data.duration || undefined}
                 className="custom-select"
               >
                 <Select.Option value="Месяц">Месяц</Select.Option>
-                <Select.Option value="Пол года">Пол года</Select.Option>
+                <Select.Option value="Три месяца">Три месяца</Select.Option>
+                <Select.Option value="Полгода">Полгода</Select.Option>
                 <Select.Option value="Год">Год</Select.Option>
-                <Select.Option value="2 года">2 года</Select.Option>
-                <Select.Option value="5 лет">5 лет</Select.Option>
               </Select>
             </label>
           </div>

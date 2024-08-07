@@ -3,8 +3,9 @@
 const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
-    static associate({ Todo, MailCheck }) {
+    static associate({ Todo, MailCheck, StudentProfile }) {
       User.hasOne(MailCheck, { foreignKey: "user_id" });
+      User.belongsTo(StudentProfile, { foreignKey: "profile_id" });
     }
   }
   User.init(
@@ -12,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
+      profile_id: DataTypes.NUMBER,
       confirm: DataTypes.BOOLEAN,
     },
     {

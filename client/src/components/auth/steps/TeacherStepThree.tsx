@@ -1,5 +1,6 @@
 import React from "react";
 import { Select, Card } from "antd";
+import { Select, Card } from "antd";
 import { TeacherStepThreeData } from "../../../types/profile";
 import UploadFile from "../../../pages/upload-file"; // Обновите путь к компоненту
 import "./StepOne.css";
@@ -13,6 +14,21 @@ interface TeacherStepThreeProps {
   updateData: (data: TeacherStepThreeData) => void;
   next: () => void;
 }
+
+const competencies = [
+  "Подготовка к ЕГЭ",
+  "Общий Английский",
+  "Английский для путешествия",
+];
+
+const languageLevels = [
+  "A1 - Начальный",
+  "A2 - Элементарный",
+  "B1 - Средний",
+  "B2 - Средне-продвинутый",
+  "C1 - Продвинутый",
+  "C2 - Владение в совершенстве",
+];
 
 const competencies = [
   "Подготовка к ЕГЭ",
@@ -55,7 +71,7 @@ const TeacherStepThree: React.FC<TeacherStepThreeProps> = ({
   };
 
   return (
-    <div className="step-four">
+    <div className="step-three">
       <h2>Шаг 3 из 5</h2>
       <Card>
         <div>

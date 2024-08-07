@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card } from "antd";
 import { StepFourData } from "../../../types/profile";
 
 import "./StepFour.css";
+import SexImage from "../../images/sexImage";
+import axios from "axios";
+import { stringify } from "querystring";
 const { Meta } = Card;
 
 interface StepFourProps {
@@ -12,9 +15,18 @@ interface StepFourProps {
 }
 
 const StepFour: React.FC<StepFourProps> = ({ data, updateData }) => {
+  const [studentPrice, setStudentPrice] =
+    useState<{ id: number; name: string; key_name: string }[]>();
+
+  const [teacherExperience, setTeacherExperience] =
+    useState<{ id: number; name: string }[]>();
+
+  const [preferredSex, setPreferredSex] =
+    useState<{ id: number; name: string }[]>();
+
   const [, setForceUpdate] = useState(0);
-  const handleComfortChange = (value: string) => {
-    updateData({ ...data, sex: value });
+  const handleComfortChange = (value: number) => {
+    updateData({ ...data, preferred_sex_id: value });
     setForceUpdate((f) => f + 1);
   };
 
@@ -23,56 +35,53 @@ const StepFour: React.FC<StepFourProps> = ({ data, updateData }) => {
     setForceUpdate((f) => f + 1);
   };
 
-  const handlePriceRangeChange = (value: string) => {
-    updateData({ ...data, priceRange: value });
+  const handlePriceRangeChange = (value: number) => {
+    updateData({ ...data, price_id: value });
     setForceUpdate((f) => f + 1);
   };
 
-  const handleExperienceChange = (value: string) => {
-    updateData({ ...data, experience: value });
+  const handleExperienceChange = (value: number) => {
+    updateData({ ...data, teacher_experience_id: value });
     setForceUpdate((f) => f + 1);
   };
+
+  useEffect(() => {
+    async function getLevels() {
+      const {
+        data: { studentPrice, teacherExperience, preferredSex },
+      } = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/profile/step_4`
+      );
+      console.log("preferredSex", preferredSex);
+      setStudentPrice(studentPrice);
+      setTeacherExperience(teacherExperience);
+      setPreferredSex(preferredSex);
+    }
+
+    getLevels();
+  }, []);
 
   return (
-    <>
+    <div>
       <h2>Шаг 4 из 5</h2>
       <Card>
         <div className="selects-container">
           <label>Вам комфортнее работать с:</label>
           <div className="comfort-selection">
-            <Card
-              key={`man-${data.sex === "man"}`}
-              hoverable
-              className={`comfort-card ${data.sex === "man" ? "selected" : ""}`}
-              onClick={() => handleComfortChange("man")}
-              cover={
-                <img alt="Мужчина" src="https://i.ibb.co/WsNLzCP/Image.png" />
-              }
-            >
-              <Meta title="Мужчина" className="gender" />
-            </Card>
-            <Card
-              key={`woman-${data.sex === "woman"}`}
-              hoverable
-              className={`comfort-card ${data.sex === "woman" ? "selected" : ""}`}
-              onClick={() => handleComfortChange("woman")}
-              cover={
-                <img alt="Женщина" src="https://i.ibb.co/X8xYD8t/Image.png" />
-              }
-            >
-              <Meta title="Женщина" className="gender" />
-            </Card>
-            <Card
-              key={`both-${data.sex === "both"}`}
-              hoverable
-              className={`comfort-card ${data.sex === "both" ? "selected" : ""}`}
-              onClick={() => handleComfortChange("both")}
-              cover={
-                <img alt="Оба пола" src="https://i.ibb.co/RHrnrzt/Image.png" />
-              }
-            >
-              <Meta title="Оба пола" className="gender" />
-            </Card>
+            {preferredSex?.map((sex) => (
+              <Card
+                key={sex.id}
+                className={`comfort-card ${data.preferred_sex_id === sex.id ? "selected" : ""}`}
+                onClick={() => handleComfortChange(sex.id)}
+                cover={
+                  <SexImage
+                    src={`/images/${sex.name}.png`}
+                    alt={sex.name}
+                    className="comfort-selection-img"
+                  />
+                }
+              />
+            ))}
           </div>
 
           <div>
@@ -80,7 +89,6 @@ const StepFour: React.FC<StepFourProps> = ({ data, updateData }) => {
             <div className="lessons-selection">
               <Card
                 key={`lessons-1-2-${data.lessons === "1-2"}`}
-                hoverable
                 className={`lessons-card ${data.lessons === "1-2" ? "selected" : ""}`}
                 onClick={() => handleLessonsChange("1-2")}
               >
@@ -88,7 +96,6 @@ const StepFour: React.FC<StepFourProps> = ({ data, updateData }) => {
               </Card>
               <Card
                 key={`lessons-3+-${data.lessons === "3+"}`}
-                hoverable
                 className={`lessons-card ${data.lessons === "3+" ? "selected" : ""}`}
                 onClick={() => handleLessonsChange("3+")}
               >
@@ -99,64 +106,34 @@ const StepFour: React.FC<StepFourProps> = ({ data, updateData }) => {
           <div>
             <label>Выберите ценовой диапазон:</label>
             <div className="price-range-selection">
-              <Card
-                key={`price-до2000-${data.priceRange === "до2000"}`}
-                hoverable
-                className={`price-range-card ${data.priceRange === "до2000" ? "selected" : ""}`}
-                onClick={() => handlePriceRangeChange("до2000")}
-              >
-                <Meta title="до 2000" />
-              </Card>
-              <Card
-                key={`price-до5000-${data.priceRange === "до5000"}`}
-                hoverable
-                className={`price-range-card ${data.priceRange === "до5000" ? "selected" : ""}`}
-                onClick={() => handlePriceRangeChange("до5000")}
-              >
-                <Meta title="до 5000" />
-              </Card>
-              <Card
-                key={`price-до10000-${data.priceRange === "до10000"}`}
-                hoverable
-                className={`price-range-card ${data.priceRange === "до10000" ? "selected" : ""}`}
-                onClick={() => handlePriceRangeChange("до10000")}
-              >
-                <Meta title="до 10000" />
-              </Card>
+              {studentPrice?.map((price) => (
+                <Card
+                  key={price.id}
+                  className={`price-range-card ${data.price_id === price.id ? "selected" : ""}`}
+                  onClick={() => handlePriceRangeChange(price.id)}
+                >
+                  <Meta title={price.name} />
+                </Card>
+              ))}
             </div>
           </div>
           <div>
             <label>Стаж преподавателя:</label>
             <div className="experience-selection">
-              <Card
-                key={`experience-1-3года-${data.experience === "1-3года"}`}
-                hoverable
-                className={`experience-card ${data.experience === "1-3года" ? "selected" : ""}`}
-                onClick={() => handleExperienceChange("1-3года")}
-              >
-                <Meta title="1-3 года" />
-              </Card>
-              <Card
-                key={`experience-5-10лет-${data.experience === "5-10лет"}`}
-                hoverable
-                className={`experience-card ${data.experience === "5-10лет" ? "selected" : ""}`}
-                onClick={() => handleExperienceChange("5-10лет")}
-              >
-                <Meta title="5-10 лет" />
-              </Card>
-              <Card
-                key={`experience->10лет-${data.experience === ">10лет"}`}
-                hoverable
-                className={`experience-card ${data.experience === ">10лет" ? "selected" : ""}`}
-                onClick={() => handleExperienceChange(">10лет")}
-              >
-                <Meta title="> 10 лет" />
-              </Card>
+              {teacherExperience?.map((exp) => (
+                <Card
+                  key={exp.id}
+                  className={`experience-card ${data.teacher_experience_id === exp.id ? "selected" : ""}`}
+                  onClick={() => handleExperienceChange(exp.id)}
+                >
+                  <Meta title={exp.name} />
+                </Card>
+              ))}
             </div>
           </div>
         </div>
       </Card>
-    </>
+    </div>
   );
 };
 

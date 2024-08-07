@@ -133,6 +133,7 @@ router.post("/confirm/:token", async (req, res) => {
   }
 });
 router.get("/me", (req, res) => {
+  console.log("req.session.userId1111", req.session.userId);
   if (!req.session.userId) {
     return res.status(401).json({ error: "Not authenticated" });
   }
