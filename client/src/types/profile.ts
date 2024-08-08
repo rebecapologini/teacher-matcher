@@ -33,7 +33,7 @@ export interface StepFiveData {
 }
 
 export interface TeacherStepThreeData {
-  competence: string[];
+  competence: number[];
   languageLevel: string;
   documents: string;
 }
@@ -42,8 +42,8 @@ export interface TeacherStepFourData {
   teachingExperience: number;
   almaMater: string | number | "";
   faculty: string | number | "";
-  academicDegree: string;
-  lessonCost: string;
+  academicDegree: number;
+  lessonCost: number;
 }
 export interface TeacherStepFiveData {
   convenientTime: {

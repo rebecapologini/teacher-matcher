@@ -29,6 +29,10 @@ const ProfileSetup = () => {
     setIsFilledStepFive,
     setIsFilledStepFour,
     setIsFilledStepThree,
+    setIsFilledTeacherStepThree,
+    setIsFilledTeacherStepFour,
+    setIsFilledTeacherStepFive,
+    setGlobalRole,
   } = useProfile();
 
   const [currentStep, setCurrentStep] = useState<number>(0);
@@ -58,6 +62,22 @@ const ProfileSetup = () => {
     } as StepFourData,
     stepFiveData: { about: "" } as StepFiveData,
   });
+
+  const teacherSteps = {
+    stepThreeData: { competence: [], languageLevel: "", documents: "" },
+    stepFourData: {
+      teacher_experience_id: 0,
+      almaMater: 0,
+      faculty: 0,
+      academicDegree: 0,
+      lessonCost: 0,
+    },
+    stepFiveData: {
+      convenientTime: [],
+      aboutYourself: "",
+      videoPresentation: "",
+    },
+  };
   console.log(profileData);
   useEffect(() => {
     setIsFilledStepOne(
@@ -80,37 +100,98 @@ const ProfileSetup = () => {
           Object.entries({ role: "" }).flat()
         ).length)
     );
-    setIsFilledStepThree(
-      (prev) =>
-        (prev = _.difference(
-          Object.entries(profileData.stepThreeData).flat(),
+    if (role === "student") {
+      setIsFilledStepThree(
+        (prev) =>
+          (prev = _.difference(
+            Object.entries(profileData.stepThreeData).flat(),
+            Object.entries({
+              language_id: 0,
+              goal_id: 0,
+              level_id: 0,
+              duration: "",
+            }).flat()
+          ).length)
+      );
+      setIsFilledStepFour(
+        (prev) =>
+          (prev = _.difference(
+            Object.entries(profileData.stepFourData).flat(),
+            Object.entries({
+              preferred_sex_id: 0,
+              lessons: "",
+              price_id: 0,
+              teacher_experience_id: 0,
+            }).flat()
+          ).length)
+      );
+      setIsFilledStepFive(
+        (prev) =>
+          (prev = _.difference(
+            Object.entries(profileData.stepFiveData).flat(),
+            Object.entries({ about: "" }).flat()
+          ).length)
+      );
+    } else if (role === "teacher") {
+      setIsFilledTeacherStepThree(
+        (prev) =>
+          (prev = _.difference(
+            _.flatten(Object.entries(profileData.stepThreeData).flat()),
+            Object.entries({
+              competence: [],
+              languageLevel: "",
+              documents: "",
+            }).flat()
+          ).length)
+      );
+      setIsFilledTeacherStepFour(
+        (prev) =>
+          (prev = _.difference(
+            Object.entries(profileData.stepFourData).flat(),
+            Object.entries({
+              teachingExperience: 0,
+              almaMater: 0,
+              faculty: 0,
+              academicDegree: 0,
+              lessonCost: "",
+            }).flat()
+          ).length)
+      );
+      setIsFilledTeacherStepFive(
+        (prev) =>
+          (prev = _.difference(
+            _.flatten(Object.entries(profileData.stepFiveData).flat()),
+            Object.entries({
+              convenientTime: [],
+              aboutYourself: "",
+              videoPresentation: "",
+            }).flat()
+          ).length)
+      );
+      console.log(
+        "1",
+        _.flatten(Object.entries(profileData.stepFiveData).flat())
+      );
+      console.log(
+        "2",
+        Object.entries({
+          convenientTime: [],
+          aboutYourself: "",
+          videoPresentation: "",
+        }).flat()
+      );
+      console.log(
+        "3",
+        _.difference(
+          _.flatten(Object.entries(profileData.stepFiveData).flat()),
           Object.entries({
-            language_id: 0,
-            goal_id: 0,
-            level_id: 0,
-            duration: "",
+            convenientTime: [],
+            aboutYourself: "",
+            videoPresentation: "",
           }).flat()
-        ).length)
-    );
-    setIsFilledStepFour(
-      (prev) =>
-        (prev = _.difference(
-          Object.entries(profileData.stepFourData).flat(),
-          Object.entries({
-            preferred_sex_id: 0,
-            lessons: "",
-            price_id: 0,
-            teacher_experience_id: 0,
-          }).flat()
-        ).length)
-    );
-    setIsFilledStepFive(
-      (prev) =>
-        (prev = _.difference(
-          Object.entries(profileData.stepFiveData).flat(),
-          Object.entries({ about: "" }).flat()
-        ).length)
-    );
+        ).length
+      );
+    }
   });
   const updateProfileData = (
     step: keyof ProfileData,
@@ -163,6 +244,44 @@ const ProfileSetup = () => {
   const handleRoleUpdate = (data: StepTwoData) => {
     updateProfileData("stepTwoData", data);
     setRole(data.role);
+    setGlobalRole(data.role);
+    console.log("asdf", data);
+    console.log("1234", profileData);
+    if (data.role === "teacher") {
+      setProfileData((prevData) => ({
+        ...prevData,
+        stepThreeData: { competence: [], languageLevel: "", documents: "" },
+        stepFourData: {
+          teachingExperience: 0,
+          almaMater: 0,
+          faculty: 0,
+          academicDegree: 0,
+          lessonCost: "",
+        },
+        stepFiveData: {
+          convenientTime: [],
+          aboutYourself: "",
+          videoPresentation: "",
+        },
+      }));
+    } else if (data.role === "student") {
+      setProfileData((prevData) => ({
+        ...prevData,
+        stepThreeData: {
+          language_id: 0,
+          goal_id: 0,
+          level_id: 0,
+          duration: "",
+        },
+        stepFourData: {
+          preferred_sex_id: 0,
+          lessons: "",
+          price_id: 0,
+          teacher_experience_id: 0,
+        },
+        stepFiveData: { about: "" },
+      }));
+    }
   };
 
   return (

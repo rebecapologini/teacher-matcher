@@ -7,32 +7,32 @@ module.exports = {
       "Levels",
       [
         {
-          level: "A1",
+          level: "A1 - Начальный",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          level: "A2",
+          level: "A2 - Элементарный",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          level: "B1",
+          level: "B1 - Средний",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          level: "B2",
+          level: "B2 - Средне-продвинутый",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          level: "C1",
+          level: "C1 - Продвинутый",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
-          level: "C2",
+          level: "C2 - Владение в совершенстве",
           createdAt: new Date(),
           updatedAt: new Date(),
         },

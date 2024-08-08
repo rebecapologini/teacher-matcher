@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Select, Card } from "antd";
 import { TeacherStepThreeData } from "../../../types/profile";
 import "./StepOne.css";
+import axios from "axios";
 
 const { Option } = Select;
 
@@ -11,32 +12,33 @@ interface TeacherStepThreeProps {
   next: () => void;
 }
 
-const competencies = [
-  "Подготовка к ЕГЭ",
-  "Общий Английский",
-  "Английский для путешествия",
-];
-
-const languageLevels = [
-  "A1 - Начальный",
-  "A2 - Элементарный",
-  "B1 - Средний",
-  "B2 - Средне-продвинутый",
-  "C1 - Продвинутый",
-  "C2 - Владение в совершенстве",
-];
-
 const TeacherStepThree: React.FC<TeacherStepThreeProps> = ({
   data,
   updateData,
 }) => {
-  const handleCompetenceChange = (selectedCompetencies: string[]) => {
+  const handleCompetenceChange = (selectedCompetencies: number[]) => {
     updateData({ ...data, competence: selectedCompetencies });
   };
 
   const handleLanguageLevelChange = (selectedLevel: string) => {
     updateData({ ...data, languageLevel: selectedLevel });
   };
+  const [levels, setLevels] = useState<{ id: number; level: string }[]>([]);
+  const [goals, setGoals] = useState<{ id: number; name: string }[]>([]);
+
+  useEffect(() => {
+    async function getLevels() {
+      const {
+        data: { levels, goals },
+      } = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URL}/profile/levels`
+      );
+      setLevels(levels);
+      setGoals(goals);
+    }
+
+    getLevels();
+  }, []);
 
   return (
     <div className="step-three">
@@ -52,9 +54,9 @@ const TeacherStepThree: React.FC<TeacherStepThreeProps> = ({
               onChange={handleCompetenceChange}
               className="custom-select"
             >
-              {competencies.map((competence) => (
-                <Option key={competence} value={competence}>
-                  {competence}
+              {goals.map((competence) => (
+                <Option key={competence.id} value={competence.id}>
+                  {competence.name}
                 </Option>
               ))}
             </Select>
@@ -67,9 +69,9 @@ const TeacherStepThree: React.FC<TeacherStepThreeProps> = ({
               onChange={handleLanguageLevelChange}
               className="custom-select"
             >
-              {languageLevels.map((level) => (
-                <Option key={level} value={level}>
-                  {level}
+              {levels.map((level) => (
+                <Option key={level.id} value={level.id}>
+                  {level.level}
                 </Option>
               ))}
             </Select>

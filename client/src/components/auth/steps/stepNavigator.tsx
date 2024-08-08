@@ -22,6 +22,10 @@ const StepNavigator: React.FC<StepNavigatorProps> = ({
     isFilledStepThree,
     isFilledStepFour,
     isFilledStepFive,
+    globalRole,
+    isFilledTeacherStepThree,
+    isFilledTeacherStepFour,
+    isFilledTeacherStepFive,
   } = useProfile();
   const [disabled, setDisabled] = useState(true);
   useEffect(() => {
@@ -30,15 +34,45 @@ const StepNavigator: React.FC<StepNavigatorProps> = ({
       setDisabled(false);
     } else if (currentStep === 1 && isFilledStepTwo === 1) {
       setDisabled(false);
-    } else if (currentStep === 2 && isFilledStepThree === 4) {
+    } else if (
+      globalRole === "student" &&
+      currentStep === 2 &&
+      isFilledStepThree === 4
+    ) {
       setDisabled(false);
-    } else if (currentStep === 3 && isFilledStepFour === 4) {
+    } else if (
+      globalRole === "teacher" &&
+      currentStep === 2 &&
+      isFilledTeacherStepThree >= 2
+    ) {
       setDisabled(false);
-    } else if (currentStep === 4 && isFilledStepFive === 1) {
+    } else if (
+      globalRole === "student" &&
+      currentStep === 3 &&
+      isFilledStepFour === 4
+    ) {
+      setDisabled(false);
+    } else if (
+      globalRole === "teacher" &&
+      currentStep === 3 &&
+      isFilledTeacherStepFour === 5
+    ) {
+      setDisabled(false);
+    } else if (
+      globalRole === "student" &&
+      currentStep === 4 &&
+      isFilledStepFive === 1
+    ) {
+      setDisabled(false);
+    } else if (
+      globalRole === "teacher" &&
+      currentStep === 4 &&
+      isFilledTeacherStepFive === 3
+    ) {
       setDisabled(false);
     }
   });
-  console.log(isFilledStepOne);
+  console.log(isFilledTeacherStepThree);
   console.log(currentStep);
   return (
     <div className="step-navigator">
@@ -65,7 +99,7 @@ const StepNavigator: React.FC<StepNavigatorProps> = ({
           type="secondary"
           iconAfterText={<RightOutlined />}
           text="Далее"
-          disabled={false}
+          disabled={disabled}
           onClick={register}
         />
       )}

@@ -61,6 +61,8 @@ router.post("/register", async (req, res) => {
         { where: { id: req.session.userId } }
       );
       res.status(201).end();
+    } else {
+      console.log("aaaa", req.body);
     }
     console.log("req.session.userId", req.session.userId);
   } catch (error) {
