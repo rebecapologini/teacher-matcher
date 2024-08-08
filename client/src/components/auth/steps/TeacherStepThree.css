@@ -13,9 +13,14 @@
 
 .upload-file{
   position: absolute;
-  top: 113px;
-  margin-left: 150px;
+  top: 201px;
+  margin-left: 210px;
 }
 .document-input{
   cursor: pointer;
+  border-radius: 32px;
+  width: 231px;
+  height: 28px;
+  border-width: 1px;
+  border-color: rgb(233, 232, 232);
 }

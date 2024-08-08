@@ -26,7 +26,7 @@ const UploadFile: React.FC<UploadFileProps> = ({
     ) {
       const formData = new FormData();
       formData.append("file", file);
-
+  
       try {
         const response = await axios.post(
           `${import.meta.env.VITE_API_BASE_URL}/upload`,
@@ -37,11 +37,15 @@ const UploadFile: React.FC<UploadFileProps> = ({
             },
           }
         );
-
-        const fileUrl = response.data.filePath;
-        setFileName(response.data.fileName); // Используем оригинальное имя файла
+  
+        const { fileName, filePath } = response.data;
+        
+        // Выводим имя файла и путь в консоль
+        console.log(`File Name: ${fileName}, File Path: ${filePath}`);
+        
+        setFileName(fileName); 
         setIsFileUploaded(true);
-        onUploadComplete(response.data.fileName);
+        onUploadComplete(fileName);
       } catch (error) {
         console.error("Error uploading file:", error);
       }
@@ -49,6 +53,7 @@ const UploadFile: React.FC<UploadFileProps> = ({
       alert("Файл должен быть не более 2МБ.");
     }
   };
+  
 
   const handleRemoveClick = async () => {
     if (fileName) {
@@ -94,8 +99,8 @@ const UploadFile: React.FC<UploadFileProps> = ({
         <div className="upload-icon">
           {!isFileUploaded ? (
             <svg
-              width="15"
-              height="16"
+              width="10"
+              height="18"
               viewBox="0 0 14 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

@@ -17,7 +17,6 @@ router.post('/upload', (req, res) => {
         const file = req.files.file;
         const fileType = file.mimetype;
 
-        // Определяем папку для сохранения в зависимости от типа файла
         let folder = '';
         if (fileType === 'application/pdf') {
             folder = 'pdfuploads';
@@ -27,7 +26,6 @@ router.post('/upload', (req, res) => {
             return res.status(400).json({ message: "Недопустимый тип файла" });
         }
 
-        // Заменяем пробелы на _
         const newFileName = nanoid() + '-' + file.name.replace(/\s+/g, '_');
         const uploadPath = path.join(__dirname, `../public/${folder}/`, newFileName);
 
@@ -37,7 +35,6 @@ router.post('/upload', (req, res) => {
                 return res.status(500).send(err);
             }
 
-            // Сохраняем соответствие оригинального имени и нового имени
             fileMappings[file.name] = newFileName;
 
             res.json({
@@ -50,6 +47,7 @@ router.post('/upload', (req, res) => {
         res.status(500).json({ message: 'Внутренняя ошибка сервера' });
     }
 });
+
 
 router.delete('/upload', (req, res) => {
     const { fileName } = req.body;

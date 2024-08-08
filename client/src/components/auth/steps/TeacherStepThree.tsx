@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Select, Card } from "antd";
 import { TeacherStepThreeData } from "../../../types/profile";
 import UploadFile from "../../../pages/upload-file"; // Обновите путь к компоненту
-
+import './TeacherStepThree.css'
 import axios from "axios";
 import "./StepOne.css";
 
