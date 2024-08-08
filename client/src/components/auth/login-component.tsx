@@ -14,6 +14,8 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [emailError, setEmailError] = useState<string | null>(null);
 
   const [login] = useLoginMutation();
   const dispatch = useDispatch();
@@ -27,17 +29,23 @@ const Login = () => {
     }));
   };
 
-  const handleSubmit = async (formData: {
-    email: string;
-    password: string;
-  }) => {
+  const handleSubmit = async (values: { email: string; password: string }) => {
     try {
-      const user = await login(formData).unwrap();
+      const user = await login(values).unwrap();
       console.log("Login successful:", user);
       dispatch(setUser(user));
       navigate("/");
-    } catch (err) {
+    } catch (err: any) {
       console.error("Failed to login:", err);
+
+      if (err?.data?.error === "Invalid password") {
+        setErrorMessage("Пароль неверный");
+      } 
+
+      // Additional check for email validity
+      if (err?.data?.error === 'Invalid email') {
+        setEmailError("Неверный email");
+      }
     }
   };
 
@@ -53,7 +61,7 @@ const Login = () => {
             <Form name="login" onFinish={handleSubmit} layout="vertical">
               <Form.Item
                 name="email"
-                rules={[{ required: true, message: "Введите email" }]}
+                rules={[{ required: true, message: "Введите email" },   { type: 'email', message: 'Введите корректный email' },]}
               >
                 <Input
                   type="email"
@@ -66,6 +74,7 @@ const Login = () => {
                   placeholder="Email"
                   className="custom-input"
                 />
+                 {emailError && <div className="error-message">{emailError}</div>}
               </Form.Item>
               <Form.Item
                 name="password"
@@ -81,6 +90,7 @@ const Login = () => {
                   placeholder="Password"
                   className="custom-input"
                 />
+                {errorMessage && <div className="error-message">{errorMessage}</div>}
               </Form.Item>
               <Form.Item>
                 <CustomButton

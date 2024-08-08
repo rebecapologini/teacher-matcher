@@ -10,3 +10,12 @@
   background-color: rgb(167, 111, 110);
   border-color: rgb(167, 111, 110);
 }
+
+.upload-file{
+  position: absolute;
+  top: 113px;
+  margin-left: 150px;
+}
+.document-input{
+  cursor: pointer;
+}

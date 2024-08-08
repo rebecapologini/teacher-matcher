@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Select, Card } from "antd";
 import { TeacherStepThreeData } from "../../../types/profile";
+import UploadFile from "../../../pages/upload-file"; // Обновите путь к компоненту
 import "./StepOne.css";
 import axios from "axios";
+import "./StepThree.css";
+import "./TeacherStepThree.css";
 
 const { Option } = Select;
 
@@ -40,46 +43,80 @@ const TeacherStepThree: React.FC<TeacherStepThreeProps> = ({
     getLevels();
   }, []);
 
+  const handleUploadComplete = (fileName: string) => {
+    updateData({ ...data, documents: fileName });
+  };
+
+  const handleRemoveFile = () => {
+    updateData({ ...data, documents: "" });
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    updateData({ ...data, [name]: value });
+  };
+
+  const handleClickOnInput = () => {
+    const uploadIconContainer = document.querySelector(
+      ".upload-icon-container"
+    ) as HTMLElement;
+    if (uploadIconContainer) {
+      uploadIconContainer.click();
+    }
+  };
+
   return (
     <div className="step-three">
       <h2>Шаг 3 из 5</h2>
       <Card>
-        <div className="selects-container">
-          <div>
-            <label>Выберите компетенции</label>
-            <Select
-              mode="multiple"
-              placeholder="Выберите компетенции"
-              value={data.competence}
-              onChange={handleCompetenceChange}
-              className="custom-select"
-            >
-              {goals.map((competence) => (
-                <Option key={competence.id} value={competence.id}>
-                  {competence.name}
-                </Option>
-              ))}
-            </Select>
+        <div>
+          <label>Выберите компетенции</label>
+          <Select
+            mode="multiple"
+            placeholder="Выберите компетенции"
+            value={data.competence}
+            onChange={handleCompetenceChange}
+            className="competence-select"
+          >
+            {goals.map((competence) => (
+              <Option key={competence.id} value={competence.id}>
+                {competence.name}
+              </Option>
+            ))}
+          </Select>
+        </div>
+        <div>
+          <label>Уровень владения языком</label>
+          <Select
+            placeholder="Выберите уровень владения языком"
+            value={data.languageLevel}
+            onChange={handleLanguageLevelChange}
+            className="language-level-select"
+          >
+            {levels.map((level) => (
+              <Option key={level.id} value={level.id}>
+                {level.level}
+              </Option>
+            ))}
+          </Select>
+        </div>
+
+        <div>
+          <label>Подтверждающие документы</label>
+          <div className="docs">
+            <UploadFile
+              onUploadComplete={handleUploadComplete}
+              onRemove={handleRemoveFile}
+            />
           </div>
-          <div>
-            <label>Уровень владения языком</label>
-            <Select
-              placeholder="Выберите уровень владения языком"
-              value={data.languageLevel}
-              onChange={handleLanguageLevelChange}
-              className="custom-select"
-            >
-              {levels.map((level) => (
-                <Option key={level.id} value={level.id}>
-                  {level.level}
-                </Option>
-              ))}
-            </Select>
-          </div>
-          <div>
-            <label>Подтверждающие документы</label>
-            <input type="file" multiple className="custom-file-input" />
-          </div>
+          <input
+            name="documents"
+            value={data.documents}
+            onChange={handleChange}
+            readOnly
+            className="document-input"
+            onClick={handleClickOnInput}
+          />
         </div>
       </Card>
     </div>

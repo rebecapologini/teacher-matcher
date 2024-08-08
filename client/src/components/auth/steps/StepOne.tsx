@@ -69,6 +69,7 @@ const StepOne: React.FC<StepOneProps> = ({ data, updateData }) => {
             }
             icon={!avatarUrl && <UserOutlined />}
           />
+            />
           <Uploading
             onUploadComplete={handleUploadComplete}
             onRemove={handleRemoveAvatar}
