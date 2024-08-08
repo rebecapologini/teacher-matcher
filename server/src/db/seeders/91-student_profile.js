@@ -12,7 +12,7 @@ module.exports = {
           level_id: 3,
           duration: "2 month",
           preferred_sex_id: 1,
-          number_of_lessons: "3 and more",
+          lessons: "3 and more",
           price_id: 2,
           teacher_experience_id: 2,
           about: "Я молодец",

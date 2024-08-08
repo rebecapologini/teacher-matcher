@@ -36,11 +36,12 @@ export interface TeacherStepThreeData {
   competence: number[];
   languageLevel: string;
   documents: string;
+  language_id: number;
 }
 
 export interface TeacherStepFourData {
   teachingExperience: number;
-  almaMater: string | number | "";
+  almaMater: string | number | "" | undefined;
   faculty: string | number | "";
   academicDegree: number;
   lessonCost: number;

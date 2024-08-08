@@ -141,6 +141,7 @@ const ProfileSetup = () => {
               competence: [],
               languageLevel: "",
               documents: "",
+              language_id: 0,
             }).flat()
           ).length)
       );
@@ -250,7 +251,12 @@ const ProfileSetup = () => {
     if (data.role === "teacher") {
       setProfileData((prevData) => ({
         ...prevData,
-        stepThreeData: { competence: [], languageLevel: "", documents: "" },
+        stepThreeData: {
+          competence: [],
+          languageLevel: "",
+          documents: "",
+          language_id: 0,
+        },
         stepFourData: {
           teachingExperience: 0,
           almaMater: 0,

@@ -2,49 +2,26 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Users", {
+    await queryInterface.createTable("CometenceArrs", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
       },
-      student_profile_id: {
-        unique: true,
+      goal_id: {
         type: Sequelize.INTEGER,
-
         references: {
-          model: {
-            tableName: "StudentProfiles",
-          },
+          model: "Goals",
           key: "id",
         },
       },
-      teacher_profile_id: {
-        unique: true,
+      profile_id: {
         type: Sequelize.INTEGER,
-
         references: {
-          model: {
-            tableName: "TeacherProfiles",
-          },
+          model: "TeacherProfiles",
           key: "id",
         },
-      },
-      name: {
-        type: Sequelize.STRING,
-      },
-      email: {
-        type: Sequelize.STRING,
-        unique: true,
-      },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      confirm: {
-        type: Sequelize.BOOLEAN,
-        allowNull: false,
       },
       createdAt: {
         allowNull: false,
@@ -57,6 +34,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Users");
+    await queryInterface.dropTable("CometenceArrs");
   },
 };

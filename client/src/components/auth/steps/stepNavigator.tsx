@@ -43,7 +43,7 @@ const StepNavigator: React.FC<StepNavigatorProps> = ({
     } else if (
       globalRole === "teacher" &&
       currentStep === 2 &&
-      isFilledTeacherStepThree >= 2
+      isFilledTeacherStepThree >= 4
     ) {
       setDisabled(false);
     } else if (

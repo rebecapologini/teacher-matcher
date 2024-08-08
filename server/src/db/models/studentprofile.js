@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       TeacherExperience,
       User,
     }) {
-      StudentProfile.hasOne(User, { foreignKey: "profile_id" });
+      StudentProfile.hasOne(User, { foreignKey: "student_profile_id" });
       StudentProfile.belongsTo(Language, { foreignKey: "language_id" });
       StudentProfile.belongsTo(Level, { foreignKey: "level_id" });
       StudentProfile.belongsTo(Goal, { foreignKey: "goal_id" });
@@ -34,17 +34,17 @@ module.exports = (sequelize, DataTypes) => {
   }
   StudentProfile.init(
     {
-      language_id: DataTypes.NUMBER,
-      goal_id: DataTypes.NUMBER,
-      level_id: DataTypes.NUMBER,
+      language_id: DataTypes.INTEGER,
+      goal_id: DataTypes.INTEGER,
+      level_id: DataTypes.INTEGER,
       duration: DataTypes.STRING,
-      preferred_sex_id: DataTypes.NUMBER,
-      number_of_lessons: DataTypes.STRING,
-      price_id: DataTypes.NUMBER,
-      teacher_experience_id: DataTypes.NUMBER,
+      preferred_sex_id: DataTypes.INTEGER,
+      lessons: DataTypes.STRING,
+      price_id: DataTypes.INTEGER,
+      teacher_experience_id: DataTypes.INTEGER,
       about: DataTypes.TEXT,
       picture_link: DataTypes.STRING,
-      sex_id: DataTypes.NUMBER,
+      sex_id: DataTypes.INTEGER,
     },
     {
       sequelize,

@@ -2,12 +2,48 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("StudentProfiles", {
+    await queryInterface.createTable("TeacherProfiles", {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER,
+      },
+      name: {
+        type: Sequelize.STRING,
+      },
+      surname: {
+        type: Sequelize.STRING,
+      },
+      age: {
+        type: Sequelize.INTEGER,
+      },
+      sex_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "Sexes",
+          },
+          key: "id",
+        },
+      },
+      picture_link: {
+        type: Sequelize.STRING,
+      },
+      competence_arr_id: {
+        type: Sequelize.INTEGER,
+      },
+      languageLevel: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "Levels",
+          },
+          key: "id",
+        },
+      },
+      documents: {
+        type: Sequelize.STRING,
       },
       language_id: {
         type: Sequelize.INTEGER,
@@ -18,71 +54,29 @@ module.exports = {
           key: "id",
         },
       },
-      goal_id: {
+      teachingExperience: {
         type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: "Goals",
-          },
-          key: "id",
-        },
       },
-      level_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: "Levels",
-          },
-          key: "id",
-        },
-      },
-      duration: {
+      almaMater: {
         type: Sequelize.STRING,
       },
-      preferred_sex_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: "PreferredSexes",
-          },
-          key: "id",
-        },
-      },
-      lessons: {
+      faculty: {
         type: Sequelize.STRING,
       },
-      price_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: "StudentPrices",
-          },
-          key: "id",
-        },
-      },
-      teacher_experience_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: "TeacherExperiences",
-          },
-          key: "id",
-        },
-      },
-      about: {
-        type: Sequelize.TEXT,
-      },
-      picture_link: {
+      academicDegree: {
         type: Sequelize.STRING,
       },
-      sex_id: {
+      lessonCost: {
         type: Sequelize.INTEGER,
-        references: {
-          model: {
-            tableName: "Sexes",
-          },
-          key: "id",
-        },
+      },
+      convenientTime: {
+        type: Sequelize.JSON,
+      },
+      aboutYourself: {
+        type: Sequelize.STRING,
+      },
+      videoPresentation: {
+        type: Sequelize.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -95,6 +89,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("StudentProfiles");
+    await queryInterface.dropTable("TeacherProfiles");
   },
 };

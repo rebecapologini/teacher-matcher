@@ -9,6 +9,8 @@ const {
   Sex,
   StudentProfile,
   User,
+  TeacherProfile,
+  CometenceArr,
 } = require("../db/models");
 const router = express.Router();
 
@@ -57,12 +59,26 @@ router.post("/register", async (req, res) => {
       const result = await StudentProfile.create(rest);
       console.log("res", result.id);
       await User.update(
-        { profile_id: result.id },
+        { student_profile_id: result.id },
         { where: { id: req.session.userId } }
       );
       res.status(201).end();
-    } else {
+    } else if (req.body.role === "teacher") {
+      const { role, competence, ...rest } = data;
+      console.log("rest", rest);
+
+      const result = await TeacherProfile.create(rest);
       console.log("aaaa", req.body);
+      const competenceArr = competence.map((el) => {
+        console.log("el", el);
+        return { profile_id: result.id, goal_id: el };
+      });
+      await CometenceArr.bulkCreate(competenceArr);
+      await User.update(
+        { teacher_profile_id: result.id },
+        { where: { id: req.session.userId } }
+      );
+      res.status(201).end();
     }
     console.log("req.session.userId", req.session.userId);
   } catch (error) {
