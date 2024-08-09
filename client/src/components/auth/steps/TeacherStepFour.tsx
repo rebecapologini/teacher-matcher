@@ -66,8 +66,14 @@ const TeacherStepFour: React.FC<TeacherStepFourProps> = ({
         const response = await axios.get(`${url}/getFaculties`, {
           params: { university_id: selectedUniversity.id },
         });
-        const fetchedFaculties = response.data.response.items || [];
-        setFaculties(fetchedFaculties);
+
+        // Сортировка факультетов по алфавиту
+        const sortedFaculties = response.data.response.items.sort((a: Faculty, b: Faculty) => {
+          return a.title.localeCompare(b.title);
+        });
+
+        console.log(sortedFaculties);
+        setFaculties(sortedFaculties);
       } catch (error) {
         message.error("Ошибка при загрузке списка факультетов");
       }

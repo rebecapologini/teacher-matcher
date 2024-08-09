@@ -16,7 +16,9 @@ router.get('/api/getUniversitiesFromDB', async (req, res) => {
     try {
       // Найти все университеты и отсортировать их по имени
       const universities = await University.findAll({
-        order: [['title', 'ASC']], // Сортировка по полю title в порядке возрастания
+        order: [
+          ['title', 'ASC'],
+        ]
       });
       res.json({ universities });
     } catch (error) {
@@ -26,6 +28,9 @@ router.get('/api/getUniversitiesFromDB', async (req, res) => {
   });
 
 // Получение факультетов из API VK по университету
+
+
+
 router.get('/api/getFaculties', async (req, res) => {
   const { university_id } = req.query;
   try {

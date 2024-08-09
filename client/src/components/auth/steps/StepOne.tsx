@@ -30,16 +30,17 @@ const StepOne: React.FC<StepOneProps> = ({ data, updateData }) => {
 
   const handleUploadComplete = (fileUrl: string) => {
     setAvatarUrl(fileUrl);
-    updateData({ ...data, picture_link: fileUrl }); // Сохранение URL в данные
+    updateData({ ...data, picture_link: fileUrl });
   };
+
   const handleRemoveAvatar = () => {
     setAvatarUrl(undefined);
     updateData({ ...data, picture_link: "" });
   };
+
   const handleSexChange = (value: number) => {
     updateData({ ...data, sex_id: value });
   };
-  console.log(avatarUrl);
 
   useEffect(() => {
     async function getLevels() {
@@ -48,7 +49,6 @@ const StepOne: React.FC<StepOneProps> = ({ data, updateData }) => {
       } = await axios.get(
         `${import.meta.env.VITE_API_BASE_URL}/profile/step_1`
       );
-      console.log("sex", sex);
       setSex(sex);
     }
 
@@ -61,13 +61,14 @@ const StepOne: React.FC<StepOneProps> = ({ data, updateData }) => {
       <Card>
         <div className="avatar">
           <Avatar
-            size={128}
+            size={128} // Размер аватара
             src={
               avatarUrl
                 ? `http://localhost:4000${avatarUrl}`
                 : "http://localhost:4000/uploads/default-avatar.svg"
             }
             icon={!avatarUrl && <UserOutlined />}
+            className="custom-avatar"
           />
 
           <Uploading
@@ -116,7 +117,9 @@ const StepOne: React.FC<StepOneProps> = ({ data, updateData }) => {
             {sex?.map((sex) => (
               <Card
                 key={sex.id}
-                className={`lessons-card ${data.sex_id === sex.id ? "selected" : ""}`}
+                className={`lessons-card ${
+                  data.sex_id === sex.id ? "selected" : ""
+                }`}
                 onClick={() => handleSexChange(sex.id)}
               >
                 <Meta title={sex.name} />
