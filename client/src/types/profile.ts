@@ -43,8 +43,8 @@ export interface TeacherStepFourData {
   teachingExperience: number;
   almaMater: string | number | "" | undefined;
   faculty: string | number | "";
-  academicDegree: number;
-  lessonCost: number;
+  academicDegree: string;
+  lessonCost: string;
 }
 export interface TeacherStepFiveData {
   convenientTime: {

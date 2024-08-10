@@ -27,11 +27,6 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
     console.log("user", user);
     return <Navigate to="/" />;
   }
-  // else if (data?.profile_id) {
-  //   return <Navigate to="/matching" />;
-  // } else {
-  //   return <Navigate to="/profile-setup" />;
-  // }
 
   return <>{children}</>;
 };

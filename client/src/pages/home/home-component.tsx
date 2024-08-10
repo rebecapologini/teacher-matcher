@@ -6,7 +6,6 @@ import { RightOutlined } from "@ant-design/icons";
 
 import Header from "../../components/header/header-component.tsx";
 import { useNavigate } from "react-router-dom";
-import { useFetchUserQuery } from "../../features/auth/auth-api-slice.ts";
 
 const Home: React.FC = () => {
   const navigate = useNavigate();

@@ -10,6 +10,7 @@ import {
   ProtectedRoute,
 } from "../components/auth";
 import { LazyHome } from "../pages/home";
+import MatchingCard from "../components/matching/MatchingCard";
 
 interface RouteConfig {
   path: string;
@@ -19,7 +20,7 @@ interface RouteConfig {
 
 export const routes: RouteConfig[] = [
   { path: "/login", element: <LazyLogin /> },
-  { path: "/matching", element: <LazyLogin />, protected: true },
+  { path: "/matching", element: <MatchingCard />, protected: true },
   { path: "/register", element: <LazyRegister /> },
   { path: "/auth", element: <LazyAuthPage /> },
   { path: "/confirm/:token", element: <LazyConfirmPage /> },

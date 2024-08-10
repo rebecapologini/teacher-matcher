@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
   Level.init(
     {
       level: DataTypes.STRING,
+      profile_name: DataTypes.STRING,
     },
     {
       sequelize,
