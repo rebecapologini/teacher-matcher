@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   margin-top: 2px;
-  
+  width: 100%;
 }
 .ant-avatar{
   opacity: 1;
@@ -27,3 +27,8 @@
   border-color: rgb(167, 111, 110);
   outline: none;
 }
+.custom-avatar img {
+  width: 100% !important;
+  height: auto !important;
+}
+

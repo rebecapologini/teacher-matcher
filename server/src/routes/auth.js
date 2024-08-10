@@ -17,16 +17,20 @@ router.post(
   ],
 
   async (req, res) => {
-    console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.log(errors);
       return res.status(400).json({ errors: errors.array() });
     }
 
     const { name, email, password } = req.body;
 
     try {
+      // Проверка наличия пользователя с таким email
+      const existingUser = await User.findOne({ where: { email } });
+      if (existingUser) {
+        return res.status(400).json({ error: "Email already in use" });
+      }
+
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = await User.create({
         name,
@@ -34,6 +38,7 @@ router.post(
         password: hashedPassword,
         confirm: false,
       });
+
       req.session.userId = user.id;
       const confirmationToken = generateToken();
       await MailCheck.create({ user_id: user.id, token: confirmationToken });
@@ -55,6 +60,7 @@ router.post(
     }
   }
 );
+
 
 router.post(
   "/login",
