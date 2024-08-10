@@ -9,7 +9,27 @@ import axios from "axios";
 
 const MatchingCard: React.FC = () => {
   const [profileData, setProfileData] = useState({});
-  const [avatarUrl, setAvatarUrl] = useState<string | undefined>("");
+  const [selectedDay, setSelectedDay] = useState<string | null>("Пн");
+
+  const declension = ["год", "года", "лет"];
+
+  const daysOfWeek = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
+  const timesList = [
+    "8:00",
+    "9:00",
+    "10:00",
+    "11:00",
+    "12:00",
+    "13:00",
+    "14:00",
+    "15:00",
+    "16:00",
+    "17:00",
+    "18:00",
+    "19:00",
+    "20:00",
+    "21:00",
+  ];
 
   const cardRef = useRef<HTMLDivElement>(null);
   const leftIndicatorRef = useRef<HTMLDivElement>(null);
@@ -31,7 +51,6 @@ const MatchingCard: React.FC = () => {
     const card = cardRef.current;
     const leftIndicator = leftIndicatorRef.current;
     const rightIndicator = rightIndicatorRef.current;
-    setAvatarUrl("/uploads/b9k9S8m3uEj6xR9IiHsWz-both.png");
 
     if (!card || !leftIndicator || !rightIndicator) return;
 
@@ -75,29 +94,6 @@ const MatchingCard: React.FC = () => {
     ];
   }
 
-  var declension = ["год", "года", "лет"];
-
-  const daysOfWeek = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
-  const timesList = [
-    "8:00",
-    "9:00",
-    "10:00",
-    "11:00",
-    "12:00",
-    "13:00",
-    "14:00",
-    "15:00",
-    "16:00",
-    "17:00",
-    "18:00",
-    "19:00",
-    "20:00",
-    "21:00",
-  ];
-  const [selectedDay, setSelectedDay] = useState<string | null>(null);
-  const [selectedTimes, setSelectedTimes] = useState<{
-    [day: string]: string[];
-  }>({});
   const handleDayClick = (
     day: string,
     e: React.MouseEvent | React.TouchEvent
@@ -124,12 +120,12 @@ const MatchingCard: React.FC = () => {
           ✔
         </div>
         <Card className={styles.card} ref={cardRef}>
-          <Button>AA</Button>
           <div className="avatar">
             {profileData.picture_link && (
               <Avatar
                 size={128}
                 src={`http://localhost:4000${profileData.picture_link}`}
+                className="custom-avatar"
               />
             )}
           </div>
@@ -149,19 +145,23 @@ const MatchingCard: React.FC = () => {
               profileData.Goals.map((competence) => (
                 <div className={styles.tabs}>{competence.name}</div>
               ))}
+            {profileData.almaMater &&
+              profileData.faculty &&
+              profileData.academicDegree && (
+                <>
+                  {" "}
+                  <div className={styles.tabs}>{profileData.almaMater}</div>
+                  <div className={styles.tabs}>{profileData.faculty}</div>
+                  <div className={styles.tabs}>
+                    {profileData.academicDegree}
+                  </div>
+                </>
+              )}
           </div>
           <div className={styles.cost_info}>
             Индивидуальное занятие · 55 мин · {profileData.lessonCost} ₽
           </div>
           <div className={styles.profile_body}>
-            <div className={styles.profile_title}>Образование</div>
-            {profileData.almaMater &&
-              profileData.faculty &&
-              profileData.academicDegree && (
-                <div className={styles.text_blocks}>
-                  {`${profileData.almaMater} — ${profileData.faculty} (${profileData.academicDegree})`}
-                </div>
-              )}
             <div className={styles.profile_title}>О себе</div>
             {profileData.aboutYourself && (
               <div className={styles.text_blocks}>
@@ -178,7 +178,7 @@ const MatchingCard: React.FC = () => {
             )}
             {profileData.convenientTime && (
               <>
-                <div className={styles.profile_title}>Свободное время</div>
+                <div className={styles.profile_title}>Свободные слоты</div>
                 <div className="select-day">
                   <div className="days-container">
                     {daysOfWeek.map((day) => (

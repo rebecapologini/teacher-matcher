@@ -57,3 +57,7 @@
   background-color: rgb(157, 101, 100);
   border: 1px solid #a76f6e;
 }
+.custom-avatar img {
+  width: 100% !important;
+  height: auto !important;
+}
