@@ -5,28 +5,20 @@
   gap: 20px;
 }
 
+.custom-input .ant-input {
+  border-radius: 30px !important;
+  border-start-end-radius: 0 !important;
+  border-end-end-radius: 0 !important;
+}
+.custom-input .ant-input-group-addon {
+  border-radius: 30px;
+  border-start-start-radius: 0;
+  border-end-start-radius: 0;
+  padding: 0 5px;
+}
 .custom-select .ant-select-selector {
   border-radius: 30px;
   background-color: rgb(167, 111, 110);
   border-color: rgb(167, 111, 110);
-}
-
-.upload-file{
-  position: absolute;
-  top: 201px;
-  margin-left: 210px;
-}
-.document-input {
-  cursor: pointer;
-  border-radius: 32px;
-  width: 225px;
-  height: 28px;
-  border: 1px solid rgba(118, 118, 118, 0.4); /* Граница с прозрачностью 50% */
-  outline: none;
-  transition: 0.2s;
-  padding-left: 12px;
-}
-.document-input:hover{
-  border-color: rgba(68, 105, 226, 0.7); /* Увеличенная непрозрачность при наведении и фокусе */
-  transition: 0.2s;
+  padding: 7px 10px;
 }

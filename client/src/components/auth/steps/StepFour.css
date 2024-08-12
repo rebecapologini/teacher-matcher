@@ -54,3 +54,22 @@
 .comfort-selection-img {
   margin-top: 40px;
 }
+/* .ant-slider-track {
+  background-color: brown !important;
+}
+
+.ant-slider-handle::after {
+  box-shadow: 0 0 0 2px brown !important;
+}
+/* 
+.ant-slider-step  */
+
+/* :where(.css-dev-only-do-not-override-1pg9a38).ant-slider:hover
+  .ant-slider-dot-active {
+  border-color: brown;
+}
+
+:where(.css-dev-only-do-not-override-1pg9a38).ant-slider
+  .ant-slider-dot-active {
+  border-color: brown;
+} */ */

@@ -17,8 +17,13 @@ module.exports = (sequelize, DataTypes) => {
       Sex,
       TeacherExperience,
       User,
+      TeacherProfile,
     }) {
       StudentProfile.hasOne(User, { foreignKey: "student_profile_id" });
+      StudentProfile.belongsToMany(TeacherProfile, {
+        through: "Matched_profile",
+        foreignKey: "student_id",
+      });
       StudentProfile.belongsTo(Language, { foreignKey: "language_id" });
       StudentProfile.belongsTo(Level, { foreignKey: "level_id" });
       StudentProfile.belongsTo(Goal, { foreignKey: "goal_id" });

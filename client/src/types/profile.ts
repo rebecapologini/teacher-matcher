@@ -67,3 +67,7 @@ export interface ProfileDataForRegistration
     StepThreeData,
     StepFourData,
     StepFiveData {}
+
+export interface ProfileId {
+  id: number | string | undefined;
+}

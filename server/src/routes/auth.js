@@ -38,7 +38,7 @@ router.post(
         password: hashedPassword,
         confirm: false,
       });
-
+      console.log("req.session.userId ", req.session.userId);
       req.session.userId = user.id;
       const confirmationToken = generateToken();
       await MailCheck.create({ user_id: user.id, token: confirmationToken });
@@ -55,12 +55,11 @@ router.post(
         res.status(201).json(userWithoutPassword);
       });
     } catch (error) {
-      console.log(error);
+      console.log("error", error);
       res.status(500).json({ error: error.message });
     }
   }
 );
-
 
 router.post(
   "/login",
@@ -71,6 +70,7 @@ router.post(
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log("errors.array() ");
       return res.status(400).json({ errors: errors.array() });
     }
 
@@ -172,7 +172,7 @@ async function sendConfirmationEmail(email, token) {
     from: process.env.EMAIL_USER,
     to: email,
     subject: "Подтверждение почты",
-    text: `Для подтверждения почты перейдите по ссылке: http://localhost:5173/confirm/${token}`,
+    text: `Для подтверждения почты перейдите по ссылке: ${process.env.CLIENT_URL}/confirm/${token}`,
   };
 
   await transporter.sendMail(mailOptions);

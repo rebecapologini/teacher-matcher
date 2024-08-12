@@ -42,7 +42,6 @@ export const ProfileProvider = ({
     useState<number>(0);
   const [globalRole, setGlobalRole] = useState<string>("");
 
-  console.log("isFilledTeacherStepThree", isFilledTeacherStepThree);
   return (
     <ProfileContext.Provider
       value={{

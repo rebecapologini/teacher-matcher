@@ -1,13 +1,12 @@
 .upload-file {
-  display: flex;
-  align-items: center;
-  width: 150px;
+  margin: 0;
+  padding: 0;
 }
 
 .upload-icon-container {
   cursor: pointer;
-  width: 24px;
-  height: 24px;
+  width: 18px;
+  height: 18px;
 }
 
 .upload-icon {

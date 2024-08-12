@@ -10,3 +10,20 @@
   background-color: rgb(167, 111, 110);
   border-color: rgb(167, 111, 110);
 }
+
+.ant-select-focused:where(
+    .css-dev-only-do-not-override-1pg9a38
+  ).ant-select-outlined:not(.ant-select-disabled):not(
+    .ant-select-customize-input
+  ):not(.ant-pagination-size-changer)
+  .ant-select-selector {
+  border-color: rgb(167, 111, 110) !important;
+  box-shadow: 0 0 0 2px rgba(167, 111, 110, 0.209) !important;
+}
+:where(.css-dev-only-do-not-override-1pg9a38).ant-select-single.ant-select-open
+  .ant-select-selection-item {
+  color: black !important;
+}
+.ant-select-open .ant-select-single .ant-select-selection-item {
+  background-color: brown !important;
+}

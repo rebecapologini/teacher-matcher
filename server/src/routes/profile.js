@@ -51,7 +51,6 @@ router.get("/step_1", async (req, res) => {
 
 router.post("/register", async (req, res) => {
   try {
-    console.log("req.body", req.body);
     const data = req.body;
     if (req.body.role === "student") {
       const { role, ...rest } = data;
@@ -65,10 +64,9 @@ router.post("/register", async (req, res) => {
       res.status(201).end();
     } else if (req.body.role === "teacher") {
       const { role, competence, ...rest } = data;
-      console.log("rest", rest);
 
       const result = await TeacherProfile.create(rest);
-      console.log("aaaa", req.body);
+
       const competenceArr = competence.map((el) => {
         console.log("el", el);
         return { profile_id: result.id, goal_id: el };
@@ -80,7 +78,6 @@ router.post("/register", async (req, res) => {
       );
       res.status(201).end();
     }
-    console.log("req.session.userId", req.session.userId);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

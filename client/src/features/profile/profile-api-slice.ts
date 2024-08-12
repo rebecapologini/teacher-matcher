@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-import { ProfileDataForRegistration } from "../../types/profile.ts";
+import { ProfileDataForRegistration, ProfileId } from "../../types/profile.ts";
 
 const baseQuery = fetchBaseQuery({
   baseUrl: import.meta.env.VITE_API_BASE_URL,
@@ -10,7 +10,7 @@ const baseQuery = fetchBaseQuery({
 export const apiProfileSlice = createApi({
   reducerPath: "apiProfile",
   baseQuery,
-  tagTypes: ["ProfileDataForRegistration"],
+  tagTypes: ["ProfileDataForRegistration", "ProfileId"],
   endpoints: (builder) => ({
     bregister: builder.mutation({
       query: (profile: ProfileDataForRegistration) => ({
@@ -20,7 +20,23 @@ export const apiProfileSlice = createApi({
       }),
       invalidatesTags: ["ProfileDataForRegistration"],
     }),
+    matching: builder.mutation({
+      query: (id: ProfileId) => ({
+        url: "/matching/add",
+        method: "POST",
+        body: id,
+      }),
+      invalidatesTags: ["ProfileId"],
+    }),
+    fetchTeacher: builder.query<ProfileDataForRegistration[], void>({
+      query: () => "/matching/teachers",
+      providesTags: ["ProfileId"],
+    }),
   }),
 });
 
-export const { useBregisterMutation } = apiProfileSlice;
+export const {
+  useBregisterMutation,
+  useMatchingMutation,
+  useFetchTeacherQuery,
+} = apiProfileSlice;

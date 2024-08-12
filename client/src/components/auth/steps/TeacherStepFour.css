@@ -28,6 +28,8 @@
   margin-top: 10px;
 }
 
-.lesson-cost {
-  width: 100%;
+.lesson-cost .ant-input {
+  border-radius: 30px !important;
+  border-start-end-radius: 0 !important;
+  border-end-end-radius: 0 !important;
 }

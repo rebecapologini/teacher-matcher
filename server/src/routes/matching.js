@@ -11,82 +11,43 @@ const {
   User,
   TeacherProfile,
   CometenceArr,
+  Matched_profile,
 } = require("../db/models");
 const router = express.Router();
-
 router.get("/teachers", async (req, res) => {
   try {
     const teacher = JSON.parse(
       JSON.stringify(
-        await TeacherProfile.findOne({
-          where: { id: 1 },
+        await TeacherProfile.findAll({
           include: [{ model: Level }, { model: Goal }],
         })
       )
     );
-    console.log("teacher", teacher);
+    console.log("111req.session", req.session);
     res.json(teacher);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: error.message });
   }
 });
 
-// router.get("/step_4", async (req, res) => {
-//   try {
-//     const studentPrice = await StudentPrice.findAll();
-//     const teacherExperience = await TeacherExperience.findAll();
-//     const preferredSex = await PreferredSex.findAll();
-//     res.json({ studentPrice, teacherExperience, preferredSex });
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// });
-
-// router.get("/step_1", async (req, res) => {
-//   try {
-//     const sex = await Sex.findAll();
-
-//     res.json({ sex });
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// });
-
-// router.post("/register", async (req, res) => {
-//   try {
-//     console.log("req.body", req.body);
-//     const data = req.body;
-//     if (req.body.role === "student") {
-//       const { role, ...rest } = data;
-
-//       const result = await StudentProfile.create(rest);
-//       console.log("res", result.id);
-//       await User.update(
-//         { student_profile_id: result.id },
-//         { where: { id: req.session.userId } }
-//       );
-//       res.status(201).end();
-//     } else if (req.body.role === "teacher") {
-//       const { role, competence, ...rest } = data;
-//       console.log("rest", rest);
-
-//       const result = await TeacherProfile.create(rest);
-//       console.log("aaaa", req.body);
-//       const competenceArr = competence.map((el) => {
-//         console.log("el", el);
-//         return { profile_id: result.id, goal_id: el };
-//       });
-//       await CometenceArr.bulkCreate(competenceArr);
-//       await User.update(
-//         { teacher_profile_id: result.id },
-//         { where: { id: req.session.userId } }
-//       );
-//       res.status(201).end();
-//     }
-//     console.log("req.session.userId", req.session.userId);
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// });
+router.post("/add", async (req, res) => {
+  try {
+    const { student_profile_id } = JSON.parse(
+      JSON.stringify(
+        await User.findOne({
+          where: { id: req.session.userId },
+        })
+      )
+    );
+    await Matched_profile.create({
+      teacher_id: Number(req.body.id),
+      student_id: student_profile_id,
+    });
+  } catch (error) {
+    console.log("error", error);
+    res.status(500).json({ error: error.message });
+  }
+});
 
 module.exports = router;

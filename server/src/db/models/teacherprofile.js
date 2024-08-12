@@ -7,7 +7,20 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate({ Language, Level, Sex, CometenceArr, Goal, User }) {
+    static associate({
+      Language,
+      Level,
+      Sex,
+      CometenceArr,
+      Goal,
+      User,
+      TeacherProfile,
+      StudentProfile,
+    }) {
+      TeacherProfile.belongsToMany(StudentProfile, {
+        through: "Matched_profile",
+        foreignKey: "teacher_id",
+      });
       TeacherProfile.hasOne(User, { foreignKey: "teacher_profile_id" });
       TeacherProfile.belongsTo(Language, { foreignKey: "language_id" });
       TeacherProfile.belongsTo(Level, { foreignKey: "languageLevel" });
@@ -25,7 +38,6 @@ module.exports = (sequelize, DataTypes) => {
       age: DataTypes.INTEGER,
       sex_id: DataTypes.INTEGER,
       picture_link: DataTypes.STRING,
-      competence_arr_id: DataTypes.INTEGER,
       languageLevel: DataTypes.INTEGER,
       documents: DataTypes.STRING,
       language_id: DataTypes.INTEGER,

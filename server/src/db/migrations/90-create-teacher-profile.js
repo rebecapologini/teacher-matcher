@@ -30,9 +30,6 @@ module.exports = {
       picture_link: {
         type: Sequelize.STRING,
       },
-      competence_arr_id: {
-        type: Sequelize.INTEGER,
-      },
       languageLevel: {
         type: Sequelize.INTEGER,
         references: {
@@ -73,7 +70,7 @@ module.exports = {
         type: Sequelize.JSON,
       },
       aboutYourself: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
       },
       videoPresentation: {
         type: Sequelize.STRING,

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Select, Card } from "antd";
+import { Select, Card, Input } from "antd";
 import { TeacherStepThreeData } from "../../../types/profile";
 import UploadFile from "../../../pages/upload-file"; // Обновите путь к компоненту
 import "./TeacherStepThree.css";
@@ -113,36 +113,40 @@ const TeacherStepThree: React.FC<TeacherStepThreeProps> = ({
           </div>
           <div>
             <label>Подтверждающие документы</label>
-            <div className="docs">
-              <UploadFile
-                onUploadComplete={handleUploadComplete}
-                onRemove={handleRemoveFile}
-              />
-            </div>
-            <input
+
+            <Input
               name="documents"
+              className="custom-input"
               value={data.documents}
               onChange={handleChange}
               readOnly
-              className="document-input"
               onClick={handleClickOnInput}
+              addonAfter={
+                <UploadFile
+                  onUploadComplete={handleUploadComplete}
+                  onRemove={handleRemoveFile}
+                />
+              }
             />
           </div>
           <div>
             <label>Выберите компетенции</label>
-            <Select
-              mode="multiple"
-              placeholder="Выберите компетенции"
-              value={data.competence}
-              onChange={handleCompetenceChange}
-              className="custom-select"
-            >
-              {goals.map((competence) => (
-                <Option key={competence.id} value={competence.id}>
-                  {competence.name}
-                </Option>
-              ))}
-            </Select>
+            <div className="my-select-container">
+              <Select
+                mode="multiple"
+                placeholder="Выберите компетенции"
+                value={data.competence}
+                onChange={handleCompetenceChange}
+                className="custom-select"
+                style={{ width: "100%" }}
+              >
+                {goals.map((competence) => (
+                  <Option key={competence.id} value={competence.id}>
+                    {competence.name}
+                  </Option>
+                ))}
+              </Select>
+            </div>
           </div>
         </div>
       </Card>
