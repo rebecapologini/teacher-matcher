@@ -9,7 +9,7 @@ router.use(cors());
 router.use(express.json());
 
 // Пример модели университета (может отличаться в зависимости от вашей реализации)
-const {University} = require('../db/models');
+const {University, Level, StudentPrices} = require('../db/models');
 
 // Получение списка университетов из базы данных
 router.get('/api/getUniversitiesFromDB', async (req, res) => {
@@ -26,9 +26,30 @@ router.get('/api/getUniversitiesFromDB', async (req, res) => {
       res.status(500).json({ error: error.message });
     }
   });
+router.get('/api/getPriceRanges', async(req,res) => {
+  try {
+    const studentPrice = await StudentPrices.findAll();
+    res.json({studentPrice})
+  } catch (error) {
+    console.error('Error while getting prices', error)
+  }
+})
+  router.get('/api/getLevels', async(req, res) => {
+    try {
+        // Попробуйте сделать простой запрос, чтобы убедиться, что подключение к базе данных работает
+        console.log('Fetching levels from the database...');
+        
+        const levels = await Level.findAll({
+            order: [['level', 'ASC']]
+        });
 
-// Получение факультетов из API VK по университету
-
+        console.log('Levels fetched successfully:', levels);
+        res.json({ levels });
+    } catch (error) {
+        console.error('Error while getting levels:', error);
+        res.status(500).json({ error: error.message });
+    }
+});
 
 
 router.get('/api/getFaculties', async (req, res) => {

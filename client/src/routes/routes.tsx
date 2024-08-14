@@ -11,7 +11,9 @@ import {
 } from "../components/auth";
 import { LazyHome } from "../pages/home";
 import MatchingCard from "../components/matching/MatchingCard";
-
+import UserProfile from '../components/TeacherProfile/UserProfile'
+import StudentProfile from '../components/StudentProfile/StudentProfile'
+import EmailAccept from "../EmailAccept/EmailAccept";
 interface RouteConfig {
   path: string;
   element: ReactNode;
@@ -27,6 +29,9 @@ export const routes: RouteConfig[] = [
   { path: "/profile-setup", element: <LazyProfileSetup />, protected: true },
   { path: "/", element: <LazyHome /> },
   { path: "/confirm/:token", element: <LazyConfirmPage /> },
+  { path: "/userprofile", element: <UserProfile/> },
+  { path: 'studentprofile', element: <StudentProfile/>},
+  { path: '/emailaccept', element: <EmailAccept/>}
 ];
 
 export const generateRoutes = (routes: RouteConfig[]) => {

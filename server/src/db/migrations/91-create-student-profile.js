@@ -51,6 +51,15 @@ module.exports = {
       lessons: {
         type: Sequelize.STRING,
       },
+      name: {
+        type: Sequelize.STRING,
+      },
+      surname: {
+        type: Sequelize.STRING,
+      },
+      age: {
+        type: Sequelize.INTEGER,
+      },
       price_id: {
         type: Sequelize.INTEGER,
         references: {

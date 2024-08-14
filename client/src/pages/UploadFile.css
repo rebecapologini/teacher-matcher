@@ -15,3 +15,17 @@
   justify-content: center;
   align-items: center;
 }
+.customFile{
+  position: relative;
+  top: 9px;
+  left: 275px;
+}
+.imager{
+  overflow: hidden;
+  opacity: 0;
+}
+.editing{
+  position: relative;
+  left: 210px;
+  top: 110px;
+}

@@ -9,16 +9,16 @@ const App = () => {
   const navigate = useNavigate();
   const { data, isSuccess } = useFetchUserQuery();
   console.log("data", data);
-  useEffect(() => {
-    if (isSuccess && (data?.student_profile_id || data?.teacher_profile_id)) {
-      console.log("data?.profile_id", data?.profile_id);
-      navigate("/matching");
-    } else if (isSuccess && data?.id) {
-      navigate("/profile-setup");
-    } else {
-      navigate("/");
-    }
-  }, [isSuccess]);
+  // useEffect(() => {
+  //   if (isSuccess && (data?.student_profile_id || data?.teacher_profile_id)) {
+  //     console.log("data?.profile_id", data?.profile_id);
+  //     navigate("/matching");
+  //   } else if (isSuccess && data?.id) {
+  //     navigate("/profile-setup");
+  //   } else {
+  //     navigate("/");
+  //   }
+  // }, [isSuccess]);
   return (
     <ProfileProvider>
       <div>
