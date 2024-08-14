@@ -18,6 +18,9 @@ module.exports = {
       age: {
         type: Sequelize.INTEGER,
       },
+      phone: {
+        type: Sequelize.STRING,
+      },
       sex_id: {
         type: Sequelize.INTEGER,
         references: {

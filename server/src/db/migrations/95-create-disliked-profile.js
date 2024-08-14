@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Matched_profiles", {
+    await queryInterface.createTable("Disliked_profiles", {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -23,9 +23,6 @@ module.exports = {
           key: "id",
         },
       },
-      accepted: {
-        type: Sequelize.BOOLEAN,
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
@@ -37,6 +34,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Matched_profiles");
+    await queryInterface.dropTable("Disliked_profiles");
   },
 };

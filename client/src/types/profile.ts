@@ -5,6 +5,7 @@ export interface StepOneData {
   avatarUrl: string;
   sex_id: number;
   picture_link: string;
+  phone: string;
 }
 
 export interface StepTwoData {
@@ -41,7 +42,7 @@ export interface TeacherStepThreeData {
 
 export interface TeacherStepFourData {
   teachingExperience: number;
-  almaMater: string | number | "" | undefined;
+  almaMater: string | number | "" | undefined | null;
   faculty: string | number | "";
   academicDegree: string;
   lessonCost: string;

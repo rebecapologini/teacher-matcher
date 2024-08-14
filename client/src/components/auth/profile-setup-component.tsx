@@ -46,6 +46,7 @@ const ProfileSetup = () => {
       age: 0,
       sex_id: 0,
       picture_link: "",
+      phone: "",
     } as StepOneData,
     stepTwoData: { role: "" } as StepTwoData,
     stepThreeData: {
@@ -90,9 +91,11 @@ const ProfileSetup = () => {
             age: 0,
             sex_id: 0,
             picture_link: "",
+            phone: "",
           }).flat()
         ).length)
     );
+
     setIsFilledStepTwo(
       (prev) =>
         (prev = _.difference(
@@ -213,6 +216,7 @@ const ProfileSetup = () => {
   };
 
   const next = () => {
+    console.log("profileData", profileData);
     setCurrentStep((prev) => prev + 1);
   };
 

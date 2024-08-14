@@ -14,5 +14,6 @@
 }
 .reg-card,
 .custom-input {
+  margin-top: 100px;
   border-radius: 60px;
 }

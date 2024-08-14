@@ -35,6 +35,8 @@ const TeacherStepFour: React.FC<TeacherStepFourProps> = ({
   const [universities, setUniversities] = useState<University[]>([]);
   const [faculties, setFaculties] = useState<Faculty[]>([]);
 
+  const [academicDegree, setAcademicDegree] = useState(false);
+
   useEffect(() => {
     const fetchUniversities = async () => {
       const url = import.meta.env.VITE_API_BASE_URL;
@@ -68,11 +70,14 @@ const TeacherStepFour: React.FC<TeacherStepFourProps> = ({
         });
 
         // Сортировка факультетов по алфавиту
-        const sortedFaculties = response.data.response.items.sort((a: Faculty, b: Faculty) => {
-          return a.title.localeCompare(b.title);
-        });
+        const sortedFaculties = response.data.response.items.sort(
+          (a: Faculty, b: Faculty) => {
+            return a.title.localeCompare(b.title);
+          }
+        );
 
         console.log(sortedFaculties);
+        setAcademicDegree(true);
         setFaculties(sortedFaculties);
       } catch (error) {
         message.error("Ошибка при загрузке списка факультетов");
@@ -88,6 +93,7 @@ const TeacherStepFour: React.FC<TeacherStepFourProps> = ({
   };
 
   const handleAcademicDegreeChange = (value: string) => {
+    console.log("academicDegree", value);
     updateData({ ...data, academicDegree: value });
   };
 
@@ -128,7 +134,7 @@ const TeacherStepFour: React.FC<TeacherStepFourProps> = ({
             <Select
               className="custom-select"
               placeholder="Выберите университет"
-              value={data.almaMater?.toString()}
+              value={data.almaMater || undefined}
               onChange={handleUniversityChange}
             >
               {universities.map((university) => (
@@ -138,13 +144,13 @@ const TeacherStepFour: React.FC<TeacherStepFourProps> = ({
               ))}
             </Select>
           </div>
-          {data.almaMater && (
+          {academicDegree && (
             <div>
               <label>Факультет</label>
               <Select
                 className="custom-select"
                 placeholder="Выберите факультет"
-                value={data.faculty?.toString()}
+                value={data.faculty || undefined}
                 onChange={(value) => handleFacultyChange(value)}
               >
                 {faculties.map((faculty) => (
@@ -158,12 +164,13 @@ const TeacherStepFour: React.FC<TeacherStepFourProps> = ({
           <div>
             <label>Ученая степень</label>
             <Select
+              placeholder="Например, магистр"
               className="custom-select"
-              value={data.academicDegree}
+              value={data.academicDegree || undefined}
               onChange={handleAcademicDegreeChange}
             >
               {academicDegrees.map((degree) => (
-                <Option key={degree} value={degree}>
+                <Option key={degree} value={degree} label={degree}>
                   {degree}
                 </Option>
               ))}

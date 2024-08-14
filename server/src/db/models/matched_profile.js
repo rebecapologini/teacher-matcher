@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       teacher_id: DataTypes.INTEGER,
       student_id: DataTypes.INTEGER,
+      accepted: DataTypes.BOOLEAN,
     },
     {
       sequelize,

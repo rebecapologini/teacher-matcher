@@ -22,6 +22,12 @@ module.exports = (sequelize, DataTypes) => {
       StudentProfile.hasOne(User, { foreignKey: "student_profile_id" });
       StudentProfile.belongsToMany(TeacherProfile, {
         through: "Matched_profile",
+        as: "matched",
+        foreignKey: "student_id",
+      });
+      StudentProfile.belongsToMany(TeacherProfile, {
+        through: "Disliked_profile",
+        as: "disliked",
         foreignKey: "student_id",
       });
       StudentProfile.belongsTo(Language, { foreignKey: "language_id" });
@@ -39,6 +45,10 @@ module.exports = (sequelize, DataTypes) => {
   }
   StudentProfile.init(
     {
+      name: DataTypes.STRING,
+      surname: DataTypes.STRING,
+      age: DataTypes.INTEGER,
+      phone: DataTypes.STRING,
       language_id: DataTypes.INTEGER,
       goal_id: DataTypes.INTEGER,
       level_id: DataTypes.INTEGER,

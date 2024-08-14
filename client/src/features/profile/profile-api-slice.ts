@@ -28,9 +28,29 @@ export const apiProfileSlice = createApi({
       }),
       invalidatesTags: ["ProfileId"],
     }),
-    fetchTeacher: builder.query<ProfileDataForRegistration[], void>({
-      query: () => "/matching/teachers",
-      providesTags: ["ProfileId"],
+    disliked: builder.mutation({
+      query: (id: ProfileId) => ({
+        url: "/matching/dislike",
+        method: "POST",
+        body: id,
+      }),
+      invalidatesTags: ["ProfileId"],
+    }),
+    accept: builder.mutation({
+      query: (id: ProfileId) => ({
+        url: "/matching/accept",
+        method: "POST",
+        body: id,
+      }),
+      invalidatesTags: ["ProfileId"],
+    }),
+    decline: builder.mutation({
+      query: (id: ProfileId) => ({
+        url: "/matching/decline",
+        method: "POST",
+        body: id,
+      }),
+      invalidatesTags: ["ProfileId"],
     }),
   }),
 });
@@ -38,5 +58,7 @@ export const apiProfileSlice = createApi({
 export const {
   useBregisterMutation,
   useMatchingMutation,
-  useFetchTeacherQuery,
+  useDislikedMutation,
+  useAcceptMutation,
+  useDeclineMutation,
 } = apiProfileSlice;

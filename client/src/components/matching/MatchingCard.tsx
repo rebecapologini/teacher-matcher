@@ -7,17 +7,18 @@ import Header from "../header/header-component";
 import YouTube, { YouTubeProps } from "react-youtube";
 import axios from "axios";
 import {
-  useFetchTeacherQuery,
+  useDislikedMutation,
   useMatchingMutation,
 } from "../../features/profile/profile-api-slice";
+import { useFetchUserQuery } from "../../features/auth/auth-api-slice";
 
 const MatchingCard: React.FC = () => {
+  const abcd = useFetchUserQuery();
   const [profileData, setProfileData] = useState({});
   const [selectedDay, setSelectedDay] = useState<string | null>("Пн");
   const [teacherIndex, setTeacherIndex] = useState<number>(0);
   const [showCards, setShowCards] = useState<boolean>(true);
-
-  const declension = ["год", "года", "лет"];
+  const [teachers, setTeachers] = useState([]);
 
   const daysOfWeek = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
   const timesList = [
@@ -36,6 +37,7 @@ const MatchingCard: React.FC = () => {
     "20:00",
     "21:00",
   ];
+
   const cardRef = useRef<HTMLDivElement>(null);
   const leftIndicatorRef = useRef<HTMLDivElement>(null);
   const rightIndicatorRef = useRef<HTMLDivElement>(null);
@@ -60,7 +62,8 @@ const MatchingCard: React.FC = () => {
     };
     card.addEventListener("mousedown", startDragHandler);
     card.addEventListener("touchstart", startDragHandler);
-    if (teacherIndex === 0) {
+    if (teacherIndex === 0 && showCards) {
+      console.log("showCards", showCards);
       setTimeout(() => {
         showTutorial(card, leftIndicator, rightIndicator);
       }, 500);
@@ -74,32 +77,32 @@ const MatchingCard: React.FC = () => {
       );
     };
   }, []);
-  console.log("TeacherIndex", teacherIndex);
   const [matching] = useMatchingMutation();
-
+  console.log("teachers", teachers);
   useEffect(() => {
     const getUsers = async () => {
       try {
-        const { data } = await axios.get(
+        const { data } = await axios.post(
           `${import.meta.env.VITE_API_BASE_URL}/matching/teachers`,
-          {
-            headers: {
-              "Content-Type": "application-json",
-            },
-            withCredentials: true,
-          }
+          { id: abcd.data.id }
         );
-        if (data.length) {
-        }
-        setProfileData(data[teacherIndex]);
-        if (teacherIndex === data.length) {
+
+        if (data.length === 0) {
           setShowCards(false);
         }
+        setProfileData(data[teacherIndex]);
+        setTeachers(data);
       } catch (error) {
         console.log(error);
       }
     };
     getUsers();
+  }, []);
+  useEffect(() => {
+    if (teacherIndex && teachers.length === teacherIndex) {
+      setShowCards(false);
+    }
+    setProfileData(teachers[teacherIndex]);
   }, [teacherIndex]);
   const onPlayerReady: YouTubeProps["onReady"] = (event) => {
     // access to player in all event handlers via event.target
@@ -114,6 +117,8 @@ const MatchingCard: React.FC = () => {
       autoplay: 1,
     },
   };
+  const declension = ["год", "года", "лет"];
+
   function plural(number: number, titles: string[]) {
     const cases = [2, 0, 1, 1, 1, 2];
     return titles[
@@ -123,18 +128,20 @@ const MatchingCard: React.FC = () => {
     ];
   }
   const handleSwipe = () => {
+    console.log("handleswipe");
     setTeacherIndex((prev) => {
       return prev + 1;
     });
     setSelectedDay("Пн");
   };
 
-  console.log("cardred", cardRef?.current?.id);
   const handleSwipePositive = async () => {
+    console.log("cardRef?.current?.id", cardRef?.current?.id);
     await matching({ id: cardRef?.current?.id }).unwrap();
-    console.log("handleSwipePositive");
   };
-  const handleSwipeNegative = () => {
+  const [disliked] = useDislikedMutation();
+  const handleSwipeNegative = async () => {
+    await disliked({ id: cardRef?.current?.id }).unwrap();
     console.log("handleSwipeNegative");
   };
 
@@ -146,54 +153,58 @@ const MatchingCard: React.FC = () => {
     e.stopPropagation();
     setSelectedDay(day);
   };
-
   return (
     <div className={styles.mainContainer}>
       <div className={styles.cardContainer}>
         <Header />
-        <div
-          className={`${styles.indicator} ${styles.leftIndicator}`}
-          ref={leftIndicatorRef}
-        >
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 32 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+        {showCards && (
+          <div
+            className={`${styles.indicator} ${styles.leftIndicator}`}
+            ref={leftIndicatorRef}
           >
-            <path
-              d="M24 8L8 24"
-              stroke="white"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            <path
-              d="M8 8L24 24"
-              stroke="white"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
-        <div
-          className={`${styles.indicator} ${styles.rightIndicator}`}
-          ref={rightIndicatorRef}
-        >
-          <svg
-            width="32"
-            height="32"
-            viewBox="0 0 32 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M24 8L8 24"
+                stroke="white"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+              <path
+                d="M8 8L24 24"
+                stroke="white"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </div>
+        )}
+        {showCards && (
+          <div
+            className={`${styles.indicator} ${styles.rightIndicator}`}
+            ref={rightIndicatorRef}
           >
-            <path
-              d="M6.66667 18.6667L11.2331 22.0915C11.6618 22.413 12.2677 22.3395 12.607 21.9247L24 8"
-              stroke="white"
-              strokeLinecap="round"
-            />
-          </svg>
-        </div>
+            <svg
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6.66667 18.6667L11.2331 22.0915C11.6618 22.413 12.2677 22.3395 12.607 21.9247L24 8"
+                stroke="white"
+                strokeLinecap="round"
+              />
+            </svg>
+          </div>
+        )}
+
         {showCards && (
           <Card className={styles.card} ref={cardRef} id={profileData?.id}>
             {profileData?.picture_link && (

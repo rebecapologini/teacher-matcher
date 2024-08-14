@@ -9,11 +9,11 @@ import { useFetchUserQuery } from "./features/auth/auth-api-slice";
 const App = () => {
   const navigate = useNavigate();
   const { data, isSuccess } = useFetchUserQuery();
-  console.log("data", data);
   useEffect(() => {
     if (isSuccess && data?.student_profile_id) {
-      // console.log("data?.profile_id", data?.profile_id);
       navigate("/matching");
+    } else if (isSuccess && data?.teacher_profile_id) {
+      navigate("/requests");
     } else if (isSuccess && data?.id) {
       navigate("/profile-setup");
     } else {
@@ -49,6 +49,13 @@ const App = () => {
               handleColor: "rgba(167, 111, 110)",
               trackHoverBg: "rgba(167, 111, 110, 0.209)",
               trackBg: "rgba(167, 111, 110)",
+              colorPrimaryBorderHover: "rgba(167, 111, 110)",
+            },
+            Tabs: {
+              inkBarColor: "#A76F6E",
+              itemActiveColor: "#A76F6E",
+              itemSelectedColor: "#A76F6E",
+              itemHoverColor: "rgba(167, 111, 110)",
             },
           },
         }}

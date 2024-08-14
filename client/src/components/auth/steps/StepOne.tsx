@@ -28,6 +28,10 @@ const StepOne: React.FC<StepOneProps> = ({ data, updateData }) => {
     updateData({ ...data, age: value });
   };
 
+  const handlePhoneChange = (value: string) => {
+    updateData({ ...data, phone: value });
+  };
+
   const handleUploadComplete = (fileUrl: string) => {
     setAvatarUrl(fileUrl);
     updateData({ ...data, picture_link: fileUrl });
@@ -106,6 +110,18 @@ const StepOne: React.FC<StepOneProps> = ({ data, updateData }) => {
               name="age"
               value={data.age || ""}
               onChange={(e) => handleAgeChange(Number(e.target.value))}
+              className="custom-input"
+            />
+          </label>
+        </div>
+        <div>
+          <label>
+            Номер для связи
+            <Input
+              type="number"
+              name="phone"
+              value={data.phone || ""}
+              onChange={(e) => handlePhoneChange(e.target.value)}
               className="custom-input"
             />
           </label>

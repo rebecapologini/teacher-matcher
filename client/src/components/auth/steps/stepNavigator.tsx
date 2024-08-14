@@ -30,7 +30,7 @@ const StepNavigator: React.FC<StepNavigatorProps> = ({
   const [disabled, setDisabled] = useState(true);
   useEffect(() => {
     setDisabled(true);
-    if (currentStep === 0 && isFilledStepOne === 5) {
+    if (currentStep === 0 && isFilledStepOne === 6) {
       setDisabled(false);
     } else if (currentStep === 1 && isFilledStepTwo === 1) {
       setDisabled(false);
