@@ -156,7 +156,7 @@ const MatchingCard: React.FC = () => {
   return (
     <div className={styles.mainContainer}>
       <div className={styles.cardContainer}>
-        <Header />
+        <Header showProfile={true} />
         {showCards && (
           <div
             className={`${styles.indicator} ${styles.leftIndicator}`}

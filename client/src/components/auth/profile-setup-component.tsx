@@ -237,8 +237,11 @@ const ProfileSetup = () => {
       const profile = await bregister(lodashMergedObj).unwrap();
 
       console.log("resObj", lodashMergedObj);
-
-      navigate("/matching");
+      if (profileData.stepTwoData.role === "student") {
+        navigate("/matching");
+      } else if (profileData.stepTwoData.role === "teacher") {
+        navigate("/requests");
+      }
     } catch (err) {
       console.error("Failed to register:", err);
     }

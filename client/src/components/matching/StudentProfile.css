@@ -1,0 +1,125 @@
+.main_container {
+  overflow: scroll;
+  touch-action: auto;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  font-family: Roboto;
+}
+
+.requests_card {
+  margin-bottom: 15px;
+  width: 327px;
+  height: auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.student_title {
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 18.75px;
+  letter-spacing: 0.11999999731779099px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.info_block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.info_block_container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+.info_block > .avatar {
+  width: 64px;
+}
+.tabs {
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14.06px;
+  letter-spacing: 0.12px;
+  background-color: #f0e9e9;
+  color: #8b5d5d;
+}
+.tabs_container {
+  justify-content: start;
+  gap: 4px;
+  row-gap: 0px;
+  display: -webkit-flex;
+  display: flex;
+  flex-direction: row;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+}
+
+.text_block {
+  margin-top: 10px;
+  margin-left: 20px;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 18.2px;
+  letter-spacing: -0.30000001192092896px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.button_decline .ant-btn-primary {
+  background-color: #d28989;
+  box-shadow: 0 2px 0 #d2898941;
+}
+.button_accept .ant-btn-primary {
+  background-color: #70d08a;
+  box-shadow: 0 2px 0 #70d08a3e;
+}
+
+.button_accept .ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover {
+  background-color: #70d08a71;
+}
+.button_decline .ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover {
+  background-color: #d2898956;
+}
+
+.ant-card-body > .buttons {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 0 0;
+}
+
+.requests-name {
+  font-family: Roboto;
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 18.2px;
+}
+
+.requests-types {
+  display: flex;
+  gap: 10px;
+}
+
+.requests-types {
+  margin-bottom: -10px !important;
+}
+
+.phone_block {
+  background-color: #70d08a71;
+  border-radius: 30px;
+  padding: 10px;
+  text-align: center;
+}

@@ -12,6 +12,7 @@ import {
 import { LazyHome } from "../pages/home";
 import MatchingCard from "../components/matching/MatchingCard";
 import Requests from "../components/matching/Requests";
+import StudentProfile from "../components/matching/StudentProfile";
 
 interface RouteConfig {
   path: string;
@@ -26,6 +27,8 @@ export const routes: RouteConfig[] = [
   { path: "/auth", element: <LazyAuthPage /> },
   { path: "/confirm/:token", element: <LazyConfirmPage /> },
   { path: "/requests", element: <Requests />, protected: true },
+  { path: "/profile", element: <StudentProfile />, protected: true },
+
   { path: "/profile-setup", element: <LazyProfileSetup />, protected: true },
   { path: "/", element: <LazyHome /> },
   { path: "/confirm/:token", element: <LazyConfirmPage /> },
