@@ -1,0 +1,77 @@
+.step-five {
+  height: 571px;
+  width: 327px;
+  margin-bottom: 10px;
+}
+
+.days-container {
+  display: flex;
+  flex-direction: row;
+  gap: 7px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.days-container .ant-btn {
+  width: 34px;
+  height: 30px;
+}
+
+.days-container .ant-btn:hover {
+  border: 1px solid #a76f6e !important;
+  background-color: rgb(245, 245, 245);
+  color: #a76f6e !important;
+}
+
+.days-container .ant-btn.ant-btn-primary {
+  background-color: rgb(167, 111, 110);
+  border: 1px solid #a76f6e;
+}
+
+.days-container .ant-btn.ant-btn-primary:hover {
+  background-color: rgb(157, 101, 100);
+  border: 1px solid #a76f6e;
+  color: #ffffff !important;
+}
+
+.times-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.times-container .ant-btn {
+  width: 45px;
+  height: 30px;
+}
+.times-container .ant-btn:hover {
+  border: 1px solid #a76f6e !important;
+  background-color: rgb(245, 245, 245);
+  color: #a76f6e !important;
+}
+.times-container .ant-btn.ant-btn-primary {
+  background-color: rgb(167, 111, 110);
+  border: 1px solid #a76f6e;
+}
+
+.times-container .ant-btn.ant-btn-primary:hover {
+  background-color: rgb(157, 101, 100);
+  border: 1px solid #a76f6e;
+}
+.ant-input.custom-input-about {
+  width: 100%;
+  padding: 10px;
+  font-size: 12px;
+  border: 1px solid rgb(167, 111, 110);
+  border-radius: 20px;
+  box-sizing: border-box;
+  margin-top: 20px;
+  min-height: 160px;
+  border-radius: 20px;
+}
+
+.custom-input:focus {
+  border-color: rgb(167, 111, 110);
+  outline: none;
+}

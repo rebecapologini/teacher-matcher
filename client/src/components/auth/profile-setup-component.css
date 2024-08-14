@@ -1,0 +1,63 @@
+.profile-setup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  overflow: visible;
+  position: relative;
+}
+.content {
+  margin-bottom: 30px;
+}
+.profile-setup h2 {
+  font-size: 24px;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+  letter-spacing: -1px;
+  background-color: transparent !important;
+  text-align: center;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.progress-container {
+  width: 327px;
+  margin: auto;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: white;
+  z-index: 1000;
+}
+
+.step-navigator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.check-icon {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 24px;
+  color: rgb(167, 111, 110);
+}
+
+.sticky-navigation,
+.progress-container {
+  position: relative;
+  bottom: 0;
+  background-color: transparent;
+  z-index: 1000;
+  padding: 10px 0;
+}

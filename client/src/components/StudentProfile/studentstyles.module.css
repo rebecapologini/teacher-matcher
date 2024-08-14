@@ -1,0 +1,119 @@
+.profileCard {
+    width: 380px;
+    height: 600px;
+    /* Устанавливаем фиксированную высоту */
+    overflow: hidden;
+    /* Обрезаем содержимое, если оно выходит за пределы */
+}
+
+.profile-content {
+    max-height: 370px;
+    overflow-x: auto;
+}
+
+.avatar {
+    max-height: 150px;
+}
+
+.profile-content::-webkit-scrollbar {
+    display: none;
+}
+
+.student-name {
+    text-align: center;
+    font-weight: 500;
+    position: relative;
+}
+
+.email {
+    text-align: center;
+    color: #888888;
+    font-weight: 500;
+}
+
+.namemail {
+    position: relative;
+
+}
+
+.selected {
+    border-color: rgb(167, 111, 110);
+    box-shadow: 10px;
+    transition: border-color 0.3s ease;
+}
+
+.lessons-card {
+    width: 10px;
+    height: 32px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+}
+
+.lessons-selection {
+    display: flex;
+
+}
+
+.info-box {
+    border: 0.5px, solid, #888888;
+    max-width: 100%;
+    border-radius: 32px;
+    padding-left: 12px;
+    padding-top: 8px;
+    padding-right: 12px;
+    padding-bottom: 8px;
+    font-weight: 500;
+}
+
+.custom-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 100px;
+    width: 100%;
+    bottom: 50px;
+}
+
+.custom-avatar img {
+    width: 100% !important;
+    height: auto !important;
+}
+
+.saveButton {
+    width: 330px;
+    background-color: #AA7070;
+    bottom: -15px;
+}
+
+.edit {
+    margin-top: 20px;
+    width: 346px;
+    height: 38px;
+    background-color: #AA7070;
+    border-radius: 28px;
+    font-weight: 600;
+}
+.price-range-card{
+    width: 10px;
+    height: 32px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+}
+.price-range-selection{
+    display: flex;
+    justify-content: space-between;
+}
+.sex-box{
+    width: 80px;
+
+}

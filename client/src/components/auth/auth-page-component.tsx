@@ -4,13 +4,18 @@ import Header from "../header/header-component.tsx";
 import Login from "./login-component";
 import Register from "./register-component";
 import { LeftOutlined } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./auth-page-component.css";
 const Auth = () => {
-  const [activeComponent, setActiveComponent] = useState<"login" | "register">(
-    "login"
-  );
+  const location = useLocation();
   const navigate = useNavigate();
+  const queryParams = new URLSearchParams(location.search);
+  const initialForm =
+    (queryParams.get("form") as "login" | "register") || "login";
+
+  const [activeComponent, setActiveComponent] = useState<"login" | "register">(
+    initialForm
+  );
 
   const handleButtonClick = (component: "login" | "register") => {
     setActiveComponent(component);
@@ -20,17 +25,20 @@ const Auth = () => {
     <div className="aut-page">
       <Header />
       <div className="buttons">
+        
         <CustomButton
           type="white"
           text="Войти"
           block
           onClick={() => handleButtonClick("login")}
+          transparent={activeComponent === "login" ? true : false}
         />
         <CustomButton
           type="white"
           text="Регистрация"
           block
           onClick={() => handleButtonClick("register")}
+          transparent={activeComponent === "register" ? true : false}
         />
       </div>{" "}
       {activeComponent === "login" ? <Login /> : <Register />}
@@ -39,7 +47,7 @@ const Auth = () => {
         text="Главная"
         block
         onClick={() => navigate("/")}
-        iconAfterText={<LeftOutlined />}
+        icon={<LeftOutlined />}
       />
     </div>
   );

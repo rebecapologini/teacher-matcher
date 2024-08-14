@@ -1,0 +1,103 @@
+.profileCard {
+  width: 380px;
+  height: 600px; /* Устанавливаем фиксированную высоту */
+  overflow: hidden; /* Обрезаем содержимое, если оно выходит за пределы */
+}
+  .avatar{
+    max-height: 150px;
+  }
+  .profile-content {
+  max-height: 370px; 
+   overflow-x: auto;
+  }
+  .profile-content::-webkit-scrollbar {
+    display: none;
+ }
+.teacher-name{
+    text-align: center;
+    font-weight: 500;
+}
+
+.email{
+    text-align: center;
+    color: #888888;
+    font-weight: 500;
+}
+.info-box{
+    border: 0.5px, solid, #888888;
+    max-width: 100%;
+    border-radius: 32px;
+    padding-left: 12px;
+    padding-top: 8px;
+    padding-right: 12px;
+    padding-bottom: 8px;
+    font-weight: 500;
+}
+.select-exp-slider{
+  width: 300px;
+  margin-left: 15px;
+}
+[title="Факультет"] {
+  color: #888888  !important;
+}
+h4 {
+    color: #888888;
+    font-weight: 400;
+    margin-bottom: 8px; /* Установите нижний отступ */
+  }
+  
+  h4 + .info-box {
+    margin-top: 0; /* Удалите верхний отступ у info-box */
+  }
+
+.edit{
+    margin-top: 20px;
+    width: 346px;
+    height: 38px;
+    background-color: #AA7070;
+    border-radius: 28px;
+    font-weight: 600;
+}
+.edit:hover{
+    background-color:#AA7070  ; 
+}
+
+.uni{
+  max-width: 287px;
+}
+.formcustomFile{
+  border: 0.5px, solid, #888888;
+  width: 100%;
+  border-radius: 32px;
+  padding-left: 12px;
+  padding-top: 8px;
+  padding-right: 12px;
+  padding-bottom: 5px;
+  font-weight: 500;
+  height: 50px;
+}
+.custom-avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 100px;
+  width: 100%;
+  bottom: 50px;
+}
+.custom-avatar img {
+  width: 100% !important;
+  height: auto !important;
+}
+.customFileR{
+  position: relative;
+  top: -20px;
+  width: 150px;
+}
+.customTime{
+  width: 65px;
+}
+.saveButton{
+  width: 330px;
+  background-color: #AA7070;
+  bottom: -15px;
+}

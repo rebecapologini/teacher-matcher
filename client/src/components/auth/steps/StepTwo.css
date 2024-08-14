@@ -1,0 +1,40 @@
+.role-selection {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  gap: 10px;
+}
+
+.role-card {
+  width: 150px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.role-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  transition: box-shadow 1s ease;
+}
+
+img {
+  width: 80% !important;
+  margin: 0 auto;
+}
+
+.role-card.selected {
+  box-shadow: 0 8px 16px rgba(0.3);
+}
+
+.role-card-text {
+  text-align: center;
+}
+
+.check-icon {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 24px;
+  color: rgb(167, 111, 110);
+}

@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "antd";
 import "./button.css";
+import { useProfile } from "../context/profileContext";
 
 interface CustomButtonProps {
   type: "details" | "secondary" | "tertiary" | "white";
@@ -8,7 +9,10 @@ interface CustomButtonProps {
   onClick?: () => void;
   block?: boolean;
   iconAfterText?: React.ReactNode;
+  icon?: React.ReactNode;
   htmlType?: "button" | "submit" | "reset";
+  transparent?: boolean;
+  disabled: boolean;
 }
 
 const CustomButton: React.FC<CustomButtonProps> = ({
@@ -17,15 +21,20 @@ const CustomButton: React.FC<CustomButtonProps> = ({
   onClick,
   block,
   iconAfterText,
+  icon,
+  transparent,
+  disabled,
 }) => {
   return (
     <Button
-      className={`custom-button ${type}`}
+      className={`custom-button ${type} ${transparent ? "transparent-button" : ""}`}
       onClick={onClick}
       block={block}
-      icon={iconAfterText}
+      icon={icon}
+      disabled={disabled}
     >
-      {text}
+      {text}{" "}
+      {iconAfterText && <span className="icon-right">{iconAfterText}</span>}
     </Button>
   );
 };

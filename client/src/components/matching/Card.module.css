@@ -1,0 +1,114 @@
+.cardContainer {
+  width: 327px;
+  height: 576px;
+  perspective: 1000px;
+  position: relative;
+  margin: 0 auto;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  overflow: scroll;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+.experience_level > * {
+  -webkit-flex: 1 auto;
+  flex: 1 auto;
+  text-align: center;
+}
+
+.indicator {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.leftIndicator {
+  left: -70px;
+  background-color: red;
+}
+
+.rightIndicator {
+  right: -70px;
+  background-color: green;
+}
+
+.name_age {
+  padding: 8px, 12px, 8px, 12px;
+  text-align: center;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.12px;
+  line-height: 23.44px;
+  margin-bottom: 10px;
+  color: #41444b;
+}
+
+.experience_level {
+  justify-content: center;
+  gap: 8px;
+  row-gap: 0px;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+}
+
+.tabs {
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 14.06px;
+  letter-spacing: 0.12px;
+  background-color: #f0e9e9;
+  color: #8b5d5d;
+}
+.cost_info {
+  color: #41444b;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15.23px;
+  margin-bottom: 20px;
+}
+
+.profile_title {
+  margin-bottom: 8px;
+  color: #41444b;
+  font-size: 16px;
+  font-weight: 500;
+  list-style: 20.8px;
+  letter-spacing: -0.3px;
+}
+
+.text_blocks {
+  margin-bottom: 12px;
+  color: #41444b;
+  font-size: 16px;
+  font-weight: 400;
+  list-style: 20.8px;
+  letter-spacing: -0.3px;
+}
+
+.profile_body {
+  margin-left: 10px;
+}

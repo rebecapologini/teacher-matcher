@@ -1,31 +1,34 @@
-import { Suspense } from "react";
-import { Routes } from "react-router-dom";
+import { Suspense, useEffect } from "react";
+import { Routes, useNavigate } from "react-router-dom";
 
 import { generateRoutes, routes } from "./routes/routes";
+import { ProfileProvider } from "./components/context/profileContext";
+import { useFetchUserQuery } from "./features/auth/auth-api-slice";
 
 const App = () => {
+  const navigate = useNavigate();
+  const { data, isSuccess } = useFetchUserQuery();
+  console.log("data", data);
+  // useEffect(() => {
+  //   if (isSuccess && (data?.student_profile_id || data?.teacher_profile_id)) {
+  //     console.log("data?.profile_id", data?.profile_id);
+  //     navigate("/matching");
+  //   } else if (isSuccess && data?.id) {
+  //     navigate("/profile-setup");
+  //   } else {
+  //     navigate("/");
+  //   }
+  // }, [isSuccess]);
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        width: "100%",
-        height: "100vh",
-      }}
-    >
-      <main
-        style={{
-          flex: 1,
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <Suspense fallback={<div>Loading...</div>}>
-          <Routes>{generateRoutes(routes)}</Routes>
-        </Suspense>
-      </main>
-    </div>
+    <ProfileProvider>
+      <div>
+        <main>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Routes>{generateRoutes(routes)}</Routes>
+          </Suspense>
+        </main>
+      </div>
+    </ProfileProvider>
   );
 };
 

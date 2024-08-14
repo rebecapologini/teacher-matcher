@@ -18,7 +18,7 @@
 .custom-button.white {
   background-color: white;
   color: rgb(167, 111, 110);
-  border: 0px solid rgb(167, 111, 110);
+  border: 0px solid #a76f6e;
   width: 140px;
   font-weight: 400;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
@@ -42,15 +42,15 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.custom-button.details:hover {
+.ant-btn.custom-button.details:hover {
   background-color: white;
-  border-color: rgb(167, 111, 110) !important;
-  color: rgb(167, 111, 110) !important;
+  border-color: rgb(167, 111, 110);
+  color: rgb(167, 111, 110);
 }
-.custom-button.white:hover {
+.ant-btn.custom-button.white:hover {
   background-color: white;
-  border-color: rgb(167, 111, 110) !important;
-  color: rgb(167, 111, 110) !important;
+  border-color: rgb(167, 111, 110);
+  color: rgb(167, 111, 110);
 }
 
 .ant-btn.custom-button.secondary:hover {
@@ -59,14 +59,13 @@
   color: rgb(167, 111, 110);
 }
 
-/* .custom-button.secondary:hover {
-  background-color: white !important;
-  border-color: rgb(167, 111, 110) !important;
-  color: rgb(167, 111, 110) !important;
-} */
-
-.custom-button.tertiary:hover {
-  background-color: white !important;
-  border-color: rgb(167, 111, 110) !important;
-  color: rgb(167, 111, 110) !important;
+.ant-btn.custom-button.tertiary:hover {
+  background-color: white;
+  border-color: rgb(167, 111, 110);
+  color: rgb(167, 111, 110);
+}
+.icon-right {
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
 }

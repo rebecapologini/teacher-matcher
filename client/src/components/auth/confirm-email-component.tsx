@@ -8,7 +8,6 @@ const ConfirmPage = () => {
   const handleNavigate = (path: string) => {
     navigate(path);
   };
-  console.log("asdasdas");
   useEffect(() => {
     const confirmEmail = async () => {
       try {
@@ -32,7 +31,7 @@ const ConfirmPage = () => {
     if (token) {
       confirmEmail();
     }
-  }, [token, navigate]);
+  }, [token]);
 
   return (
     <div>

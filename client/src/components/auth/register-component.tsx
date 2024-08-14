@@ -15,6 +15,8 @@ const Register = () => {
     email: "",
     password: "",
   });
+  
+  const [error, setError] = useState<string | null>(null); // Добавлено состояние для ошибки
 
   const [register] = useRegisterMutation();
   const dispatch = useDispatch();
@@ -34,10 +36,18 @@ const Register = () => {
     password: string;
   }) => {
     try {
+      setError(null); // Сброс ошибки перед началом регистрации
       const user = await register(formData).unwrap();
       dispatch(setUser(user));
-      navigate("/");
-    } catch (err) {
+      navigate("/profile-setup");
+    } catch (err: any) {
+      if (err?.data?.error === "Email already in use") {
+        setError("Эта почта уже используется.");
+      } else if (err?.data?.errors?.some((e: any) => e.msg === "Password must be at least 6 characters long")) {
+        setError("Ненадежный пароль.");
+      } else {
+        setError("Не удалось зарегистрироваться. Попробуйте еще раз.");
+      }
       console.error("Failed to register:", err);
     }
   };
@@ -98,6 +108,7 @@ const Register = () => {
                   className="custom-input"
                 />
               </Form.Item>
+              {error && <div style={{ color: 'red' }}>{error}</div>} {/* Отображение ошибки */}
               <Form.Item>
                 <CustomButton
                   type="secondary"
@@ -116,42 +127,6 @@ const Register = () => {
             </Form>
           </Card>
         </div>
-        {/* <form onSubmit={handleSubmit}>
-          <div>
-            <label htmlFor="name">Name:</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              autoComplete="name"
-            />
-          </div>
-          <div>
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              autoComplete="email"
-            />
-          </div>
-          <div>
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={formData.password}
-              onChange={handleChange}
-              autoComplete="new-password"
-            />
-          </div>
-          <button type="submit">Register</button>
-        </form> */}
       </div>
     </>
   );

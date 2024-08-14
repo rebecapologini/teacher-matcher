@@ -15,17 +15,22 @@ router.post(
       .isLength({ min: 6 })
       .withMessage("Password must be at least 6 characters long"),
   ],
+
   async (req, res) => {
-    console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      console.log(errors);
       return res.status(400).json({ errors: errors.array() });
     }
 
     const { name, email, password } = req.body;
 
     try {
+      // Проверка наличия пользователя с таким email
+      const existingUser = await User.findOne({ where: { email } });
+      if (existingUser) {
+        return res.status(400).json({ error: "Email already in use" });
+      }
+
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = await User.create({
         name,
@@ -33,6 +38,7 @@ router.post(
         password: hashedPassword,
         confirm: false,
       });
+
       req.session.userId = user.id;
       const confirmationToken = generateToken();
       await MailCheck.create({ user_id: user.id, token: confirmationToken });
@@ -55,6 +61,7 @@ router.post(
   }
 );
 
+
 router.post(
   "/login",
   [
@@ -72,12 +79,12 @@ router.post(
     try {
       const user = await User.findOne({ where: { email } });
       if (!user) {
-        return res.status(400).json({ error: "Invalid email or password" });
+        return res.status(400).json({ error: "Invalid email" });
       }
 
       const match = await bcrypt.compare(password, user.password);
       if (!match) {
-        return res.status(400).json({ error: "Invalid email or password" });
+        return res.status(400).json({ error: "Invalid password" });
       }
 
       req.session.userId = user.id;
@@ -107,22 +114,7 @@ router.post("/logout", (req, res) => {
     res.status(200).json({ message: "Logged out successfully" });
   });
 });
-
-router.get("/me", (req, res) => {
-  if (!req.session.userId) {
-    return res.status(401).json({ error: "Not authenticated" });
-  }
-
-  User.findByPk(req.session.userId)
-    .then((user) => {
-      const userWithoutPassword = user.toJSON();
-      delete userWithoutPassword.password;
-      return res.json(userWithoutPassword);
-    })
-    .catch((error) => res.status(500).json({ error: error.message }));
-});
-
-router.get("/confirm/:token", async (req, res) => {
+router.post("/confirm/:token", async (req, res) => {
   const { token } = req.params;
 
   try {
@@ -145,6 +137,20 @@ router.get("/confirm/:token", async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+});
+router.get("/me", (req, res) => {
+  console.log("req.session.userId1111", req.session.userId);
+  if (!req.session.userId) {
+    return res.status(401).json({ error: "Not authenticated" });
+  }
+
+  User.findByPk(req.session.userId)
+    .then((user) => {
+      const userWithoutPassword = user.toJSON();
+      delete userWithoutPassword.password;
+      return res.json(userWithoutPassword);
+    })
+    .catch((error) => res.status(500).json({ error: error.message }));
 });
 
 function generateToken() {
