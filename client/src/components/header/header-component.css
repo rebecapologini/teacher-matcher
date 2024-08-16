@@ -1,7 +1,10 @@
-header {
-  text-align: center;
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 1px;
   background-color: transparent !important;
+  text-align: center;
 }
 .header h1 {
   height: 38px;
@@ -11,4 +14,16 @@ header {
   font-family: "Open Sans", sans-serif;
   letter-spacing: -1px;
   background-color: transparent !important;
+}
+
+.profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+  margin-left: -40px;
 }

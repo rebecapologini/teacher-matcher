@@ -1,3 +1,5 @@
+//@ts-ignore
+
 import React, { useRef, useEffect, useState } from "react";
 import Header from "../header/header-component";
 import axios from "axios";
@@ -10,7 +12,7 @@ import {
 } from "../../features/profile/profile-api-slice";
 
 const Requests: React.FC = () => {
-  const abcd = useFetchUserQuery();
+  const abcd: any = useFetchUserQuery();
   const [showRequests, setShowRequests] = useState(true);
   const [students, setStudents] = useState([]);
   const [newStudents, setNewStudents] = useState([]);
@@ -37,7 +39,7 @@ const Requests: React.FC = () => {
   }, []);
 
   const [accept] = useAcceptMutation();
-  const handleAccept = (id: number, student) => {
+  const handleAccept = (id: number, student: any) => {
     console.log(id);
     accept({ id });
     setStudents((prev) => [...prev, student]);
@@ -84,6 +86,12 @@ const Requests: React.FC = () => {
           className="real-tabs"
         />
       </div>
+      {pageShown === "1" && newStudents.length === 0 && (
+        <Card className="infoCard">
+          <h1>Кажется, тут пока пусто!</h1>
+          <p>Скоро здесь появятся заявки от учеников.</p>
+        </Card>
+      )}
       {pageShown === "1" &&
         newStudents.map((student) => (
           <Card className="requests_card" key={student.id}>
@@ -97,7 +105,7 @@ const Requests: React.FC = () => {
                     {student.picture_link && (
                       <Avatar
                         size={64}
-                        src={`http://localhost:4000${student.picture_link}`}
+                        src={`${import.meta.env.VITE_API_BASE_URL_SECOND}${student.picture_link}`}
                         className="custom-avatar"
                       />
                     )}
@@ -171,6 +179,12 @@ const Requests: React.FC = () => {
             </div>
           </Card>
         ))}
+      {pageShown === "2" && students.length === 0 && (
+        <Card className="infoCard">
+          <h1>Пока пусто!</h1>
+          <p>Не отчаиваетесь, скоро вы найдете своих учеников.</p>
+        </Card>
+      )}
       {pageShown === "2" &&
         students.map((student) => (
           <Card className="requests_card" key={student.id}>
@@ -184,7 +198,7 @@ const Requests: React.FC = () => {
                     {student.picture_link && (
                       <Avatar
                         size={64}
-                        src={`http://localhost:4000${student.picture_link}`}
+                        src={`${import.meta.env.VITE_API_BASE_URL_SECOND}${student.picture_link}`}
                         className="custom-avatar"
                       />
                     )}

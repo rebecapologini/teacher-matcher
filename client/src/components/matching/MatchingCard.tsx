@@ -156,7 +156,7 @@ const MatchingCard: React.FC = () => {
   return (
     <div className={styles.mainContainer}>
       <div className={styles.cardContainer}>
-        <Header />
+        <Header showProfile={true} />
         {showCards && (
           <div
             className={`${styles.indicator} ${styles.leftIndicator}`}
@@ -212,7 +212,7 @@ const MatchingCard: React.FC = () => {
                 {profileData.picture_link && (
                   <Avatar
                     size={128}
-                    src={`http://localhost:4000${profileData.picture_link}`}
+                    src={`${import.meta.env.VITE_API_BASE_URL_SECOND}${profileData.picture_link}`}
                     className="custom-avatar"
                   />
                 )}

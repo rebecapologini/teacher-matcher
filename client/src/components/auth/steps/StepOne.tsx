@@ -68,8 +68,8 @@ const StepOne: React.FC<StepOneProps> = ({ data, updateData }) => {
             size={128} // Размер аватара
             src={
               avatarUrl
-                ? `http://localhost:4000${avatarUrl}`
-                : "http://localhost:4000/uploads/default-avatar.svg"
+                ? `${import.meta.env.VITE_API_BASE_URL_SECOND}${avatarUrl}`
+                : `${import.meta.env.VITE_API_BASE_URL_SECOND}/uploads/default-avatar.svg`
             }
             icon={!avatarUrl && <UserOutlined />}
             className="custom-avatar"

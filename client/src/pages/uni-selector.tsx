@@ -1,3 +1,5 @@
+//@ts-ignore
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { ProfileData, TeacherStepFourData } from "../types/profile";
@@ -58,7 +60,7 @@ const UniSelector: React.FC<UniSelectorProps> = ({
 
     try {
       const response = await axios.get(
-        "http://localhost:4000/api/getFaculties",
+        `${import.meta.env.VITE_API_BASE_URL}/getFaculties`,
         {
           params: { university_id: universityId },
         }

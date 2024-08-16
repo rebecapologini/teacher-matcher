@@ -1,3 +1,5 @@
+// @ts-ignore
+
 import React, { useEffect, useState } from "react";
 import { Card, Select, Slider, Input, message } from "antd";
 import axios from "axios";

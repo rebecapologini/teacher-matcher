@@ -14,6 +14,7 @@ const {
   Matched_profile,
   Disliked_profile,
 } = require("../db/models");
+const { where } = require("sequelize");
 const router = express.Router();
 router.post("/teachers", async (req, res) => {
   try {
@@ -85,7 +86,6 @@ router.post("/requests", async (req, res) => {
         })
       )
     );
-    console.log("matched", matched);
     const newStudents = matched.filter(
       (el) => el.Matched_profile.accepted === null
     );
@@ -94,6 +94,41 @@ router.post("/requests", async (req, res) => {
     );
     console.log("Aaaaaaaaaaa");
     res.json({ newStudents, acceptedStudents });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.post("/profile", async (req, res) => {
+  try {
+    const student_profile_id = await User.findOne({
+      where: { id: req.body.id },
+      include: { model: StudentProfile },
+    });
+    console.log("student_profile_id", student_profile_id);
+
+    const { matched } = JSON.parse(
+      JSON.stringify(
+        await StudentProfile.findOne({
+          where: { id: student_profile_id.student_profile_id },
+          include: {
+            model: TeacherProfile,
+            as: "matched",
+            include: [{ model: Level }, { model: Goal }, { model: Language }],
+          },
+        })
+      )
+    );
+    console.log("matched", matched);
+    const teachers = matched.filter(
+      (el) => el.Matched_profile.accepted === true
+    );
+
+    console.log("teachers", teachers);
+
+    console.log("Aaaaaaaaaaa");
+    res.json({ teachers });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: error.message });
